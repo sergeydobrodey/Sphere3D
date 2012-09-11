@@ -28,29 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbMain = new System.Windows.Forms.PictureBox();
             this.rZ = new System.Windows.Forms.RadioButton();
             this.rY = new System.Windows.Forms.RadioButton();
             this.rX = new System.Windows.Forms.RadioButton();
             this.gbrotation = new System.Windows.Forms.GroupBox();
-            this.lbrotate = new System.Windows.Forms.Label();
-            this.tbangle = new System.Windows.Forms.TextBox();
             this.btnrotate = new System.Windows.Forms.Button();
+            this.tbangle = new System.Windows.Forms.TextBox();
+            this.lbrotate = new System.Windows.Forms.Label();
             this.btnbuild = new System.Windows.Forms.Button();
             this.tbsize = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pbFront = new System.Windows.Forms.PictureBox();
+            this.pbTop = new System.Windows.Forms.PictureBox();
+            this.pbLeft = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.gbrotation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pbMain
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.pictureBox1.Image = global::Sphere3d.Properties.Resources.Untitled;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(500, 500);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.pbMain.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbMain.Location = new System.Drawing.Point(729, 28);
+            this.pbMain.Name = "pbMain";
+            this.pbMain.Size = new System.Drawing.Size(602, 494);
+            this.pbMain.TabIndex = 2;
+            this.pbMain.TabStop = false;
             // 
             // rZ
             // 
@@ -93,29 +99,12 @@
             this.gbrotation.Controls.Add(this.rZ);
             this.gbrotation.Controls.Add(this.rX);
             this.gbrotation.Controls.Add(this.rY);
-            this.gbrotation.Location = new System.Drawing.Point(555, 301);
+            this.gbrotation.Location = new System.Drawing.Point(543, 131);
             this.gbrotation.Name = "gbrotation";
             this.gbrotation.Size = new System.Drawing.Size(180, 147);
             this.gbrotation.TabIndex = 6;
             this.gbrotation.TabStop = false;
             this.gbrotation.Text = "Rotation";
-            // 
-            // lbrotate
-            // 
-            this.lbrotate.AutoSize = true;
-            this.lbrotate.Location = new System.Drawing.Point(18, 30);
-            this.lbrotate.Name = "lbrotate";
-            this.lbrotate.Size = new System.Drawing.Size(37, 13);
-            this.lbrotate.TabIndex = 7;
-            this.lbrotate.Text = "Angle:";
-            // 
-            // tbangle
-            // 
-            this.tbangle.Location = new System.Drawing.Point(61, 27);
-            this.tbangle.Name = "tbangle";
-            this.tbangle.Size = new System.Drawing.Size(100, 20);
-            this.tbangle.TabIndex = 8;
-            this.tbangle.Text = "90";
             // 
             // btnrotate
             // 
@@ -127,9 +116,26 @@
             this.btnrotate.UseVisualStyleBackColor = true;
             this.btnrotate.Click += new System.EventHandler(this.btnrotate_Click);
             // 
+            // tbangle
+            // 
+            this.tbangle.Location = new System.Drawing.Point(61, 27);
+            this.tbangle.Name = "tbangle";
+            this.tbangle.Size = new System.Drawing.Size(100, 20);
+            this.tbangle.TabIndex = 8;
+            this.tbangle.Text = "90";
+            // 
+            // lbrotate
+            // 
+            this.lbrotate.AutoSize = true;
+            this.lbrotate.Location = new System.Drawing.Point(18, 30);
+            this.lbrotate.Name = "lbrotate";
+            this.lbrotate.Size = new System.Drawing.Size(37, 13);
+            this.lbrotate.TabIndex = 7;
+            this.lbrotate.Text = "Angle:";
+            // 
             // btnbuild
             // 
-            this.btnbuild.Location = new System.Drawing.Point(555, 61);
+            this.btnbuild.Location = new System.Drawing.Point(543, 28);
             this.btnbuild.Name = "btnbuild";
             this.btnbuild.Size = new System.Drawing.Size(110, 58);
             this.btnbuild.TabIndex = 7;
@@ -139,27 +145,71 @@
             // 
             // tbsize
             // 
-            this.tbsize.Location = new System.Drawing.Point(555, 135);
+            this.tbsize.Location = new System.Drawing.Point(543, 92);
             this.tbsize.Name = "tbsize";
             this.tbsize.Size = new System.Drawing.Size(110, 20);
             this.tbsize.TabIndex = 8;
             this.tbsize.Text = "50";
             // 
+            // pbFront
+            // 
+            this.pbFront.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbFront.Location = new System.Drawing.Point(12, 28);
+            this.pbFront.Name = "pbFront";
+            this.pbFront.Size = new System.Drawing.Size(250, 250);
+            this.pbFront.TabIndex = 9;
+            this.pbFront.TabStop = false;
+            // 
+            // pbTop
+            // 
+            this.pbTop.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbTop.Location = new System.Drawing.Point(12, 284);
+            this.pbTop.Name = "pbTop";
+            this.pbTop.Size = new System.Drawing.Size(250, 250);
+            this.pbTop.TabIndex = 10;
+            this.pbTop.TabStop = false;
+            // 
+            // pbLeft
+            // 
+            this.pbLeft.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbLeft.Location = new System.Drawing.Point(268, 28);
+            this.pbLeft.Name = "pbLeft";
+            this.pbLeft.Size = new System.Drawing.Size(250, 250);
+            this.pbLeft.TabIndex = 11;
+            this.pbLeft.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(555, 307);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 623);
+            this.ClientSize = new System.Drawing.Size(1383, 553);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pbLeft);
+            this.Controls.Add(this.pbTop);
+            this.Controls.Add(this.pbFront);
             this.Controls.Add(this.tbsize);
             this.Controls.Add(this.btnbuild);
             this.Controls.Add(this.gbrotation);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbMain);
             this.Location = new System.Drawing.Point(20, 20);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.gbrotation.ResumeLayout(false);
             this.gbrotation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFront)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,7 +217,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.RadioButton rZ;
         private System.Windows.Forms.RadioButton rY;
         private System.Windows.Forms.RadioButton rX;
@@ -177,6 +227,10 @@
         private System.Windows.Forms.Label lbrotate;
         private System.Windows.Forms.Button btnbuild;
         private System.Windows.Forms.TextBox tbsize;
+        private System.Windows.Forms.PictureBox pbFront;
+        private System.Windows.Forms.PictureBox pbTop;
+        private System.Windows.Forms.PictureBox pbLeft;
+        private System.Windows.Forms.Button button1;
     }
 }
 

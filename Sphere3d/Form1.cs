@@ -30,8 +30,9 @@ namespace Sphere3d
         }
 
         int size;
-        Point3d[] m;        
-
+        Point3d[] m;
+        Point3d[] sh;      
+        int k = 0;
 
 
         public double[,] rotate(double angle)
@@ -53,21 +54,31 @@ namespace Sphere3d
 
         public void GetSphere(int R)
         {
-            double x, y, z, fi, psi;
-            int i = 0;
-            for (psi = -Math.PI / 2; psi < Math.PI / 2; psi +=0.1)
+            k = 0;
+            sh = new Point3d[3000];            
+            //for (double t = 0; t < 2 * Math.PI; t += 0.2)
+            //{               
+            //    sh[k] = new Point3d(40 * Math.Cos(t),40 * Math.Sin(t),0);
+            //    k++;
+            //}
+            double x, y, z, fi, psi;           
+            for (psi = -Math.PI / 2; psi < Math.PI / 2; psi += 0.1)
                 for (fi = 0; fi < 2 * Math.PI; fi += 0.1)
                 {
                     x = R * Math.Sin(psi) * Math.Cos(fi);
                     y = R * Math.Sin(psi) * Math.Cos(fi);
                     z = R * Math.Cos(psi);
-                    sphar[i] = new Point3d((int)x,(int)y,(int)z);
-                    i++;
+                    sh[k] = new Point3d((int)x, (int)y, (int)z);
+                    k++;
                 }
 
-        }        
+        }
 
-
+        public void DrawCircle(Graphics g, Point pt, int Radius)
+        {
+            g.DrawEllipse(new Pen(Color.Black), pt.X - Radius, pt.Y - Radius, 2 * Radius, 2 * Radius);
+        }
+         
         public void Draw2D(Graphics g, Point3d pt1, Point3d pt2)
         {
             Pen pen = new Pen(Color.Black, 1);
@@ -96,8 +107,8 @@ namespace Sphere3d
         private void btnbuild_Click(object sender, EventArgs e)
         {
             Initialize();
-            pictureBox1.Refresh();
-            Graphics g = pictureBox1.CreateGraphics();
+            pbMain.Refresh();
+            Graphics g = pbMain.CreateGraphics();
             size = Convert.ToInt32(tbsize.Text);
             m = new Point3d[8];
             m[0] = new Point3d(0, 0, 0);
@@ -123,14 +134,14 @@ namespace Sphere3d
 
         private void Initialize()
         {
-            pictureBox1.Image = Properties.Resources.Untitled;
+            pbMain.Image = Properties.Resources.Untitled;
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
         {
             Initialize();
-            pictureBox1.Refresh();
-            Graphics g = pictureBox1.CreateGraphics();
+            pbMain.Refresh();
+            Graphics g = pbMain.CreateGraphics();
             Pen pen = new Pen(Color.Red);
             double angle = Convert.ToDouble(tbangle.Text) * Math.PI / 180;
             for (int i = 0; i < m.Length; i++)
@@ -152,6 +163,25 @@ namespace Sphere3d
             Draw2D(g, m[2], m[6]);
             Draw2D(g, m[3], m[7]);
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetSphere(200);
+            Graphics g = pbMain.CreateGraphics();
+            Pen pen = new Pen(Color.Red,1);
+            int i = 0;
+            for (i = 0; i < k - 1; i++)
+            {
+                    g.DrawLine(pen,sh[i].z, sh[i].x, sh[i + 1].z, sh[i + 1].x);
+               
+             //   DrawCircle(g, new Point(20, 20), 20);
+
+               // Draw2D(g, sh[i], sh[i + 1]);
+            }
+           // Draw2D(g, sh[0], sh[i]);
+          //  Draw2D(g,new Point3d(-20,-20,0),new Point3d(20,20,20));
+            g.DrawLine(pen, sh[i ].z, sh[i ].x, sh[0].z, sh[0].x);
         }
     }
 }
