@@ -41,7 +41,6 @@
             this.pbFront = new System.Windows.Forms.PictureBox();
             this.pbTop = new System.Windows.Forms.PictureBox();
             this.pbLeft = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.gbrotation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
@@ -178,22 +177,11 @@
             this.pbLeft.TabIndex = 11;
             this.pbLeft.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(555, 307);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1383, 553);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pbLeft);
             this.Controls.Add(this.pbTop);
             this.Controls.Add(this.pbFront);
@@ -230,7 +218,6 @@
         private System.Windows.Forms.PictureBox pbFront;
         private System.Windows.Forms.PictureBox pbTop;
         private System.Windows.Forms.PictureBox pbLeft;
-        private System.Windows.Forms.Button button1;
     }
 }
 
