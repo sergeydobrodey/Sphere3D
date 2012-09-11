@@ -29,7 +29,8 @@ namespace Sphere3d
             }
         }
 
-
+        int size;
+        Point3d[] m;        
 
 
 
@@ -43,8 +44,7 @@ namespace Sphere3d
              if (rX.Checked) return rotateX;
              if (rY.Checked) return rotateY;
              if (rZ.Checked) return rotateZ;
-             else return null;
-            
+             else return null;           
 
         }
 
@@ -65,9 +65,7 @@ namespace Sphere3d
                     i++;
                 }
 
-        }
-
-        
+        }        
 
 
         public void Draw2D(Graphics g, Point3d pt1, Point3d pt2)
@@ -94,75 +92,22 @@ namespace Sphere3d
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void btnbuild_Click(object sender, EventArgs e)
         {
-
+            Initialize();
+            pictureBox1.Refresh();
             Graphics g = pictureBox1.CreateGraphics();
-            Pen pen = new Pen(Color.Red);
-            g.DrawLine(pen, new Point(250, 0), new Point(250, 250)); // y
-            g.DrawLine(pen, new Point(250, 250), new Point(500, 250)); //x
-            g.DrawLine(pen, new Point(72, 500-72), new Point(250, 250)); //z
-
-
-            double a = 2 * Convert.ToInt32(textBox1.Text) / Math.Sqrt(3);
-            int move = Convert.ToInt32(a);
-            
-            Draw2D(g, new Point3d(0, 0, 0), new Point3d(0, 0, move));
-            Draw2D(g, new Point3d(0, 0, move), new Point3d(move, 0, move));
-            Draw2D(g, new Point3d(move, 0, move), new Point3d(move, 0, 0));
-            Draw2D(g, new Point3d(move, 0, 0), new Point3d(0, 0, 0));
-
-            Draw2D(g, new Point3d(0, move, 0), new Point3d(0, move, move));
-            Draw2D(g, new Point3d(0, move, move), new Point3d(move, move, move));
-            Draw2D(g, new Point3d(move, move, move), new Point3d(move, move, 0));
-            Draw2D(g, new Point3d(move, move, 0), new Point3d(0, move, 0));
-
-
-            Draw2D(g, new Point3d(0, 0, 0), new Point3d(0, move, 0));
-            Draw2D(g, new Point3d(0, 0, move), new Point3d(0, move, move));
-            Draw2D(g, new Point3d(move, 0, move), new Point3d(move, move, move));
-            Draw2D(g, new Point3d(move, 0, 0), new Point3d(move, move, 0));
-      
-
-
-
-            //GetSphere(Convert.ToInt32(textBox1.Text));
-            //for (int i = 0; i < 2014; i++)
-            //    Draw2D(g, sphar[i], sphar[i + 1]);
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            double angle;
-            angle = Convert.ToDouble(textBox1.Text);           
-            Graphics g = pictureBox1.CreateGraphics();
-            Pen pen = new Pen(Color.Red);
-            g.DrawLine(pen, new Point(250, 0), new Point(250, 250)); // y
-            g.DrawLine(pen, new Point(250, 250), new Point(500, 250)); //x
-            g.DrawLine(pen, new Point(72, 500 - 72), new Point(250, 250)); //z
-
-
-            double a = 2 * Convert.ToInt32(textBox1.Text) / Math.Sqrt(3);
-            int move = Convert.ToInt32(a);
-            Point3d[] m;
+            size = Convert.ToInt32(tbsize.Text);
             m = new Point3d[8];
             m[0] = new Point3d(0, 0, 0);
-            m[1] = new Point3d(0, 0, move);
-            m[2] = new Point3d(move, 0, move);
-            m[3] = new Point3d(move, 0, 0);
-            m[4] = new Point3d(0, move, 0);
-            m[5] = new Point3d(0, move, move);
-            m[6] = new Point3d(move, move, move);
-            m[7] = new Point3d(move, move, 0);
-            for (int i = 0; i < m.Length; i++)
-            {
-
-                m[i] = Multiplicate(m[i], rotate(angle));
-              
-            }
-
-        
+            m[1] = new Point3d(0, 0, size);
+            m[2] = new Point3d(size, 0, size);
+            m[3] = new Point3d(size, 0, 0);
+            m[4] = new Point3d(0, size, 0);
+            m[5] = new Point3d(0, size, size);
+            m[6] = new Point3d(size, size, size);
+            m[7] = new Point3d(size, size, 0);
             for (int i = 0; i < 3; i++)
                 Draw2D(g, m[i], m[i + 1]);
             Draw2D(g, m[3], m[0]);
@@ -173,7 +118,40 @@ namespace Sphere3d
             Draw2D(g, m[1], m[5]);
             Draw2D(g, m[2], m[6]);
             Draw2D(g, m[3], m[7]);
-           
+
+        }
+
+        private void Initialize()
+        {
+            pictureBox1.Image = Properties.Resources.Untitled;
+        }
+
+        private void btnrotate_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            pictureBox1.Refresh();
+            Graphics g = pictureBox1.CreateGraphics();
+            Pen pen = new Pen(Color.Red);
+            double angle = Convert.ToDouble(tbangle.Text) * Math.PI / 180;
+            for (int i = 0; i < m.Length; i++)
+            {
+
+                m[i] = Multiplicate(m[i], rotate(angle));
+
+            }
+
+
+            for (int i = 0; i < 3; i++)
+                Draw2D(g, m[i], m[i + 1]);
+            Draw2D(g, m[3], m[0]);
+            for (int i = 4; i < 7; i++)
+                Draw2D(g, m[i], m[i + 1]);
+            Draw2D(g, m[4], m[7]);
+            Draw2D(g, m[0], m[4]);
+            Draw2D(g, m[1], m[5]);
+            Draw2D(g, m[2], m[6]);
+            Draw2D(g, m[3], m[7]);
+
         }
     }
 }

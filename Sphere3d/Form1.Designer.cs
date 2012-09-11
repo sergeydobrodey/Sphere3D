@@ -28,91 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rX = new System.Windows.Forms.RadioButton();
-            this.rY = new System.Windows.Forms.RadioButton();
             this.rZ = new System.Windows.Forms.RadioButton();
+            this.rY = new System.Windows.Forms.RadioButton();
+            this.rX = new System.Windows.Forms.RadioButton();
+            this.gbrotation = new System.Windows.Forms.GroupBox();
+            this.lbrotate = new System.Windows.Forms.Label();
+            this.tbangle = new System.Windows.Forms.TextBox();
+            this.btnrotate = new System.Windows.Forms.Button();
+            this.btnbuild = new System.Windows.Forms.Button();
+            this.tbsize = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.gbrotation.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(544, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 148);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Sphere";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pictureBox1.Image = global::Sphere3d.Properties.Resources.Untitled;
             this.pictureBox1.Location = new System.Drawing.Point(20, 20);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(500, 500);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
-            // label1
+            // rZ
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(545, 201);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Радиус:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(597, 194);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "40";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(569, 266);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Rotate 45";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.rZ);
-            this.panel1.Controls.Add(this.rY);
-            this.panel1.Controls.Add(this.rX);
-            this.panel1.Location = new System.Drawing.Point(569, 309);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 6;
-            // 
-            // rX
-            // 
-            this.rX.AutoSize = true;
-            this.rX.Checked = true;
-            this.rX.Location = new System.Drawing.Point(28, 14);
-            this.rX.Name = "rX";
-            this.rX.Size = new System.Drawing.Size(32, 17);
-            this.rX.TabIndex = 0;
-            this.rX.TabStop = true;
-            this.rX.Text = "X";
-            this.rX.UseVisualStyleBackColor = true;
+            this.rZ.AutoSize = true;
+            this.rZ.Location = new System.Drawing.Point(23, 119);
+            this.rZ.Name = "rZ";
+            this.rZ.Size = new System.Drawing.Size(32, 17);
+            this.rZ.TabIndex = 2;
+            this.rZ.Text = "Z";
+            this.rZ.UseVisualStyleBackColor = true;
             // 
             // rY
             // 
             this.rY.AutoSize = true;
-            this.rY.Location = new System.Drawing.Point(28, 37);
+            this.rY.Location = new System.Drawing.Point(23, 95);
             this.rY.Name = "rY";
             this.rY.Size = new System.Drawing.Size(32, 17);
             this.rY.TabIndex = 1;
@@ -120,33 +73,93 @@
             this.rY.Text = "Y";
             this.rY.UseVisualStyleBackColor = true;
             // 
-            // rZ
+            // rX
             // 
-            this.rZ.AutoSize = true;
-            this.rZ.Location = new System.Drawing.Point(28, 61);
-            this.rZ.Name = "rZ";
-            this.rZ.Size = new System.Drawing.Size(32, 17);
-            this.rZ.TabIndex = 2;
-            this.rZ.Text = "Z";
-            this.rZ.UseVisualStyleBackColor = true;
+            this.rX.AutoSize = true;
+            this.rX.Checked = true;
+            this.rX.Location = new System.Drawing.Point(23, 72);
+            this.rX.Name = "rX";
+            this.rX.Size = new System.Drawing.Size(32, 17);
+            this.rX.TabIndex = 0;
+            this.rX.TabStop = true;
+            this.rX.Text = "X";
+            this.rX.UseVisualStyleBackColor = true;
+            // 
+            // gbrotation
+            // 
+            this.gbrotation.Controls.Add(this.btnrotate);
+            this.gbrotation.Controls.Add(this.tbangle);
+            this.gbrotation.Controls.Add(this.lbrotate);
+            this.gbrotation.Controls.Add(this.rZ);
+            this.gbrotation.Controls.Add(this.rX);
+            this.gbrotation.Controls.Add(this.rY);
+            this.gbrotation.Location = new System.Drawing.Point(555, 301);
+            this.gbrotation.Name = "gbrotation";
+            this.gbrotation.Size = new System.Drawing.Size(180, 147);
+            this.gbrotation.TabIndex = 6;
+            this.gbrotation.TabStop = false;
+            this.gbrotation.Text = "Rotation";
+            // 
+            // lbrotate
+            // 
+            this.lbrotate.AutoSize = true;
+            this.lbrotate.Location = new System.Drawing.Point(18, 30);
+            this.lbrotate.Name = "lbrotate";
+            this.lbrotate.Size = new System.Drawing.Size(37, 13);
+            this.lbrotate.TabIndex = 7;
+            this.lbrotate.Text = "Angle:";
+            // 
+            // tbangle
+            // 
+            this.tbangle.Location = new System.Drawing.Point(61, 27);
+            this.tbangle.Name = "tbangle";
+            this.tbangle.Size = new System.Drawing.Size(100, 20);
+            this.tbangle.TabIndex = 8;
+            this.tbangle.Text = "90";
+            // 
+            // btnrotate
+            // 
+            this.btnrotate.Location = new System.Drawing.Point(61, 71);
+            this.btnrotate.Name = "btnrotate";
+            this.btnrotate.Size = new System.Drawing.Size(100, 64);
+            this.btnrotate.TabIndex = 9;
+            this.btnrotate.Text = "Rotate";
+            this.btnrotate.UseVisualStyleBackColor = true;
+            this.btnrotate.Click += new System.EventHandler(this.btnrotate_Click);
+            // 
+            // btnbuild
+            // 
+            this.btnbuild.Location = new System.Drawing.Point(555, 61);
+            this.btnbuild.Name = "btnbuild";
+            this.btnbuild.Size = new System.Drawing.Size(110, 58);
+            this.btnbuild.TabIndex = 7;
+            this.btnbuild.Text = "Build";
+            this.btnbuild.UseVisualStyleBackColor = true;
+            this.btnbuild.Click += new System.EventHandler(this.btnbuild_Click);
+            // 
+            // tbsize
+            // 
+            this.tbsize.Location = new System.Drawing.Point(555, 135);
+            this.tbsize.Name = "tbsize";
+            this.tbsize.Size = new System.Drawing.Size(110, 20);
+            this.tbsize.TabIndex = 8;
+            this.tbsize.Text = "50";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 623);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1178, 623);
+            this.Controls.Add(this.tbsize);
+            this.Controls.Add(this.btnbuild);
+            this.Controls.Add(this.gbrotation);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
             this.Location = new System.Drawing.Point(20, 20);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.gbrotation.ResumeLayout(false);
+            this.gbrotation.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,15 +167,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rZ;
         private System.Windows.Forms.RadioButton rY;
         private System.Windows.Forms.RadioButton rX;
+        private System.Windows.Forms.GroupBox gbrotation;
+        private System.Windows.Forms.Button btnrotate;
+        private System.Windows.Forms.TextBox tbangle;
+        private System.Windows.Forms.Label lbrotate;
+        private System.Windows.Forms.Button btnbuild;
+        private System.Windows.Forms.TextBox tbsize;
     }
 }
 
