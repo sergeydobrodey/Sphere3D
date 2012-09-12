@@ -59,6 +59,7 @@
             this.pbTop = new System.Windows.Forms.PictureBox();
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.pbLeft = new System.Windows.Forms.PictureBox();
+            this.btnquick = new System.Windows.Forms.Button();
             this.gbRotation.SuspendLayout();
             this.gbCreate.SuspendLayout();
             this.gbMove.SuspendLayout();
@@ -378,12 +379,23 @@
             this.pbLeft.TabIndex = 11;
             this.pbLeft.TabStop = false;
             // 
+            // btnquick
+            // 
+            this.btnquick.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnquick.Location = new System.Drawing.Point(537, 487);
+            this.btnquick.Name = "btnquick";
+            this.btnquick.Size = new System.Drawing.Size(75, 23);
+            this.btnquick.TabIndex = 15;
+            this.btnquick.Text = "Drag\'n\'Drop";
+            this.btnquick.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(735, 593);
+            this.Controls.Add(this.btnquick);
             this.Controls.Add(this.pnViews);
             this.Controls.Add(this.gbMove);
             this.Controls.Add(this.gbCreate);
@@ -438,6 +450,7 @@
         private System.Windows.Forms.Label lbmovey;
         private System.Windows.Forms.Label lbmovex;
         private System.Windows.Forms.Panel pnViews;
+        private System.Windows.Forms.Button btnquick;
     }
 }
 
