@@ -30,6 +30,7 @@ namespace Sphere3d
         Point3d[] sh;      
         int k = 0;
         int size = 0;
+        Point3d basepoint;
 
 
         public double[,] rotate(double angle)
@@ -47,7 +48,7 @@ namespace Sphere3d
         }
        
 
-        public void GetSphere(int R)
+        public void GetSphere(Point3d basepoint,int R)
         {
             k = 0;
             sh = new Point3d[3000];            
@@ -58,9 +59,9 @@ namespace Sphere3d
                 for (psi = 0; psi <= Math.PI; psi += 0.2)
               // 
                 {
-                    x = R * Math.Sin(psi) * Math.Cos(fi);
-                    y = R * Math.Sin(psi) * Math.Sin(fi);
-                    z = R * Math.Cos(psi);
+                    x = basepoint.x+R * Math.Sin(psi) * Math.Cos(fi);
+                    y = basepoint.y+R * Math.Sin(psi) * Math.Sin(fi);
+                    z = basepoint.z+R * Math.Cos(psi);
                     sh[k] = new Point3d((int)x, (int)y, (int)z);
                     k++;
                 }
@@ -109,7 +110,14 @@ namespace Sphere3d
             Initialize();
             
             size = Convert.ToInt32(tbsize.Text);
-            GetSphere(size);
+            basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
+            GetSphere(basepoint,size);
+            DrawSphere();
+           
+        }
+
+        private void DrawSphere()
+        {
             Graphics gF = pbFront.CreateGraphics();
             Graphics gL = pbLeft.CreateGraphics();
             Graphics gT = pbTop.CreateGraphics();
@@ -127,7 +135,6 @@ namespace Sphere3d
             gF.DrawLine(pen, sh[i].x + 125, sh[i].y + 125, sh[0].x + 125, sh[0].y + 125);
             gL.DrawLine(pen, sh[i].x + 125, sh[i].z + 125, sh[0].x + 125, sh[0].z + 125);
             gT.DrawLine(pen, sh[i].y + 125, sh[i].z + 125, sh[0].y + 125, sh[0].z + 125);
-           
         }
 
         private void Initialize()
@@ -146,29 +153,13 @@ namespace Sphere3d
         {
             try
             {
-                Initialize();
-                Graphics gF = pbFront.CreateGraphics();
-                Graphics gL = pbLeft.CreateGraphics();
-                Graphics gT = pbTop.CreateGraphics();
-                Graphics gM = pbMain.CreateGraphics();
-                Pen pen = new Pen(Color.Blue, 1);
-                int i = 0;
+                Initialize();               
                 double angle = Convert.ToDouble(tbangle.Text) * Math.PI / 180;
-                for (i = 0; i < k; i++)
+                for (int i = 0; i < k; i++)
                 {
                     sh[i] = Multiplicate(sh[i], rotate(angle));
                 }
-
-                for (i = 0; i < k - 1; i++)
-                {
-                    gF.DrawLine(pen, sh[i].x + 125, sh[i].y + 125, sh[i + 1].x + 125, sh[i + 1].y + 125);
-                    gL.DrawLine(pen, sh[i].x + 125, sh[i].z + 125, sh[i + 1].x + 125, sh[i + 1].z + 125);
-                    gT.DrawLine(pen, sh[i].y + 125, sh[i].z + 125, sh[i + 1].y + 125, sh[i + 1].z + 125);
-                    Draw2D(gM, sh[i], sh[i + 1]);
-                }
-                gF.DrawLine(pen, sh[i].x + 125, sh[i].y + 125, sh[0].x + 125, sh[0].y + 125);
-                gL.DrawLine(pen, sh[i].x + 125, sh[i].z + 125, sh[0].x + 125, sh[0].z + 125);
-                gT.DrawLine(pen, sh[i].y + 125, sh[i].z + 125, sh[0].y + 125, sh[0].z + 125);
+                DrawSphere();               
             }
             catch (NullReferenceException )
             {
@@ -176,6 +167,20 @@ namespace Sphere3d
             };
         }
 #endregion
+
+        private void btnmove_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            for (int i = 0; i < k; i++)
+            {
+                sh[i].x += Convert.ToInt32(tbmovex.Text);
+                sh[i].y += Convert.ToInt32(tbmovey.Text);
+                sh[i].z += Convert.ToInt32(tbmovez.Text);
+            }
+            DrawSphere();
+        }
+
+       
 
        
       
