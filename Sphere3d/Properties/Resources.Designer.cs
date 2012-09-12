@@ -60,9 +60,9 @@ namespace Sphere3d.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Untitled {
+        internal static System.Drawing.Bitmap viewport {
             get {
-                object obj = ResourceManager.GetObject("Untitled", resourceCulture);
+                object obj = ResourceManager.GetObject("viewport", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

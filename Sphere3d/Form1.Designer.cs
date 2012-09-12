@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbMain = new System.Windows.Forms.PictureBox();
             this.rZ = new System.Windows.Forms.RadioButton();
             this.rY = new System.Windows.Forms.RadioButton();
             this.rX = new System.Windows.Forms.RadioButton();
@@ -38,24 +37,16 @@
             this.lbrotate = new System.Windows.Forms.Label();
             this.btnbuild = new System.Windows.Forms.Button();
             this.tbsize = new System.Windows.Forms.TextBox();
-            this.pbFront = new System.Windows.Forms.PictureBox();
-            this.pbTop = new System.Windows.Forms.PictureBox();
             this.pbLeft = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
+            this.pbTop = new System.Windows.Forms.PictureBox();
+            this.pbFront = new System.Windows.Forms.PictureBox();
+            this.pbMain = new System.Windows.Forms.PictureBox();
             this.gbrotation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbMain
-            // 
-            this.pbMain.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.pbMain.Location = new System.Drawing.Point(729, 28);
-            this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(602, 494);
-            this.pbMain.TabIndex = 2;
-            this.pbMain.TabStop = false;
             // 
             // rZ
             // 
@@ -98,6 +89,7 @@
             this.gbrotation.Controls.Add(this.rZ);
             this.gbrotation.Controls.Add(this.rX);
             this.gbrotation.Controls.Add(this.rY);
+            this.gbrotation.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.gbrotation.Location = new System.Drawing.Point(543, 131);
             this.gbrotation.Name = "gbrotation";
             this.gbrotation.Size = new System.Drawing.Size(180, 147);
@@ -107,6 +99,7 @@
             // 
             // btnrotate
             // 
+            this.btnrotate.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnrotate.Location = new System.Drawing.Point(61, 71);
             this.btnrotate.Name = "btnrotate";
             this.btnrotate.Size = new System.Drawing.Size(100, 64);
@@ -134,6 +127,7 @@
             // 
             // btnbuild
             // 
+            this.btnbuild.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnbuild.Location = new System.Drawing.Point(543, 28);
             this.btnbuild.Name = "btnbuild";
             this.btnbuild.Size = new System.Drawing.Size(110, 58);
@@ -150,38 +144,54 @@
             this.tbsize.TabIndex = 8;
             this.tbsize.Text = "50";
             // 
-            // pbFront
-            // 
-            this.pbFront.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.pbFront.Location = new System.Drawing.Point(12, 28);
-            this.pbFront.Name = "pbFront";
-            this.pbFront.Size = new System.Drawing.Size(250, 250);
-            this.pbFront.TabIndex = 9;
-            this.pbFront.TabStop = false;
-            // 
-            // pbTop
-            // 
-            this.pbTop.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.pbTop.Location = new System.Drawing.Point(12, 284);
-            this.pbTop.Name = "pbTop";
-            this.pbTop.Size = new System.Drawing.Size(250, 250);
-            this.pbTop.TabIndex = 10;
-            this.pbTop.TabStop = false;
-            // 
             // pbLeft
             // 
-            this.pbLeft.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbLeft.BackColor = System.Drawing.Color.DarkGray;
+            this.pbLeft.Image = global::Sphere3d.Properties.Resources.viewport;
             this.pbLeft.Location = new System.Drawing.Point(268, 28);
             this.pbLeft.Name = "pbLeft";
             this.pbLeft.Size = new System.Drawing.Size(250, 250);
+            this.pbLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbLeft.TabIndex = 11;
             this.pbLeft.TabStop = false;
+            // 
+            // pbTop
+            // 
+            this.pbTop.BackColor = System.Drawing.Color.DarkGray;
+            this.pbTop.Image = global::Sphere3d.Properties.Resources.viewport;
+            this.pbTop.Location = new System.Drawing.Point(12, 284);
+            this.pbTop.Name = "pbTop";
+            this.pbTop.Size = new System.Drawing.Size(250, 250);
+            this.pbTop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbTop.TabIndex = 10;
+            this.pbTop.TabStop = false;
+            // 
+            // pbFront
+            // 
+            this.pbFront.BackColor = System.Drawing.Color.DarkGray;
+            this.pbFront.Image = global::Sphere3d.Properties.Resources.viewport;
+            this.pbFront.Location = new System.Drawing.Point(12, 28);
+            this.pbFront.Name = "pbFront";
+            this.pbFront.Size = new System.Drawing.Size(250, 250);
+            this.pbFront.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbFront.TabIndex = 9;
+            this.pbFront.TabStop = false;
+            // 
+            // pbMain
+            // 
+            this.pbMain.BackColor = System.Drawing.Color.DarkGray;
+            this.pbMain.Location = new System.Drawing.Point(268, 284);
+            this.pbMain.Name = "pbMain";
+            this.pbMain.Size = new System.Drawing.Size(250, 250);
+            this.pbMain.TabIndex = 2;
+            this.pbMain.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1383, 553);
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ClientSize = new System.Drawing.Size(761, 553);
             this.Controls.Add(this.pbLeft);
             this.Controls.Add(this.pbTop);
             this.Controls.Add(this.pbFront);
@@ -192,12 +202,12 @@
             this.Location = new System.Drawing.Point(20, 20);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.gbrotation.ResumeLayout(false);
             this.gbrotation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbFront)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFront)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
