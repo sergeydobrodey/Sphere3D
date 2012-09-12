@@ -121,13 +121,14 @@
             // 
             // btnrotate
             // 
+            this.btnrotate.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnrotate.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnrotate.Location = new System.Drawing.Point(61, 71);
             this.btnrotate.Name = "btnrotate";
             this.btnrotate.Size = new System.Drawing.Size(100, 64);
             this.btnrotate.TabIndex = 9;
             this.btnrotate.Text = "Rotate";
-            this.btnrotate.UseVisualStyleBackColor = true;
+            this.btnrotate.UseVisualStyleBackColor = false;
             this.btnrotate.Click += new System.EventHandler(this.btnrotate_Click);
             // 
             // tbangle
@@ -149,13 +150,14 @@
             // 
             // btnbuild
             // 
+            this.btnbuild.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnbuild.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnbuild.Location = new System.Drawing.Point(9, 120);
             this.btnbuild.Name = "btnbuild";
             this.btnbuild.Size = new System.Drawing.Size(152, 24);
             this.btnbuild.TabIndex = 7;
             this.btnbuild.Text = "Build";
-            this.btnbuild.UseVisualStyleBackColor = true;
+            this.btnbuild.UseVisualStyleBackColor = false;
             this.btnbuild.Click += new System.EventHandler(this.btnbuild_Click);
             // 
             // tbsize
@@ -264,12 +266,13 @@
             // 
             // btnmove
             // 
+            this.btnmove.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnmove.Location = new System.Drawing.Point(8, 97);
             this.btnmove.Name = "btnmove";
             this.btnmove.Size = new System.Drawing.Size(152, 23);
             this.btnmove.TabIndex = 14;
             this.btnmove.Text = "Move";
-            this.btnmove.UseVisualStyleBackColor = true;
+            this.btnmove.UseVisualStyleBackColor = false;
             this.btnmove.Click += new System.EventHandler(this.btnmove_Click);
             // 
             // tbmovez
@@ -345,6 +348,8 @@
             this.pbFront.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbFront.TabIndex = 9;
             this.pbFront.TabStop = false;
+            this.pbFront.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbFront_MouseDown);
+            this.pbFront.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbFront_MouseUp);
             // 
             // pbTop
             // 
@@ -360,7 +365,6 @@
             // pbMain
             // 
             this.pbMain.BackColor = System.Drawing.Color.DarkGray;
-            this.pbMain.Image = ((System.Drawing.Image)(resources.GetObject("pbMain.Image")));
             this.pbMain.Location = new System.Drawing.Point(260, 260);
             this.pbMain.Name = "pbMain";
             this.pbMain.Size = new System.Drawing.Size(250, 250);
@@ -381,20 +385,21 @@
             // 
             // btnquick
             // 
+            this.btnquick.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnquick.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnquick.Location = new System.Drawing.Point(537, 487);
             this.btnquick.Name = "btnquick";
             this.btnquick.Size = new System.Drawing.Size(75, 23);
             this.btnquick.TabIndex = 15;
             this.btnquick.Text = "Drag\'n\'Drop";
-            this.btnquick.UseVisualStyleBackColor = true;
+            this.btnquick.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(735, 593);
+            this.ClientSize = new System.Drawing.Size(726, 561);
             this.Controls.Add(this.btnquick);
             this.Controls.Add(this.pnViews);
             this.Controls.Add(this.gbMove);

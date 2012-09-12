@@ -16,14 +16,14 @@ namespace Sphere3d
         public class Point3d
         {
             public
-             int x, y, z;
+             float x, y, z;
 
             public Point3d(double x, double y, double z)
             {
 
-                this.x = (int)x;
-                this.y = (int)y;
-                this.z = (int)z;
+                this.x = (float)x;
+                this.y = (float)y;
+                this.z = (float)z;
             }
         }
                      
@@ -72,7 +72,7 @@ namespace Sphere3d
         {
             Pen pen = new Pen(Color.Black, 1);
 
-            g.DrawLine(pen,new Point(pt1.x-pt1.z/2+125,-pt1.y+pt1.z/2+125),new Point(pt2.x-pt2.z/2+125,-pt2.y+pt2.z/2+125));
+            g.DrawLine(pen,new PointF(pt1.x-pt1.z/2+125,-pt1.y+pt1.z/2+125),new PointF(pt2.x-pt2.z/2+125,-pt2.y+pt2.z/2+125));
         }
 
         public Point3d Multiplicate(Point3d vertex, double[,] ar)
@@ -177,6 +177,21 @@ namespace Sphere3d
                 sh[i].y += Convert.ToInt32(tbmovey.Text);
                 sh[i].z += Convert.ToInt32(tbmovez.Text);
             }
+            DrawSphere();
+        }
+
+        private void pbFront_MouseDown(object sender, MouseEventArgs e)
+        {
+            basepoint = new Point3d(e.X, e.Y, 0);          
+        }
+
+        private void pbFront_MouseUp(object sender, MouseEventArgs e)
+        {
+            Point3d radpoint= new Point3d (e.X,e.Y,0);
+            size=Convert.ToInt32(Math.Sqrt((radpoint.x-basepoint.x)*(radpoint.x-basepoint.x)+(radpoint.y-basepoint.y)*(radpoint.y-basepoint.y)));
+            basepoint.x -= 125;
+            basepoint.y -= 125;
+            GetSphere(basepoint, size);
             DrawSphere();
         }
 
