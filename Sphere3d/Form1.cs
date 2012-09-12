@@ -31,6 +31,7 @@ namespace Sphere3d
         int k = 0;
         int size = 0;
         Point3d basepoint;
+        float Lod = 0.1F;
 
 
         public double[,] rotate(double angle)
@@ -51,17 +52,25 @@ namespace Sphere3d
         public void GetSphere(Point3d basepoint,int R)
         {
             k = 0;
-            sh = new Point3d[3000];            
+            sh = new Point3d[5000];            
             double x, y, z, fi, psi;
 
-            
-            for (fi = 0; fi < 2 * Math.PI; fi += 0.2)
-                for (psi = 0; psi <= Math.PI; psi += 0.2)
-              // 
+
+            for (fi = 0; fi < Math.PI; fi += Lod)
+                for (psi = 0; psi < 2 * Math.PI; psi += Lod)
                 {
-                    x = basepoint.x+R * Math.Sin(psi) * Math.Cos(fi);
-                    y = basepoint.y+R * Math.Sin(psi) * Math.Sin(fi);
-                    z = basepoint.z+R * Math.Cos(psi);
+                    x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
+                    y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
+                    z = basepoint.z + R * Math.Cos(psi);
+                    sh[k] = new Point3d((int)x, (int)y, (int)z);
+                    k++;
+                }
+            for (psi = 0; psi < Math.PI; psi +=  Lod)
+                for (fi = 0; fi < 2 * Math.PI; fi += Lod)
+                {
+                    x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
+                    y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
+                    z = basepoint.z + R * Math.Cos(psi);
                     sh[k] = new Point3d((int)x, (int)y, (int)z);
                     k++;
                 }
@@ -73,6 +82,7 @@ namespace Sphere3d
             Pen pen = new Pen(Color.Black, 1);
 
             g.DrawLine(pen,new PointF(pt1.x-pt1.z/2+125,-pt1.y+pt1.z/2+125),new PointF(pt2.x-pt2.z/2+125,-pt2.y+pt2.z/2+125));
+           
         }
 
         public Point3d Multiplicate(Point3d vertex, double[,] ar)
@@ -101,7 +111,7 @@ namespace Sphere3d
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
  
@@ -187,12 +197,18 @@ namespace Sphere3d
 
         private void pbFront_MouseUp(object sender, MouseEventArgs e)
         {
+            Initialize();
             Point3d radpoint= new Point3d (e.X,e.Y,0);
             size=Convert.ToInt32(Math.Sqrt((radpoint.x-basepoint.x)*(radpoint.x-basepoint.x)+(radpoint.y-basepoint.y)*(radpoint.y-basepoint.y)));
             basepoint.x -= 125;
             basepoint.y -= 125;
             GetSphere(basepoint, size);
             DrawSphere();
+        }
+
+        private void trackBarLOD_ValueChanged(object sender, EventArgs e)
+        {
+            Lod =(float)trackBarLOD.Value / 10;
         }
 
        

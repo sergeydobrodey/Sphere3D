@@ -60,6 +60,11 @@
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.pbLeft = new System.Windows.Forms.PictureBox();
             this.btnquick = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPrimitives = new System.Windows.Forms.TabPage();
+            this.tabEdit = new System.Windows.Forms.TabPage();
+            this.lbLod = new System.Windows.Forms.Label();
+            this.trackBarLOD = new System.Windows.Forms.TrackBar();
             this.gbRotation.SuspendLayout();
             this.gbCreate.SuspendLayout();
             this.gbMove.SuspendLayout();
@@ -68,6 +73,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPrimitives.SuspendLayout();
+            this.tabEdit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLOD)).BeginInit();
             this.SuspendLayout();
             // 
             // rZ
@@ -112,7 +121,7 @@
             this.gbRotation.Controls.Add(this.rX);
             this.gbRotation.Controls.Add(this.rY);
             this.gbRotation.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.gbRotation.Location = new System.Drawing.Point(536, 191);
+            this.gbRotation.Location = new System.Drawing.Point(6, 6);
             this.gbRotation.Name = "gbRotation";
             this.gbRotation.Size = new System.Drawing.Size(180, 147);
             this.gbRotation.TabIndex = 6;
@@ -180,7 +189,7 @@
             this.gbCreate.Controls.Add(this.tbsize);
             this.gbCreate.Controls.Add(this.btnbuild);
             this.gbCreate.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.gbCreate.Location = new System.Drawing.Point(536, 28);
+            this.gbCreate.Location = new System.Drawing.Point(6, 15);
             this.gbCreate.Name = "gbCreate";
             this.gbCreate.Size = new System.Drawing.Size(180, 157);
             this.gbCreate.TabIndex = 12;
@@ -257,7 +266,7 @@
             this.gbMove.Controls.Add(this.lbmovey);
             this.gbMove.Controls.Add(this.lbmovex);
             this.gbMove.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.gbMove.Location = new System.Drawing.Point(537, 345);
+            this.gbMove.Location = new System.Drawing.Point(7, 160);
             this.gbMove.Name = "gbMove";
             this.gbMove.Size = new System.Drawing.Size(179, 135);
             this.gbMove.TabIndex = 13;
@@ -387,24 +396,77 @@
             // 
             this.btnquick.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnquick.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnquick.Location = new System.Drawing.Point(537, 487);
+            this.btnquick.Location = new System.Drawing.Point(6, 254);
             this.btnquick.Name = "btnquick";
             this.btnquick.Size = new System.Drawing.Size(75, 23);
             this.btnquick.TabIndex = 15;
             this.btnquick.Text = "Drag\'n\'Drop";
             this.btnquick.UseVisualStyleBackColor = false;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPrimitives);
+            this.tabControl1.Controls.Add(this.tabEdit);
+            this.tabControl1.Location = new System.Drawing.Point(536, 35);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(200, 500);
+            this.tabControl1.TabIndex = 16;
+            // 
+            // tabPrimitives
+            // 
+            this.tabPrimitives.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tabPrimitives.Controls.Add(this.trackBarLOD);
+            this.tabPrimitives.Controls.Add(this.lbLod);
+            this.tabPrimitives.Controls.Add(this.gbCreate);
+            this.tabPrimitives.Controls.Add(this.btnquick);
+            this.tabPrimitives.Location = new System.Drawing.Point(4, 22);
+            this.tabPrimitives.Name = "tabPrimitives";
+            this.tabPrimitives.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPrimitives.Size = new System.Drawing.Size(192, 474);
+            this.tabPrimitives.TabIndex = 0;
+            this.tabPrimitives.Text = "Primitives";
+            // 
+            // tabEdit
+            // 
+            this.tabEdit.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tabEdit.Controls.Add(this.gbRotation);
+            this.tabEdit.Controls.Add(this.gbMove);
+            this.tabEdit.Location = new System.Drawing.Point(4, 22);
+            this.tabEdit.Name = "tabEdit";
+            this.tabEdit.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEdit.Size = new System.Drawing.Size(192, 474);
+            this.tabEdit.TabIndex = 1;
+            this.tabEdit.Text = "Edit";
+            // 
+            // lbLod
+            // 
+            this.lbLod.AutoSize = true;
+            this.lbLod.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.lbLod.Location = new System.Drawing.Point(24, 187);
+            this.lbLod.Name = "lbLod";
+            this.lbLod.Size = new System.Drawing.Size(29, 13);
+            this.lbLod.TabIndex = 16;
+            this.lbLod.Text = "LOD";
+            // 
+            // trackBarLOD
+            // 
+            this.trackBarLOD.Location = new System.Drawing.Point(67, 178);
+            this.trackBarLOD.Minimum = 1;
+            this.trackBarLOD.Name = "trackBarLOD";
+            this.trackBarLOD.Size = new System.Drawing.Size(104, 45);
+            this.trackBarLOD.TabIndex = 17;
+            this.trackBarLOD.Value = 1;
+            this.trackBarLOD.ValueChanged += new System.EventHandler(this.trackBarLOD_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(726, 561);
-            this.Controls.Add(this.btnquick);
+            this.ClientSize = new System.Drawing.Size(761, 576);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.pnViews);
-            this.Controls.Add(this.gbMove);
-            this.Controls.Add(this.gbCreate);
-            this.Controls.Add(this.gbRotation);
             this.Location = new System.Drawing.Point(20, 20);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -419,6 +481,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPrimitives.ResumeLayout(false);
+            this.tabPrimitives.PerformLayout();
+            this.tabEdit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarLOD)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -456,6 +523,11 @@
         private System.Windows.Forms.Label lbmovex;
         private System.Windows.Forms.Panel pnViews;
         private System.Windows.Forms.Button btnquick;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPrimitives;
+        private System.Windows.Forms.TabPage tabEdit;
+        private System.Windows.Forms.TrackBar trackBarLOD;
+        private System.Windows.Forms.Label lbLod;
     }
 }
 
