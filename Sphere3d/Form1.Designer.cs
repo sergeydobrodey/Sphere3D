@@ -30,13 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.rZ = new System.Windows.Forms.RadioButton();
-            this.rY = new System.Windows.Forms.RadioButton();
-            this.rX = new System.Windows.Forms.RadioButton();
             this.gbRotation = new System.Windows.Forms.GroupBox();
             this.btnrotate = new System.Windows.Forms.Button();
-            this.tbangle = new System.Windows.Forms.TextBox();
-            this.lbrotate = new System.Windows.Forms.Label();
+            this.tbanglez = new System.Windows.Forms.TextBox();
+            this.tbangley = new System.Windows.Forms.TextBox();
+            this.tbanglex = new System.Windows.Forms.TextBox();
+            this.lbanglez = new System.Windows.Forms.Label();
+            this.lbanglex = new System.Windows.Forms.Label();
+            this.lbangley = new System.Windows.Forms.Label();
             this.btnbuild = new System.Windows.Forms.Button();
             this.tbsize = new System.Windows.Forms.TextBox();
             this.gbCreate = new System.Windows.Forms.GroupBox();
@@ -65,15 +66,15 @@
             this.trackBarLOD = new System.Windows.Forms.TrackBar();
             this.lbLod = new System.Windows.Forms.Label();
             this.tabEdit = new System.Windows.Forms.TabPage();
-            this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
             this.gbScale = new System.Windows.Forms.GroupBox();
-            this.lbscalex = new System.Windows.Forms.Label();
-            this.lbscaley = new System.Windows.Forms.Label();
-            this.lbscalez = new System.Windows.Forms.Label();
-            this.tbScaleX = new System.Windows.Forms.TextBox();
-            this.tbScaleY = new System.Windows.Forms.TextBox();
-            this.tbScaleZ = new System.Windows.Forms.TextBox();
             this.btnscale = new System.Windows.Forms.Button();
+            this.lbscalez = new System.Windows.Forms.Label();
+            this.tbScaleZ = new System.Windows.Forms.TextBox();
+            this.lbscaley = new System.Windows.Forms.Label();
+            this.tbScaleY = new System.Windows.Forms.TextBox();
+            this.tbScaleX = new System.Windows.Forms.TextBox();
+            this.lbscalex = new System.Windows.Forms.Label();
+            this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
             this.gbRotation.SuspendLayout();
             this.gbCreate.SuspendLayout();
             this.gbMove.SuspendLayout();
@@ -89,51 +90,19 @@
             this.gbScale.SuspendLayout();
             this.SuspendLayout();
             // 
-            // rZ
-            // 
-            this.rZ.AutoSize = true;
-            this.rZ.Location = new System.Drawing.Point(23, 119);
-            this.rZ.Name = "rZ";
-            this.rZ.Size = new System.Drawing.Size(32, 17);
-            this.rZ.TabIndex = 2;
-            this.rZ.Text = "Z";
-            this.rZ.UseVisualStyleBackColor = true;
-            // 
-            // rY
-            // 
-            this.rY.AutoSize = true;
-            this.rY.Location = new System.Drawing.Point(23, 95);
-            this.rY.Name = "rY";
-            this.rY.Size = new System.Drawing.Size(32, 17);
-            this.rY.TabIndex = 1;
-            this.rY.TabStop = true;
-            this.rY.Text = "Y";
-            this.rY.UseVisualStyleBackColor = true;
-            // 
-            // rX
-            // 
-            this.rX.AutoSize = true;
-            this.rX.Checked = true;
-            this.rX.Location = new System.Drawing.Point(23, 72);
-            this.rX.Name = "rX";
-            this.rX.Size = new System.Drawing.Size(32, 17);
-            this.rX.TabIndex = 0;
-            this.rX.TabStop = true;
-            this.rX.Text = "X";
-            this.rX.UseVisualStyleBackColor = true;
-            // 
             // gbRotation
             // 
             this.gbRotation.Controls.Add(this.btnrotate);
-            this.gbRotation.Controls.Add(this.tbangle);
-            this.gbRotation.Controls.Add(this.lbrotate);
-            this.gbRotation.Controls.Add(this.rZ);
-            this.gbRotation.Controls.Add(this.rX);
-            this.gbRotation.Controls.Add(this.rY);
+            this.gbRotation.Controls.Add(this.tbanglez);
+            this.gbRotation.Controls.Add(this.tbangley);
+            this.gbRotation.Controls.Add(this.tbanglex);
+            this.gbRotation.Controls.Add(this.lbanglez);
+            this.gbRotation.Controls.Add(this.lbanglex);
+            this.gbRotation.Controls.Add(this.lbangley);
             this.gbRotation.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.gbRotation.Location = new System.Drawing.Point(6, 6);
             this.gbRotation.Name = "gbRotation";
-            this.gbRotation.Size = new System.Drawing.Size(180, 147);
+            this.gbRotation.Size = new System.Drawing.Size(180, 135);
             this.gbRotation.TabIndex = 6;
             this.gbRotation.TabStop = false;
             this.gbRotation.Text = "Rotation";
@@ -142,30 +111,64 @@
             // 
             this.btnrotate.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnrotate.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnrotate.Location = new System.Drawing.Point(61, 71);
+            this.btnrotate.Location = new System.Drawing.Point(8, 94);
             this.btnrotate.Name = "btnrotate";
-            this.btnrotate.Size = new System.Drawing.Size(100, 64);
+            this.btnrotate.Size = new System.Drawing.Size(152, 28);
             this.btnrotate.TabIndex = 9;
             this.btnrotate.Text = "Rotate";
             this.btnrotate.UseVisualStyleBackColor = false;
             this.btnrotate.Click += new System.EventHandler(this.btnrotate_Click);
             // 
-            // tbangle
+            // tbanglez
             // 
-            this.tbangle.Location = new System.Drawing.Point(61, 27);
-            this.tbangle.Name = "tbangle";
-            this.tbangle.Size = new System.Drawing.Size(100, 20);
-            this.tbangle.TabIndex = 8;
-            this.tbangle.Text = "90";
+            this.tbanglez.Location = new System.Drawing.Point(60, 68);
+            this.tbanglez.Name = "tbanglez";
+            this.tbanglez.Size = new System.Drawing.Size(100, 20);
+            this.tbanglez.TabIndex = 17;
+            this.tbanglez.Text = "0";
             // 
-            // lbrotate
+            // tbangley
             // 
-            this.lbrotate.AutoSize = true;
-            this.lbrotate.Location = new System.Drawing.Point(18, 30);
-            this.lbrotate.Name = "lbrotate";
-            this.lbrotate.Size = new System.Drawing.Size(37, 13);
-            this.lbrotate.TabIndex = 7;
-            this.lbrotate.Text = "Angle:";
+            this.tbangley.Location = new System.Drawing.Point(60, 42);
+            this.tbangley.Name = "tbangley";
+            this.tbangley.Size = new System.Drawing.Size(100, 20);
+            this.tbangley.TabIndex = 18;
+            this.tbangley.Text = "0";
+            // 
+            // tbanglex
+            // 
+            this.tbanglex.Location = new System.Drawing.Point(60, 16);
+            this.tbanglex.Name = "tbanglex";
+            this.tbanglex.Size = new System.Drawing.Size(100, 20);
+            this.tbanglex.TabIndex = 19;
+            this.tbanglex.Text = "0";
+            // 
+            // lbanglez
+            // 
+            this.lbanglez.AutoSize = true;
+            this.lbanglez.Location = new System.Drawing.Point(39, 75);
+            this.lbanglez.Name = "lbanglez";
+            this.lbanglez.Size = new System.Drawing.Size(15, 13);
+            this.lbanglez.TabIndex = 16;
+            this.lbanglez.Text = "z:";
+            // 
+            // lbanglex
+            // 
+            this.lbanglex.AutoSize = true;
+            this.lbanglex.Location = new System.Drawing.Point(39, 23);
+            this.lbanglex.Name = "lbanglex";
+            this.lbanglex.Size = new System.Drawing.Size(15, 13);
+            this.lbanglex.TabIndex = 14;
+            this.lbanglex.Text = "x:";
+            // 
+            // lbangley
+            // 
+            this.lbangley.AutoSize = true;
+            this.lbangley.Location = new System.Drawing.Point(39, 49);
+            this.lbangley.Name = "lbangley";
+            this.lbangley.Size = new System.Drawing.Size(15, 13);
+            this.lbangley.TabIndex = 15;
+            this.lbangley.Text = "y:";
             // 
             // btnbuild
             // 
@@ -276,7 +279,7 @@
             this.gbMove.Controls.Add(this.lbmovey);
             this.gbMove.Controls.Add(this.lbmovex);
             this.gbMove.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.gbMove.Location = new System.Drawing.Point(7, 160);
+            this.gbMove.Location = new System.Drawing.Point(6, 147);
             this.gbMove.Name = "gbMove";
             this.gbMove.Size = new System.Drawing.Size(179, 135);
             this.gbMove.TabIndex = 13;
@@ -460,13 +463,6 @@
             this.tabEdit.Size = new System.Drawing.Size(192, 476);
             this.tabEdit.TabIndex = 1;
             // 
-            // imgListTabMain
-            // 
-            this.imgListTabMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabMain.ImageStream")));
-            this.imgListTabMain.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
-            this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
-            // 
             // gbScale
             // 
             this.gbScale.Controls.Add(this.btnscale);
@@ -477,63 +473,12 @@
             this.gbScale.Controls.Add(this.tbScaleX);
             this.gbScale.Controls.Add(this.lbscalex);
             this.gbScale.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.gbScale.Location = new System.Drawing.Point(7, 302);
+            this.gbScale.Location = new System.Drawing.Point(6, 288);
             this.gbScale.Name = "gbScale";
             this.gbScale.Size = new System.Drawing.Size(179, 130);
             this.gbScale.TabIndex = 14;
             this.gbScale.TabStop = false;
             this.gbScale.Text = "Scale";
-            // 
-            // lbscalex
-            // 
-            this.lbscalex.AutoSize = true;
-            this.lbscalex.Location = new System.Drawing.Point(39, 29);
-            this.lbscalex.Name = "lbscalex";
-            this.lbscalex.Size = new System.Drawing.Size(15, 13);
-            this.lbscalex.TabIndex = 0;
-            this.lbscalex.Text = "x:";
-            // 
-            // lbscaley
-            // 
-            this.lbscaley.AutoSize = true;
-            this.lbscaley.Location = new System.Drawing.Point(39, 55);
-            this.lbscaley.Name = "lbscaley";
-            this.lbscaley.Size = new System.Drawing.Size(15, 13);
-            this.lbscaley.TabIndex = 1;
-            this.lbscaley.Text = "y:";
-            // 
-            // lbscalez
-            // 
-            this.lbscalez.AutoSize = true;
-            this.lbscalez.Location = new System.Drawing.Point(39, 81);
-            this.lbscalez.Name = "lbscalez";
-            this.lbscalez.Size = new System.Drawing.Size(15, 13);
-            this.lbscalez.TabIndex = 2;
-            this.lbscalez.Text = "z:";
-            // 
-            // tbScaleX
-            // 
-            this.tbScaleX.Location = new System.Drawing.Point(60, 22);
-            this.tbScaleX.Name = "tbScaleX";
-            this.tbScaleX.Size = new System.Drawing.Size(100, 20);
-            this.tbScaleX.TabIndex = 19;
-            this.tbScaleX.Text = "1";
-            // 
-            // tbScaleY
-            // 
-            this.tbScaleY.Location = new System.Drawing.Point(60, 48);
-            this.tbScaleY.Name = "tbScaleY";
-            this.tbScaleY.Size = new System.Drawing.Size(100, 20);
-            this.tbScaleY.TabIndex = 18;
-            this.tbScaleY.Text = "1";
-            // 
-            // tbScaleZ
-            // 
-            this.tbScaleZ.Location = new System.Drawing.Point(60, 74);
-            this.tbScaleZ.Name = "tbScaleZ";
-            this.tbScaleZ.Size = new System.Drawing.Size(100, 20);
-            this.tbScaleZ.TabIndex = 17;
-            this.tbScaleZ.Text = "1";
             // 
             // btnscale
             // 
@@ -545,12 +490,70 @@
             this.btnscale.UseVisualStyleBackColor = true;
             this.btnscale.Click += new System.EventHandler(this.btnscale_Click);
             // 
+            // lbscalez
+            // 
+            this.lbscalez.AutoSize = true;
+            this.lbscalez.Location = new System.Drawing.Point(39, 81);
+            this.lbscalez.Name = "lbscalez";
+            this.lbscalez.Size = new System.Drawing.Size(15, 13);
+            this.lbscalez.TabIndex = 2;
+            this.lbscalez.Text = "z:";
+            // 
+            // tbScaleZ
+            // 
+            this.tbScaleZ.Location = new System.Drawing.Point(60, 74);
+            this.tbScaleZ.Name = "tbScaleZ";
+            this.tbScaleZ.Size = new System.Drawing.Size(100, 20);
+            this.tbScaleZ.TabIndex = 17;
+            this.tbScaleZ.Text = "1";
+            // 
+            // lbscaley
+            // 
+            this.lbscaley.AutoSize = true;
+            this.lbscaley.Location = new System.Drawing.Point(39, 55);
+            this.lbscaley.Name = "lbscaley";
+            this.lbscaley.Size = new System.Drawing.Size(15, 13);
+            this.lbscaley.TabIndex = 1;
+            this.lbscaley.Text = "y:";
+            // 
+            // tbScaleY
+            // 
+            this.tbScaleY.Location = new System.Drawing.Point(60, 48);
+            this.tbScaleY.Name = "tbScaleY";
+            this.tbScaleY.Size = new System.Drawing.Size(100, 20);
+            this.tbScaleY.TabIndex = 18;
+            this.tbScaleY.Text = "1";
+            // 
+            // tbScaleX
+            // 
+            this.tbScaleX.Location = new System.Drawing.Point(60, 22);
+            this.tbScaleX.Name = "tbScaleX";
+            this.tbScaleX.Size = new System.Drawing.Size(100, 20);
+            this.tbScaleX.TabIndex = 19;
+            this.tbScaleX.Text = "1";
+            // 
+            // lbscalex
+            // 
+            this.lbscalex.AutoSize = true;
+            this.lbscalex.Location = new System.Drawing.Point(39, 29);
+            this.lbscalex.Name = "lbscalex";
+            this.lbscalex.Size = new System.Drawing.Size(15, 13);
+            this.lbscalex.TabIndex = 0;
+            this.lbscalex.Text = "x:";
+            // 
+            // imgListTabMain
+            // 
+            this.imgListTabMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabMain.ImageStream")));
+            this.imgListTabMain.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
+            this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(761, 576);
+            this.ClientSize = new System.Drawing.Size(753, 576);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
@@ -581,13 +584,8 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pbMain;
-        private System.Windows.Forms.RadioButton rZ;
-        private System.Windows.Forms.RadioButton rY;
-        private System.Windows.Forms.RadioButton rX;
         private System.Windows.Forms.GroupBox gbRotation;
         private System.Windows.Forms.Button btnrotate;
-        private System.Windows.Forms.TextBox tbangle;
-        private System.Windows.Forms.Label lbrotate;
         private System.Windows.Forms.Button btnbuild;
         private System.Windows.Forms.TextBox tbsize;
         private System.Windows.Forms.PictureBox pbFront;
@@ -624,6 +622,12 @@
         private System.Windows.Forms.TextBox tbScaleY;
         private System.Windows.Forms.TextBox tbScaleX;
         private System.Windows.Forms.Label lbscalex;
+        private System.Windows.Forms.TextBox tbanglez;
+        private System.Windows.Forms.TextBox tbangley;
+        private System.Windows.Forms.TextBox tbanglex;
+        private System.Windows.Forms.Label lbanglez;
+        private System.Windows.Forms.Label lbanglex;
+        private System.Windows.Forms.Label lbangley;
     }
 }
 
