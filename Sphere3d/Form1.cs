@@ -33,7 +33,7 @@ namespace Sphere3d
         int size = 0;
         Point3d basepoint;
         float Lod = 0.2F;
-       
+        PointF delta = new PointF(0, 0);
       
           
         int W = 1;
@@ -212,9 +212,10 @@ namespace Sphere3d
                 gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[i + 1].y + pbFront.Width/2, sh[i + 1].z + pbFront.Width/2);
                 Draw2D(gM, sh[i], sh[i + 1]);
             }
-            gF.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].y + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].y + pbFront.Width/2);
-            gL.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].z + pbFront.Width/2);
-            gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].y + pbFront.Width/2, sh[0].z + pbFront.Width/2);
+            //obsolete
+            //gF.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].y + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].y + pbFront.Width/2);
+            //gL.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].z + pbFront.Width/2);
+            //gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].y + pbFront.Width/2, sh[0].z + pbFront.Width/2);
         }
 
         private void Initialize()
@@ -234,47 +235,78 @@ namespace Sphere3d
                 Initialize();
                 double[,] matrixACT = MatrixReady();
                 matrix.Clear();
-                for (int i = 0; i < sh.Count-1; i++)
+                for (int i = 0; i < sh.Count; i++)
                 {
                     sh[i] = MultiplicateF(sh[i], matrixACT);
                 }
                 DrawSphere();
+                tbanglex.Text = "0";
+                tbangley.Text = "0";
+                tbanglez.Text = "0";
+                tbmovex.Text = "0";
+                tbmovey.Text = "0";
+                tbmovez.Text = "0";
+                tbScaleX.Text = "1";
+                tbScaleY.Text = "1";
+                tbScaleZ.Text = "1";
+
            
         }
 
 
         private void btnmove_Click(object sender, EventArgs e)
         {
-            btnrotate_Click(this, null);
-            //Initialize();
-            //for (int i = 0; i < sh.Count - 1; i++)
-            //{
-            //    sh[i].x += Convert.ToInt32(tbmovex.Text);
-            //    sh[i].y += Convert.ToInt32(tbmovey.Text);
-            //    sh[i].z += Convert.ToInt32(tbmovez.Text);
-            //}
-            //DrawSphere();
+            btnrotate_Click(this, null);    // call btnrotate_Click 
         }
 
         private void btnscale_Click(object sender, EventArgs e)
         {
-            btnrotate_Click(this, null);
+            btnrotate_Click(this, null);    // call btnrotate_Click 
         }
 
         private void pbFront_MouseDown(object sender, MouseEventArgs e)
         {
-            basepoint = new Point3d(e.X, e.Y, 0);          
+            if (e.Button == MouseButtons.Left) 
+            basepoint = new Point3d(e.X, e.Y, 0);
+            if (e.Button == MouseButtons.Right)
+                delta = e.Location;
+            if (e.Button == MouseButtons.Middle)
+                delta = e.Location;
+
         }
 
         private void pbFront_MouseUp(object sender, MouseEventArgs e)
         {
-            Initialize();
-            Point3d radpoint= new Point3d (e.X,e.Y,0);
-            size=Convert.ToInt32(Math.Sqrt((radpoint.x-basepoint.x)*(radpoint.x-basepoint.x)+(radpoint.y-basepoint.y)*(radpoint.y-basepoint.y)));
-            basepoint.x -= pbFront.Width/2;
-            basepoint.y -= pbFront.Width/2;
-            GetSphere(basepoint, size);
-            DrawSphere();
+            if (e.Button == MouseButtons.Left)
+            {
+                Initialize();
+                Point3d radpoint = new Point3d(e.X, e.Y, 0);
+                size = Convert.ToInt32(Math.Sqrt((radpoint.x - basepoint.x) * (radpoint.x - basepoint.x) + (radpoint.y - basepoint.y) * (radpoint.y - basepoint.y)));
+                basepoint.x -= pbFront.Width / 2;
+                basepoint.y -= pbFront.Width / 2;
+                GetSphere(basepoint, size);
+                DrawSphere();
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                float scrollangley = delta.X - e.X;   // need to fix
+                float scrollanglex = delta.Y - e.Y;
+                tbanglex.Text = Convert.ToString(scrollanglex);
+                tbangley.Text = Convert.ToString(scrollangley);
+                btnrotate_Click(this, null); 
+            }
+            if (e.Button == MouseButtons.Middle)
+            {
+
+                float scrollzoom = delta.Y - e.Y;  // need to fix                
+                scrollzoom=1+scrollzoom/70;
+                tbScaleX.Text = Convert.ToString(scrollzoom);
+                tbScaleY.Text = Convert.ToString(scrollzoom);
+                tbScaleZ.Text = Convert.ToString(scrollzoom);
+                btnrotate_Click(this, null);
+
+            }
+
         }
 
         private void trackBarLOD_ValueChanged(object sender, EventArgs e)

@@ -68,20 +68,20 @@
             this.trackBarLOD = new System.Windows.Forms.TrackBar();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.flowEdit = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnscale = new System.Windows.Forms.Button();
-            this.lbscalez = new System.Windows.Forms.Label();
-            this.tbScaleZ = new System.Windows.Forms.TextBox();
-            this.lbscaley = new System.Windows.Forms.Label();
-            this.tbScaleY = new System.Windows.Forms.TextBox();
-            this.tbScaleX = new System.Windows.Forms.TextBox();
-            this.lbscalex = new System.Windows.Forms.Label();
-            this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
             this.pnlRotate = new System.Windows.Forms.Panel();
-            this.pnlMove = new System.Windows.Forms.Panel();
-            this.pnlScale = new System.Windows.Forms.Panel();
             this.btnPanelRotate = new System.Windows.Forms.Button();
+            this.pnlMove = new System.Windows.Forms.Panel();
             this.btnPanelMove = new System.Windows.Forms.Button();
+            this.pnlScale = new System.Windows.Forms.Panel();
+            this.btnscale = new System.Windows.Forms.Button();
             this.btnPanelScale = new System.Windows.Forms.Button();
+            this.lbscalez = new System.Windows.Forms.Label();
+            this.tbScaleY = new System.Windows.Forms.TextBox();
+            this.tbScaleZ = new System.Windows.Forms.TextBox();
+            this.lbscalex = new System.Windows.Forms.Label();
+            this.lbscaley = new System.Windows.Forms.Label();
+            this.tbScaleX = new System.Windows.Forms.TextBox();
+            this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -312,20 +312,20 @@
             this.pnViews.Controls.Add(this.pbTop);
             this.pnViews.Controls.Add(this.pbMain);
             this.pnViews.Controls.Add(this.pbLeft);
-            this.pnViews.Location = new System.Drawing.Point(10, 30);
+            this.pnViews.Location = new System.Drawing.Point(12, 12);
             this.pnViews.Name = "pnViews";
-            this.pnViews.Size = new System.Drawing.Size(520, 520);
+            this.pnViews.Size = new System.Drawing.Size(810, 810);
             this.pnViews.TabIndex = 14;
             // 
             // pbFront
             // 
             this.pbFront.BackColor = System.Drawing.Color.DarkGray;
             this.pbFront.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.pbFront.Image = ((System.Drawing.Image)(resources.GetObject("pbFront.Image")));
-            this.pbFront.Location = new System.Drawing.Point(5, 5);
+            this.pbFront.Image = global::Sphere3d.Properties.Resources.viewport;
+            this.pbFront.Location = new System.Drawing.Point(0, 0);
             this.pbFront.Name = "pbFront";
-            this.pbFront.Size = new System.Drawing.Size(250, 250);
-            this.pbFront.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbFront.Size = new System.Drawing.Size(400, 400);
+            this.pbFront.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFront.TabIndex = 9;
             this.pbFront.TabStop = false;
             this.pbFront.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbFront_MouseDown);
@@ -334,32 +334,31 @@
             // pbTop
             // 
             this.pbTop.BackColor = System.Drawing.Color.DarkGray;
-            this.pbTop.Image = ((System.Drawing.Image)(resources.GetObject("pbTop.Image")));
-            this.pbTop.Location = new System.Drawing.Point(5, 260);
+            this.pbTop.Image = global::Sphere3d.Properties.Resources.viewport;
+            this.pbTop.Location = new System.Drawing.Point(0, 410);
             this.pbTop.Name = "pbTop";
-            this.pbTop.Size = new System.Drawing.Size(250, 250);
-            this.pbTop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbTop.Size = new System.Drawing.Size(400, 400);
+            this.pbTop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbTop.TabIndex = 10;
             this.pbTop.TabStop = false;
             // 
             // pbMain
             // 
             this.pbMain.BackColor = System.Drawing.Color.DarkGray;
-            this.pbMain.Location = new System.Drawing.Point(260, 260);
+            this.pbMain.Location = new System.Drawing.Point(410, 410);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(250, 250);
-            this.pbMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbMain.Size = new System.Drawing.Size(400, 400);
             this.pbMain.TabIndex = 2;
             this.pbMain.TabStop = false;
             // 
             // pbLeft
             // 
             this.pbLeft.BackColor = System.Drawing.Color.DarkGray;
-            this.pbLeft.Image = ((System.Drawing.Image)(resources.GetObject("pbLeft.Image")));
-            this.pbLeft.Location = new System.Drawing.Point(260, 5);
+            this.pbLeft.Image = global::Sphere3d.Properties.Resources.viewport;
+            this.pbLeft.Location = new System.Drawing.Point(410, 0);
             this.pbLeft.Name = "pbLeft";
-            this.pbLeft.Size = new System.Drawing.Size(250, 250);
-            this.pbLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbLeft.Size = new System.Drawing.Size(400, 400);
+            this.pbLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbLeft.TabIndex = 11;
             this.pbLeft.TabStop = false;
             // 
@@ -369,7 +368,7 @@
             this.tabControlMain.Controls.Add(this.tabEdit);
             this.tabControlMain.ImageList = this.imgListTabMain;
             this.tabControlMain.ItemSize = new System.Drawing.Size(16, 16);
-            this.tabControlMain.Location = new System.Drawing.Point(536, 35);
+            this.tabControlMain.Location = new System.Drawing.Point(840, 13);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(200, 500);
@@ -478,75 +477,6 @@
             this.flowEdit.Size = new System.Drawing.Size(186, 470);
             this.flowEdit.TabIndex = 0;
             // 
-            // btnscale
-            // 
-            this.btnscale.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnscale.Location = new System.Drawing.Point(33, 110);
-            this.btnscale.Name = "btnscale";
-            this.btnscale.Size = new System.Drawing.Size(115, 25);
-            this.btnscale.TabIndex = 20;
-            this.btnscale.Text = "Scale";
-            this.btnscale.UseVisualStyleBackColor = false;
-            this.btnscale.Click += new System.EventHandler(this.btnscale_Click);
-            // 
-            // lbscalez
-            // 
-            this.lbscalez.AutoSize = true;
-            this.lbscalez.Location = new System.Drawing.Point(47, 88);
-            this.lbscalez.Name = "lbscalez";
-            this.lbscalez.Size = new System.Drawing.Size(15, 13);
-            this.lbscalez.TabIndex = 2;
-            this.lbscalez.Text = "z:";
-            // 
-            // tbScaleZ
-            // 
-            this.tbScaleZ.Location = new System.Drawing.Point(68, 81);
-            this.tbScaleZ.Name = "tbScaleZ";
-            this.tbScaleZ.Size = new System.Drawing.Size(100, 20);
-            this.tbScaleZ.TabIndex = 17;
-            this.tbScaleZ.Text = "1";
-            // 
-            // lbscaley
-            // 
-            this.lbscaley.AutoSize = true;
-            this.lbscaley.Location = new System.Drawing.Point(47, 62);
-            this.lbscaley.Name = "lbscaley";
-            this.lbscaley.Size = new System.Drawing.Size(15, 13);
-            this.lbscaley.TabIndex = 1;
-            this.lbscaley.Text = "y:";
-            // 
-            // tbScaleY
-            // 
-            this.tbScaleY.Location = new System.Drawing.Point(68, 55);
-            this.tbScaleY.Name = "tbScaleY";
-            this.tbScaleY.Size = new System.Drawing.Size(100, 20);
-            this.tbScaleY.TabIndex = 18;
-            this.tbScaleY.Text = "1";
-            // 
-            // tbScaleX
-            // 
-            this.tbScaleX.Location = new System.Drawing.Point(68, 29);
-            this.tbScaleX.Name = "tbScaleX";
-            this.tbScaleX.Size = new System.Drawing.Size(100, 20);
-            this.tbScaleX.TabIndex = 19;
-            this.tbScaleX.Text = "1";
-            // 
-            // lbscalex
-            // 
-            this.lbscalex.AutoSize = true;
-            this.lbscalex.Location = new System.Drawing.Point(47, 36);
-            this.lbscalex.Name = "lbscalex";
-            this.lbscalex.Size = new System.Drawing.Size(15, 13);
-            this.lbscalex.TabIndex = 0;
-            this.lbscalex.Text = "x:";
-            // 
-            // imgListTabMain
-            // 
-            this.imgListTabMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabMain.ImageStream")));
-            this.imgListTabMain.TransparentColor = System.Drawing.Color.Transparent;
-            this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
-            this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
-            // 
             // pnlRotate
             // 
             this.pnlRotate.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -562,6 +492,17 @@
             this.pnlRotate.Name = "pnlRotate";
             this.pnlRotate.Size = new System.Drawing.Size(180, 140);
             this.pnlRotate.TabIndex = 0;
+            // 
+            // btnPanelRotate
+            // 
+            this.btnPanelRotate.Location = new System.Drawing.Point(4, 4);
+            this.btnPanelRotate.Name = "btnPanelRotate";
+            this.btnPanelRotate.Size = new System.Drawing.Size(173, 22);
+            this.btnPanelRotate.TabIndex = 0;
+            this.btnPanelRotate.Text = "-                    Rotate";
+            this.btnPanelRotate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPanelRotate.UseVisualStyleBackColor = true;
+            this.btnPanelRotate.Click += new System.EventHandler(this.btnPanelRotate_Click);
             // 
             // pnlMove
             // 
@@ -579,6 +520,17 @@
             this.pnlMove.Size = new System.Drawing.Size(180, 140);
             this.pnlMove.TabIndex = 1;
             // 
+            // btnPanelMove
+            // 
+            this.btnPanelMove.Location = new System.Drawing.Point(4, 4);
+            this.btnPanelMove.Name = "btnPanelMove";
+            this.btnPanelMove.Size = new System.Drawing.Size(173, 22);
+            this.btnPanelMove.TabIndex = 0;
+            this.btnPanelMove.Text = "-                    Move";
+            this.btnPanelMove.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPanelMove.UseVisualStyleBackColor = true;
+            this.btnPanelMove.Click += new System.EventHandler(this.btnPanelMove_Click);
+            // 
             // pnlScale
             // 
             this.pnlScale.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -595,27 +547,16 @@
             this.pnlScale.Size = new System.Drawing.Size(180, 140);
             this.pnlScale.TabIndex = 2;
             // 
-            // btnPanelRotate
+            // btnscale
             // 
-            this.btnPanelRotate.Location = new System.Drawing.Point(4, 4);
-            this.btnPanelRotate.Name = "btnPanelRotate";
-            this.btnPanelRotate.Size = new System.Drawing.Size(173, 22);
-            this.btnPanelRotate.TabIndex = 0;
-            this.btnPanelRotate.Text = "-                    Rotate";
-            this.btnPanelRotate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPanelRotate.UseVisualStyleBackColor = true;
-            this.btnPanelRotate.Click += new System.EventHandler(this.btnPanelRotate_Click);
-            // 
-            // btnPanelMove
-            // 
-            this.btnPanelMove.Location = new System.Drawing.Point(4, 4);
-            this.btnPanelMove.Name = "btnPanelMove";
-            this.btnPanelMove.Size = new System.Drawing.Size(173, 22);
-            this.btnPanelMove.TabIndex = 0;
-            this.btnPanelMove.Text = "-                    Move";
-            this.btnPanelMove.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPanelMove.UseVisualStyleBackColor = true;
-            this.btnPanelMove.Click += new System.EventHandler(this.btnPanelMove_Click);
+            this.btnscale.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnscale.Location = new System.Drawing.Point(33, 110);
+            this.btnscale.Name = "btnscale";
+            this.btnscale.Size = new System.Drawing.Size(115, 25);
+            this.btnscale.TabIndex = 20;
+            this.btnscale.Text = "Scale";
+            this.btnscale.UseVisualStyleBackColor = false;
+            this.btnscale.Click += new System.EventHandler(this.btnscale_Click);
             // 
             // btnPanelScale
             // 
@@ -628,12 +569,70 @@
             this.btnPanelScale.UseVisualStyleBackColor = true;
             this.btnPanelScale.Click += new System.EventHandler(this.btnPanelScale_Click);
             // 
+            // lbscalez
+            // 
+            this.lbscalez.AutoSize = true;
+            this.lbscalez.Location = new System.Drawing.Point(47, 88);
+            this.lbscalez.Name = "lbscalez";
+            this.lbscalez.Size = new System.Drawing.Size(15, 13);
+            this.lbscalez.TabIndex = 2;
+            this.lbscalez.Text = "z:";
+            // 
+            // tbScaleY
+            // 
+            this.tbScaleY.Location = new System.Drawing.Point(68, 55);
+            this.tbScaleY.Name = "tbScaleY";
+            this.tbScaleY.Size = new System.Drawing.Size(100, 20);
+            this.tbScaleY.TabIndex = 18;
+            this.tbScaleY.Text = "1";
+            // 
+            // tbScaleZ
+            // 
+            this.tbScaleZ.Location = new System.Drawing.Point(68, 81);
+            this.tbScaleZ.Name = "tbScaleZ";
+            this.tbScaleZ.Size = new System.Drawing.Size(100, 20);
+            this.tbScaleZ.TabIndex = 17;
+            this.tbScaleZ.Text = "1";
+            // 
+            // lbscalex
+            // 
+            this.lbscalex.AutoSize = true;
+            this.lbscalex.Location = new System.Drawing.Point(47, 36);
+            this.lbscalex.Name = "lbscalex";
+            this.lbscalex.Size = new System.Drawing.Size(15, 13);
+            this.lbscalex.TabIndex = 0;
+            this.lbscalex.Text = "x:";
+            // 
+            // lbscaley
+            // 
+            this.lbscaley.AutoSize = true;
+            this.lbscaley.Location = new System.Drawing.Point(47, 62);
+            this.lbscaley.Name = "lbscaley";
+            this.lbscaley.Size = new System.Drawing.Size(15, 13);
+            this.lbscaley.TabIndex = 1;
+            this.lbscaley.Text = "y:";
+            // 
+            // tbScaleX
+            // 
+            this.tbScaleX.Location = new System.Drawing.Point(68, 29);
+            this.tbScaleX.Name = "tbScaleX";
+            this.tbScaleX.Size = new System.Drawing.Size(100, 20);
+            this.tbScaleX.TabIndex = 19;
+            this.tbScaleX.Text = "1";
+            // 
+            // imgListTabMain
+            // 
+            this.imgListTabMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabMain.ImageStream")));
+            this.imgListTabMain.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
+            this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(771, 576);
+            this.ClientSize = new System.Drawing.Size(1053, 830);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
