@@ -209,8 +209,15 @@ namespace Sphere3d
         private void trackBarLOD_ValueChanged(object sender, EventArgs e)
         {
             Lod =(float)trackBarLOD.Value / 10;
+            tabControlMain.Refresh();
         }
 
+        private void btnscale_Click(object sender, EventArgs e)
+        {
+
+        }
+
+       
        
 
        
