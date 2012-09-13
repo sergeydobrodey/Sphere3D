@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Sphere3d
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {        
 
         public class Point3d
@@ -32,8 +32,12 @@ namespace Sphere3d
         List<double[,]> matrix = new List<double[,]>();
         int size = 0;
         Point3d basepoint;
-        float Lod = 0.1F;
+        float Lod = 0.2F;
+       
+      
+          
         int W = 1;
+
 
         #region Matrix
         public void Rotate(double anglex,double angley,double anglez)
@@ -69,6 +73,7 @@ namespace Sphere3d
 
         public void GetSphere(Point3d basepoint,int R)
         {
+         
             sh.Clear();           
             double x, y, z, fi, psi;
             for (fi = 0; fi < Math.PI; fi += Lod)
@@ -107,6 +112,7 @@ namespace Sphere3d
             b[2, 0] = vertex.z;
             b[3, 0] = W;
             
+            
             for (int i = 0; i < 4; i++)   
                for (int j = 0; j < 1; j++)
                {
@@ -143,12 +149,19 @@ namespace Sphere3d
             double movey = Convert.ToDouble(tbmovey.Text);
             double movez = Convert.ToDouble(tbmovez.Text);
             Move(movex, movey, movez);
-           
 
-            double scalex = Convert.ToDouble(tbScaleX.Text);
-            double scaley = Convert.ToDouble(tbScaleY.Text);
-            double scalez = Convert.ToDouble(tbScaleZ.Text);
-            Scale(scalex, scaley, scalez);
+            try
+            {
+                double scalex = Convert.ToDouble(tbScaleX.Text);
+                double scaley = Convert.ToDouble(tbScaleY.Text);
+                double scalez = Convert.ToDouble(tbScaleZ.Text);
+                Scale(scalex, scaley, scalez);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Use decimal comma", "Something wrong");
+            }
+           
 
             double anglex = Convert.ToDouble(tbanglex.Text) * Math.PI / 180; ;
             double angley = Convert.ToDouble(tbangley.Text) * Math.PI / 180; ;
@@ -162,9 +175,12 @@ namespace Sphere3d
         }
 
 
-        public Form1()
+        public mainForm()
         {
-            InitializeComponent();            
+            InitializeComponent();
+          
+
+           
         }
 
  
@@ -212,7 +228,7 @@ namespace Sphere3d
             pbTop.Refresh();
             pbMain.Refresh();
         }
-        #region obsolete
+
         private void btnrotate_Click(object sender, EventArgs e)
         {            
                 Initialize();
@@ -225,7 +241,7 @@ namespace Sphere3d
                 DrawSphere();
            
         }
-#endregion
+
 
         private void btnmove_Click(object sender, EventArgs e)
         {
@@ -238,6 +254,11 @@ namespace Sphere3d
             //    sh[i].z += Convert.ToInt32(tbmovez.Text);
             //}
             //DrawSphere();
+        }
+
+        private void btnscale_Click(object sender, EventArgs e)
+        {
+            btnrotate_Click(this, null);
         }
 
         private void pbFront_MouseDown(object sender, MouseEventArgs e)
@@ -262,16 +283,71 @@ namespace Sphere3d
             tabControlMain.Refresh();
         }
 
-        private void btnscale_Click(object sender, EventArgs e)
+        #region DropDownPanels
+        private void btnPanelCreate_Click(object sender, EventArgs e)
         {
-            btnrotate_Click(this, null);
+
+            if (pnlCreate.Height != 30)
+            {
+                pnlCreate.Height = 30;
+                btnPanelCreate.Text = "+                    Create";
+            }
+            else
+            {
+                pnlCreate.Height = 170;
+                btnPanelCreate.Text = "-                    Create";
+            }
         }
 
-       
-       
+        private void btnPanelRotate_Click(object sender, EventArgs e)
+        {
+            if (pnlRotate.Height != 30)
+            {
+                pnlRotate.Height = 30;
+                btnPanelRotate.Text = "+                    Rotate";
+            }
+            else
+            {
+                pnlRotate.Height = 140;
+                btnPanelRotate.Text = "-                    Rotate";
+            }
+        }
 
-       
-      
+        private void btnPanelMove_Click(object sender, EventArgs e)
+        {
+            if (pnlMove.Height != 30)
+            {
+                pnlMove.Height = 30;
+                btnPanelMove.Text = "+                    Move";
+            }
+            else
+            {
+                pnlMove.Height = 140;
+                btnPanelMove.Text = "-                    Move";
+            }
+        }
+
+        private void btnPanelScale_Click(object sender, EventArgs e)
+        {
+            if (pnlScale.Height != 30)
+            {
+                pnlScale.Height = 30;
+                btnPanelScale.Text = "+                    Scale";
+            }
+            else
+            {
+                pnlScale.Height = 140;
+                btnPanelScale.Text = "-                    Scale";
+            }
+        }
+
+        #endregion
+
+
+
+
+
+
     }
 }
 
