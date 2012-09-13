@@ -10,149 +10,376 @@ using System.Windows.Forms;
 
 namespace Sphere3d
 {
-    public partial class Form1 : Form
-    {
-        //int ox = 250;
-        //int oy = 250;
+    public partial class mainForm : Form
+    {        
 
         public class Point3d
         {
             public
-             int x, y, z;
+             float x, y, z;
 
             public Point3d(double x, double y, double z)
             {
 
-                this.x = (int)x;
-                this.y = (int)y;
-                this.z = (int)z;
+                this.x = (float)x;
+                this.y = (float)y;
+                this.z = (float)z;
             }
         }
 
-        int size;
-        Point3d[] m;        
+
+        List<Point3d> sh = new List<Point3d>();  
+        List<double[,]> matrix = new List<double[,]>();
+        int size = 0;
+        Point3d basepoint;
+        float Lod = 0.2F;
+        PointF delta = new PointF(0, 0);
+      
+          
+        int W = 1;
 
 
-
-        public double[,] rotate(double angle)
-        {
-             double C = Math.Cos(angle);
-             double S = Math.Sin(angle);             
-             double[,] rotateX = { { 1, 0, 0 }, { 0, C, -S }, { 0, S, C } };
-             double[,] rotateY = { { C, 0, S }, { 0, 1, 0 }, { -S, 0, C } };
-             double[,] rotateZ = { { C, -S, 0 }, { S, C, 0 }, { 0, 0, 1 } };
-             if (rX.Checked) return rotateX;
-             if (rY.Checked) return rotateY;
-             if (rZ.Checked) return rotateZ;
-             else return null;           
-
+        #region Matrix
+        public void Rotate(double anglex,double angley,double anglez)
+        {  
+            double Cx = Math.Cos(anglex);
+            double Sx = Math.Sin(anglex);
+            double Cy = Math.Cos(angley);
+            double Sy = Math.Sin(angley);
+            double Cz = Math.Cos(anglez);
+            double Sz = Math.Sin(anglez);
+            double[,] rotateX = { { 1, 0, 0, 0 }, { 0, Cx, Sx, 0 }, { 0, -Sx, Cx, 0 }, { 0, 0, 0, 1 } };
+            double[,] rotateY = { { Cy, 0, Sy, 0 }, { 0, 1, 0, 0 }, { -Sy, 0, Cy, 0 }, { 0, 0, 0, 1 } };
+            double[,] rotateZ = { { Cz, Sz, 0, 0 }, { -Sz, Cz, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+            matrix.Add(rotateX);
+            matrix.Add(rotateY);
+            matrix.Add(rotateZ);
         }
 
-
-        public Point3d[] sphar = new Point3d[5000];
-
-        public void GetSphere(int R)
+        public void Move(double movex, double movey, double movez)
         {
+            double[,] move = { { 1, 0, 0, movex }, { 0, 1, 0, movey }, { 0, 0,1, movez }, { 0, 0, 0, 1 } };
+            matrix.Add(move);
+        }
+
+        public void Scale(double scalex, double scaley, double scalez)
+        {
+            double[,] scale = { { scalex, 0, 0, 0 }, { 0, scaley, 0, 0 }, { 0, 0, scalez, 0 }, { 0, 0, 0, 1 } };
+            matrix.Add(scale);
+            
+        }
+        #endregion
+
+
+        public void GetSphere(Point3d basepoint,int R)
+        {
+         
+            sh.Clear();           
             double x, y, z, fi, psi;
-            int i = 0;
-            for (psi = -Math.PI / 2; psi < Math.PI / 2; psi +=0.1)
-                for (fi = 0; fi < 2 * Math.PI; fi += 0.1)
+            for (fi = 0; fi < Math.PI; fi += Lod)
+                for (psi = 0; psi < 2 * Math.PI; psi += Lod)
                 {
-                    x = R * Math.Sin(psi) * Math.Cos(fi);
-                    y = R * Math.Sin(psi) * Math.Cos(fi);
-                    z = R * Math.Cos(psi);
-                    sphar[i] = new Point3d((int)x,(int)y,(int)z);
-                    i++;
+                    x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
+                    y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
+                    z = basepoint.z + R * Math.Cos(psi);
+                    sh.Add(new Point3d((int)x, (int)y, (int)z));                   
                 }
-
-        }        
-
-
+            for (psi = 0; psi < Math.PI; psi +=  Lod)
+                for (fi = 0; fi < 2 * Math.PI; fi += Lod)
+                {
+                    x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
+                    y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
+                    z = basepoint.z + R * Math.Cos(psi);
+                    sh.Add(new Point3d((int)x, (int)y, (int)z));                     
+                }            
+        }
+       
         public void Draw2D(Graphics g, Point3d pt1, Point3d pt2)
         {
             Pen pen = new Pen(Color.Black, 1);
 
-            g.DrawLine(pen,new Point(pt1.x-pt1.z/2+250,-pt1.y+pt1.z/2+250),new Point(pt2.x-pt2.z/2+250,-pt2.y+pt2.z/2+250));
+            g.DrawLine(pen,new PointF(pt1.x-pt1.z/2+pbFront.Width/2,-pt1.y+pt1.z/2+pbFront.Width/2),new PointF(pt2.x-pt2.z/2+pbFront.Width/2,-pt2.y+pt2.z/2+pbFront.Width/2));
+           
         }
 
-
-        public Point3d Multiplicate(Point3d vertex, double[,] ar)
+        public Point3d MultiplicateF(Point3d vertex, double[,] ar)
         {
-           
-            vertex.x = Convert.ToInt32(vertex.x * ar[0, 0] + vertex.y * ar[1, 2] + vertex.z * ar[2, 0]);
-            vertex.y = Convert.ToInt32(vertex.x * ar[0, 1] + vertex.y * ar[1, 1] + vertex.z * ar[2, 1]);
-            vertex.z = Convert.ToInt32(vertex.x * ar[0, 2] + vertex.y * ar[1, 2] + vertex.z * ar[2, 2]);
+            double[,] result= new double[4,1];
+            double[,] a = ar;
+            double[,] b = new double[4, 1];
+            b[0, 0] = vertex.x;
+            b[1, 0] = vertex.y;
+            b[2, 0] = vertex.z;
+            b[3, 0] = W;
+            
+            
+            for (int i = 0; i < 4; i++)   
+               for (int j = 0; j < 1; j++)
+               {
+                   result[i, j] = 0;
+                   for (int r = 0; r < 4; r++)
+                       result[i, j] += a[i, r] * b[r, j];
+               }   
+            
+            vertex.x = (float)(result[0,0]);
+            vertex.y = (float)(result[1, 0]);
+            vertex.z = (float)(result[2, 0]);
+            
             return vertex;
 
         }
 
-
-        public Form1()
+        public double[,] MultiplicateM(double[,] a, double[,] b)
         {
-            InitializeComponent();
+            double[,] result = new double[4, 4];
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                {
+                    result[i, j] = 0;
+                    for (int r = 0; r < 4; r++)
+                        result[i, j] += a[i, r] * b[r, j];
+                }   
+            return result;
+        }
+
+        public double[,] MatrixReady() 
+        {           
+
+            double movex = Convert.ToDouble(tbmovex.Text);
+            double movey = Convert.ToDouble(tbmovey.Text);
+            double movez = Convert.ToDouble(tbmovez.Text);
+            Move(movex, movey, movez);
+
+            try
+            {
+                double scalex = Convert.ToDouble(tbScaleX.Text);
+                double scaley = Convert.ToDouble(tbScaleY.Text);
+                double scalez = Convert.ToDouble(tbScaleZ.Text);
+                Scale(scalex, scaley, scalez);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Use decimal comma", "Something wrong");
+            }
+           
+
+            double anglex = Convert.ToDouble(tbanglex.Text) * Math.PI / 180; ;
+            double angley = Convert.ToDouble(tbangley.Text) * Math.PI / 180; ;
+            double anglez = Convert.ToDouble(tbanglez.Text) * Math.PI / 180; ;
+            Rotate(anglex, angley, anglez);
+
+            double[,] result = new double[4, 4] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+            for (int i = 0; i < matrix.Count; i++)
+                result = MultiplicateM(result, matrix[i]);     
+            return result;
         }
 
 
+        public mainForm()
+        {
+            InitializeComponent();
+          
+
+           
+        }
+
+ 
         private void btnbuild_Click(object sender, EventArgs e)
         {
             Initialize();
-            pictureBox1.Refresh();
-            Graphics g = pictureBox1.CreateGraphics();
+            
             size = Convert.ToInt32(tbsize.Text);
-            m = new Point3d[8];
-            m[0] = new Point3d(0, 0, 0);
-            m[1] = new Point3d(0, 0, size);
-            m[2] = new Point3d(size, 0, size);
-            m[3] = new Point3d(size, 0, 0);
-            m[4] = new Point3d(0, size, 0);
-            m[5] = new Point3d(0, size, size);
-            m[6] = new Point3d(size, size, size);
-            m[7] = new Point3d(size, size, 0);
-            for (int i = 0; i < 3; i++)
-                Draw2D(g, m[i], m[i + 1]);
-            Draw2D(g, m[3], m[0]);
-            for (int i = 4; i < 7; i++)
-                Draw2D(g, m[i], m[i + 1]);
-            Draw2D(g, m[4], m[7]);
-            Draw2D(g, m[0], m[4]);
-            Draw2D(g, m[1], m[5]);
-            Draw2D(g, m[2], m[6]);
-            Draw2D(g, m[3], m[7]);
+            basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
+            GetSphere(basepoint,size);
+            DrawSphere();
+           
+        }
 
+        private void DrawSphere()
+        {
+            Graphics gF = pbFront.CreateGraphics();
+            Graphics gL = pbLeft.CreateGraphics();
+            Graphics gT = pbTop.CreateGraphics();
+            Graphics gM = pbMain.CreateGraphics();
+            Pen pen = new Pen(Color.Blue, 1);
+
+            int i = 0;
+
+            for (i = 0; i < sh.Count-1; i++)
+            {
+                gF.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].y + pbFront.Width/2, sh[i + 1].x + pbFront.Width/2, sh[i + 1].y + pbFront.Width/2);
+                gL.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[i + 1].x + pbFront.Width/2, sh[i + 1].z + pbFront.Width/2);
+                gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[i + 1].y + pbFront.Width/2, sh[i + 1].z + pbFront.Width/2);
+                Draw2D(gM, sh[i], sh[i + 1]);
+            }
+            //obsolete
+            //gF.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].y + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].y + pbFront.Width/2);
+            //gL.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].z + pbFront.Width/2);
+            //gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].y + pbFront.Width/2, sh[0].z + pbFront.Width/2);
         }
 
         private void Initialize()
         {
-            pictureBox1.Image = Properties.Resources.Untitled;
+            pbFront.Image = Properties.Resources.viewport;
+            pbLeft.Image = Properties.Resources.viewport;
+            pbTop.Image = Properties.Resources.viewport;
+            pbMain.Image = null;
+            pbFront.Refresh();
+            pbLeft.Refresh();
+            pbTop.Refresh();
+            pbMain.Refresh();
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
+        {            
+                Initialize();
+                double[,] matrixACT = MatrixReady();
+                matrix.Clear();
+                for (int i = 0; i < sh.Count; i++)
+                {
+                    sh[i] = MultiplicateF(sh[i], matrixACT);
+                }
+                DrawSphere();
+                tbanglex.Text = "0";
+                tbangley.Text = "0";
+                tbanglez.Text = "0";
+                tbmovex.Text = "0";
+                tbmovey.Text = "0";
+                tbmovez.Text = "0";
+                tbScaleX.Text = "1";
+                tbScaleY.Text = "1";
+                tbScaleZ.Text = "1";
+
+           
+        }
+
+
+        private void btnmove_Click(object sender, EventArgs e)
         {
-            Initialize();
-            pictureBox1.Refresh();
-            Graphics g = pictureBox1.CreateGraphics();
-            Pen pen = new Pen(Color.Red);
-            double angle = Convert.ToDouble(tbangle.Text) * Math.PI / 180;
-            for (int i = 0; i < m.Length; i++)
+            btnrotate_Click(this, null);    // call btnrotate_Click 
+        }
+
+        private void btnscale_Click(object sender, EventArgs e)
+        {
+            btnrotate_Click(this, null);    // call btnrotate_Click 
+        }
+
+        private void pbFront_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) 
+            basepoint = new Point3d(e.X, e.Y, 0);
+            if (e.Button == MouseButtons.Right)
+                delta = e.Location;
+            if (e.Button == MouseButtons.Middle)
+                delta = e.Location;
+
+        }
+
+        private void pbFront_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Initialize();
+                Point3d radpoint = new Point3d(e.X, e.Y, 0);
+                size = Convert.ToInt32(Math.Sqrt((radpoint.x - basepoint.x) * (radpoint.x - basepoint.x) + (radpoint.y - basepoint.y) * (radpoint.y - basepoint.y)));
+                basepoint.x -= pbFront.Width / 2;
+                basepoint.y -= pbFront.Width / 2;
+                GetSphere(basepoint, size);
+                DrawSphere();
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                float scrollangley = delta.X - e.X;   // need to fix
+                float scrollanglex = delta.Y - e.Y;
+                tbanglex.Text = Convert.ToString(scrollanglex);
+                tbangley.Text = Convert.ToString(scrollangley);
+                btnrotate_Click(this, null); 
+            }
+            if (e.Button == MouseButtons.Middle)
             {
 
-                m[i] = Multiplicate(m[i], rotate(angle));
+                float scrollzoom = delta.Y - e.Y;  // need to fix                
+                scrollzoom=1+scrollzoom/70;
+                tbScaleX.Text = Convert.ToString(scrollzoom);
+                tbScaleY.Text = Convert.ToString(scrollzoom);
+                tbScaleZ.Text = Convert.ToString(scrollzoom);
+                btnrotate_Click(this, null);
 
             }
 
-
-            for (int i = 0; i < 3; i++)
-                Draw2D(g, m[i], m[i + 1]);
-            Draw2D(g, m[3], m[0]);
-            for (int i = 4; i < 7; i++)
-                Draw2D(g, m[i], m[i + 1]);
-            Draw2D(g, m[4], m[7]);
-            Draw2D(g, m[0], m[4]);
-            Draw2D(g, m[1], m[5]);
-            Draw2D(g, m[2], m[6]);
-            Draw2D(g, m[3], m[7]);
-
         }
+
+        private void trackBarLOD_ValueChanged(object sender, EventArgs e)
+        {
+            Lod =(float)trackBarLOD.Value / 10;
+            tabControlMain.Refresh();
+        }
+
+        #region DropDownPanels
+        private void btnPanelCreate_Click(object sender, EventArgs e)
+        {
+
+            if (pnlCreate.Height != 30)
+            {
+                pnlCreate.Height = 30;
+                btnPanelCreate.Text = "+                    Create";
+            }
+            else
+            {
+                pnlCreate.Height = 170;
+                btnPanelCreate.Text = "-                    Create";
+            }
+        }
+
+        private void btnPanelRotate_Click(object sender, EventArgs e)
+        {
+            if (pnlRotate.Height != 30)
+            {
+                pnlRotate.Height = 30;
+                btnPanelRotate.Text = "+                    Rotate";
+            }
+            else
+            {
+                pnlRotate.Height = 140;
+                btnPanelRotate.Text = "-                    Rotate";
+            }
+        }
+
+        private void btnPanelMove_Click(object sender, EventArgs e)
+        {
+            if (pnlMove.Height != 30)
+            {
+                pnlMove.Height = 30;
+                btnPanelMove.Text = "+                    Move";
+            }
+            else
+            {
+                pnlMove.Height = 140;
+                btnPanelMove.Text = "-                    Move";
+            }
+        }
+
+        private void btnPanelScale_Click(object sender, EventArgs e)
+        {
+            if (pnlScale.Height != 30)
+            {
+                pnlScale.Height = 30;
+                btnPanelScale.Text = "+                    Scale";
+            }
+            else
+            {
+                pnlScale.Height = 140;
+                btnPanelScale.Text = "-                    Scale";
+            }
+        }
+
+        #endregion
+
+
+
+
+
+
     }
 }
 
