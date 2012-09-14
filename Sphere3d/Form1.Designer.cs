@@ -81,6 +81,12 @@
             this.lbscalex = new System.Windows.Forms.Label();
             this.lbscaley = new System.Windows.Forms.Label();
             this.tbScaleX = new System.Windows.Forms.TextBox();
+            this.tabView = new System.Windows.Forms.TabPage();
+            this.flowView = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlGlobalView = new System.Windows.Forms.Panel();
+            this.rbtnViewOblique = new System.Windows.Forms.RadioButton();
+            this.rbtnViewRect = new System.Windows.Forms.RadioButton();
+            this.btnPanelGlobalView = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
@@ -98,6 +104,9 @@
             this.pnlRotate.SuspendLayout();
             this.pnlMove.SuspendLayout();
             this.pnlScale.SuspendLayout();
+            this.tabView.SuspendLayout();
+            this.flowView.SuspendLayout();
+            this.pnlGlobalView.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnrotate
@@ -366,9 +375,10 @@
             // 
             this.tabControlMain.Controls.Add(this.tabPrimitives);
             this.tabControlMain.Controls.Add(this.tabEdit);
+            this.tabControlMain.Controls.Add(this.tabView);
             this.tabControlMain.ImageList = this.imgListTabMain;
             this.tabControlMain.ItemSize = new System.Drawing.Size(16, 16);
-            this.tabControlMain.Location = new System.Drawing.Point(840, 13);
+            this.tabControlMain.Location = new System.Drawing.Point(841, 13);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(200, 500);
@@ -450,7 +460,7 @@
             this.trackBarLOD.Location = new System.Drawing.Point(71, 3);
             this.trackBarLOD.Minimum = 1;
             this.trackBarLOD.Name = "trackBarLOD";
-            this.trackBarLOD.Size = new System.Drawing.Size(104, 45);
+            this.trackBarLOD.Size = new System.Drawing.Size(104, 42);
             this.trackBarLOD.TabIndex = 17;
             this.trackBarLOD.Value = 2;
             this.trackBarLOD.ValueChanged += new System.EventHandler(this.trackBarLOD_ValueChanged);
@@ -620,12 +630,77 @@
             this.tbScaleX.TabIndex = 19;
             this.tbScaleX.Text = "1";
             // 
+            // tabView
+            // 
+            this.tabView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tabView.Controls.Add(this.flowView);
+            this.tabView.ImageIndex = 2;
+            this.tabView.Location = new System.Drawing.Point(4, 20);
+            this.tabView.Name = "tabView";
+            this.tabView.Size = new System.Drawing.Size(192, 476);
+            this.tabView.TabIndex = 2;
+            // 
+            // flowView
+            // 
+            this.flowView.Controls.Add(this.pnlGlobalView);
+            this.flowView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowView.Location = new System.Drawing.Point(0, 0);
+            this.flowView.Name = "flowView";
+            this.flowView.Size = new System.Drawing.Size(192, 476);
+            this.flowView.TabIndex = 0;
+            // 
+            // pnlGlobalView
+            // 
+            this.pnlGlobalView.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlGlobalView.Controls.Add(this.rbtnViewOblique);
+            this.pnlGlobalView.Controls.Add(this.rbtnViewRect);
+            this.pnlGlobalView.Controls.Add(this.btnPanelGlobalView);
+            this.pnlGlobalView.Location = new System.Drawing.Point(3, 3);
+            this.pnlGlobalView.Name = "pnlGlobalView";
+            this.pnlGlobalView.Size = new System.Drawing.Size(186, 140);
+            this.pnlGlobalView.TabIndex = 0;
+            // 
+            // rbtnViewOblique
+            // 
+            this.rbtnViewOblique.AutoSize = true;
+            this.rbtnViewOblique.Location = new System.Drawing.Point(4, 67);
+            this.rbtnViewOblique.Name = "rbtnViewOblique";
+            this.rbtnViewOblique.Size = new System.Drawing.Size(160, 17);
+            this.rbtnViewOblique.TabIndex = 2;
+            this.rbtnViewOblique.Text = "oblique frontal isometric view";
+            this.rbtnViewOblique.UseVisualStyleBackColor = true;
+            this.rbtnViewOblique.CheckedChanged += new System.EventHandler(this.rbtnViewOblique_CheckedChanged);
+            // 
+            // rbtnViewRect
+            // 
+            this.rbtnViewRect.AutoSize = true;
+            this.rbtnViewRect.Checked = true;
+            this.rbtnViewRect.Location = new System.Drawing.Point(4, 43);
+            this.rbtnViewRect.Name = "rbtnViewRect";
+            this.rbtnViewRect.Size = new System.Drawing.Size(147, 17);
+            this.rbtnViewRect.TabIndex = 1;
+            this.rbtnViewRect.TabStop = true;
+            this.rbtnViewRect.Text = "rectangular isometric view";
+            this.rbtnViewRect.UseVisualStyleBackColor = true;
+            // 
+            // btnPanelGlobalView
+            // 
+            this.btnPanelGlobalView.Location = new System.Drawing.Point(4, 4);
+            this.btnPanelGlobalView.Name = "btnPanelGlobalView";
+            this.btnPanelGlobalView.Size = new System.Drawing.Size(173, 22);
+            this.btnPanelGlobalView.TabIndex = 0;
+            this.btnPanelGlobalView.Text = "-                  GlobalView";
+            this.btnPanelGlobalView.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPanelGlobalView.UseVisualStyleBackColor = true;
+            this.btnPanelGlobalView.Click += new System.EventHandler(this.btnPanelGlobalView_Click);
+            // 
             // imgListTabMain
             // 
             this.imgListTabMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabMain.ImageStream")));
             this.imgListTabMain.TransparentColor = System.Drawing.Color.Transparent;
             this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
+            this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
             // 
             // mainForm
             // 
@@ -659,6 +734,10 @@
             this.pnlMove.PerformLayout();
             this.pnlScale.ResumeLayout(false);
             this.pnlScale.PerformLayout();
+            this.tabView.ResumeLayout(false);
+            this.flowView.ResumeLayout(false);
+            this.pnlGlobalView.ResumeLayout(false);
+            this.pnlGlobalView.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -717,6 +796,12 @@
         private System.Windows.Forms.Button btnPanelMove;
         private System.Windows.Forms.Panel pnlScale;
         private System.Windows.Forms.Button btnPanelScale;
+        private System.Windows.Forms.TabPage tabView;
+        private System.Windows.Forms.FlowLayoutPanel flowView;
+        private System.Windows.Forms.Panel pnlGlobalView;
+        private System.Windows.Forms.Button btnPanelGlobalView;
+        private System.Windows.Forms.RadioButton rbtnViewOblique;
+        private System.Windows.Forms.RadioButton rbtnViewRect;
     }
 }
 

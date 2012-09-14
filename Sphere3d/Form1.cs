@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 
@@ -27,17 +23,15 @@ namespace Sphere3d
             }
         }
 
-
+        #region global variables
         List<Point3d> sh = new List<Point3d>();  
         List<double[,]> matrix = new List<double[,]>();
         int size = 0;
         Point3d basepoint;
         float Lod = 0.2F;
-        PointF delta = new PointF(0, 0);
-      
-          
+        PointF delta = new PointF(0, 0);    
         int W = 1;
-
+        #endregion
 
         #region Matrix
         public void Rotate(double anglex,double angley,double anglez)
@@ -70,7 +64,7 @@ namespace Sphere3d
         }
         #endregion
 
-
+        #region  Mathematics 
         public void GetSphere(Point3d basepoint,int R)
         {
          
@@ -97,9 +91,10 @@ namespace Sphere3d
         public void Draw2D(Graphics g, Point3d pt1, Point3d pt2)
         {
             Pen pen = new Pen(Color.Black, 1);
-
-            g.DrawLine(pen,new PointF(pt1.x-pt1.z/2+pbFront.Width/2,-pt1.y+pt1.z/2+pbFront.Width/2),new PointF(pt2.x-pt2.z/2+pbFront.Width/2,-pt2.y+pt2.z/2+pbFront.Width/2));
-           
+            if (rbtnViewRect.Checked)        
+                g.DrawLine(pen, new PointF((float)(pt1.x / Math.Cos(Math.PI / 6) - pt1.z * Math.Cos(Math.PI / 6) + pbFront.Width / 2), (float)(-pt1.y + pt1.z * Math.Sin(Math.PI / 6) + pt1.x * Math.Sin(Math.PI / 6) + pbFront.Width / 2)), new PointF((float)(pt2.x / Math.Cos(Math.PI / 6) - pt2.z * Math.Cos(Math.PI / 6) + pbFront.Width / 2), (float)(-pt2.y + pt2.z * Math.Sin(Math.PI / 6) + pt2.x * Math.Sin(Math.PI / 6) + pbFront.Width / 2)));
+            else
+                g.DrawLine(pen, new PointF(pt1.x - pt1.z / 2 + pbFront.Width / 2, -pt1.y + pt1.z / 2 + pbFront.Width / 2), new PointF(pt2.x - pt2.z / 2 + pbFront.Width / 2, -pt2.y + pt2.z / 2 + pbFront.Width / 2));
         }
 
         public Point3d MultiplicateF(Point3d vertex, double[,] ar)
@@ -174,27 +169,15 @@ namespace Sphere3d
             return result;
         }
 
+        #endregion
+
 
         public mainForm()
         {
-            InitializeComponent();
-          
-
-           
+            InitializeComponent();  
         }
 
- 
-        private void btnbuild_Click(object sender, EventArgs e)
-        {
-            Initialize();
-            
-            size = Convert.ToInt32(tbsize.Text);
-            basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
-            GetSphere(basepoint,size);
-            DrawSphere();
-           
-        }
-
+        #region Draw
         private void DrawSphere()
         {
             Graphics gF = pbFront.CreateGraphics();
@@ -212,10 +195,7 @@ namespace Sphere3d
                 gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[i + 1].y + pbFront.Width/2, sh[i + 1].z + pbFront.Width/2);
                 Draw2D(gM, sh[i], sh[i + 1]);
             }
-            //obsolete
-            //gF.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].y + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].y + pbFront.Width/2);
-            //gL.DrawLine(pen, sh[i].x + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].x + pbFront.Width/2, sh[0].z + pbFront.Width/2);
-            //gT.DrawLine(pen, sh[i].y + pbFront.Width/2, sh[i].z + pbFront.Width/2, sh[0].y + pbFront.Width/2, sh[0].z + pbFront.Width/2);
+            
         }
 
         private void Initialize()
@@ -228,6 +208,19 @@ namespace Sphere3d
             pbLeft.Refresh();
             pbTop.Refresh();
             pbMain.Refresh();
+        }
+        #endregion
+
+        #region buttons handlers
+
+        private void btnbuild_Click(object sender, EventArgs e)
+        {
+            Initialize();
+            
+            size = Convert.ToInt32(tbsize.Text);
+            basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
+            GetSphere(basepoint,size);
+            DrawSphere();
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
@@ -264,6 +257,20 @@ namespace Sphere3d
             btnrotate_Click(this, null);    // call btnrotate_Click 
         }
 
+        private void trackBarLOD_ValueChanged(object sender, EventArgs e)
+        {
+            Lod = (float)trackBarLOD.Value / 10;
+            tabControlMain.Refresh();
+        }
+
+        private void rbtnViewOblique_CheckedChanged(object sender, EventArgs e)
+        {
+            btnrotate_Click(this, null); // call btnrotate_Click 
+        }
+        #endregion
+
+
+        #region PaintOnFrontView
         private void pbFront_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) 
@@ -308,12 +315,8 @@ namespace Sphere3d
             }
 
         }
-
-        private void trackBarLOD_ValueChanged(object sender, EventArgs e)
-        {
-            Lod =(float)trackBarLOD.Value / 10;
-            tabControlMain.Refresh();
-        }
+        #endregion       
+       
 
         #region DropDownPanels
         private void btnPanelCreate_Click(object sender, EventArgs e)
@@ -373,13 +376,24 @@ namespace Sphere3d
             }
         }
 
+      
+
+        private void btnPanelGlobalView_Click(object sender, EventArgs e)
+        {
+             if (pnlGlobalView.Height != 30)
+            {
+                pnlGlobalView.Height = 30;
+                btnPanelGlobalView.Text = "+                  GlobalView";
+            }
+            else
+            {
+                pnlGlobalView.Height = 170;
+                btnPanelGlobalView.Text = "-                  GlobalView";
+            }
+
+
+        }
         #endregion
-
-
-
-
-
-
     }
 }
 
