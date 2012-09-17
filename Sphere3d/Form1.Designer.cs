@@ -87,7 +87,12 @@
             this.rbtnViewOblique = new System.Windows.Forms.RadioButton();
             this.rbtnViewRect = new System.Windows.Forms.RadioButton();
             this.btnPanelGlobalView = new System.Windows.Forms.Button();
+            this.pnlColorPicker = new System.Windows.Forms.Panel();
+            this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
+            this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.HistoryBox = new System.Windows.Forms.ListBox();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -107,6 +112,9 @@
             this.tabView.SuspendLayout();
             this.flowView.SuspendLayout();
             this.pnlGlobalView.SuspendLayout();
+            this.pnlColorPicker.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarColorPicker)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnrotate
@@ -400,6 +408,7 @@
             // 
             this.flowPrimitiv.Controls.Add(this.pnlCreate);
             this.flowPrimitiv.Controls.Add(this.pnlLOD);
+            this.flowPrimitiv.Controls.Add(this.panel1);
             this.flowPrimitiv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowPrimitiv.Location = new System.Drawing.Point(3, 3);
             this.flowPrimitiv.Name = "flowPrimitiv";
@@ -437,13 +446,13 @@
             // 
             // pnlLOD
             // 
-            this.pnlLOD.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pnlLOD.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlLOD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlLOD.Controls.Add(this.lbLod);
             this.pnlLOD.Controls.Add(this.trackBarLOD);
             this.pnlLOD.Location = new System.Drawing.Point(3, 179);
             this.pnlLOD.Name = "pnlLOD";
-            this.pnlLOD.Size = new System.Drawing.Size(180, 30);
+            this.pnlLOD.Size = new System.Drawing.Size(180, 37);
             this.pnlLOD.TabIndex = 18;
             // 
             // lbLod
@@ -645,6 +654,7 @@
             // flowView
             // 
             this.flowView.Controls.Add(this.pnlGlobalView);
+            this.flowView.Controls.Add(this.pnlColorPicker);
             this.flowView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowView.Location = new System.Drawing.Point(0, 0);
             this.flowView.Name = "flowView";
@@ -696,6 +706,27 @@
             this.btnPanelGlobalView.UseVisualStyleBackColor = true;
             this.btnPanelGlobalView.Click += new System.EventHandler(this.btnPanelGlobalView_Click);
             // 
+            // pnlColorPicker
+            // 
+            this.pnlColorPicker.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlColorPicker.Controls.Add(this.trackBarColorPicker);
+            this.pnlColorPicker.Controls.Add(this.btnPanelColorPicker);
+            this.pnlColorPicker.Location = new System.Drawing.Point(3, 149);
+            this.pnlColorPicker.Name = "pnlColorPicker";
+            this.pnlColorPicker.Size = new System.Drawing.Size(186, 136);
+            this.pnlColorPicker.TabIndex = 1;
+            // 
+            // btnPanelColorPicker
+            // 
+            this.btnPanelColorPicker.Location = new System.Drawing.Point(4, 3);
+            this.btnPanelColorPicker.Name = "btnPanelColorPicker";
+            this.btnPanelColorPicker.Size = new System.Drawing.Size(173, 22);
+            this.btnPanelColorPicker.TabIndex = 1;
+            this.btnPanelColorPicker.Text = "-                     Color";
+            this.btnPanelColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPanelColorPicker.UseVisualStyleBackColor = true;
+            this.btnPanelColorPicker.Click += new System.EventHandler(this.btnPanelColorPicker_Click);
+            // 
             // imgListTabMain
             // 
             this.imgListTabMain.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgListTabMain.ImageStream")));
@@ -703,6 +734,32 @@
             this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
+            // 
+            // trackBarColorPicker
+            // 
+            this.trackBarColorPicker.Location = new System.Drawing.Point(31, 41);
+            this.trackBarColorPicker.Maximum = 5;
+            this.trackBarColorPicker.Name = "trackBarColorPicker";
+            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 42);
+            this.trackBarColorPicker.TabIndex = 2;
+            this.trackBarColorPicker.ValueChanged += new System.EventHandler(this.trackBarColorPicker_ValueChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.HistoryBox);
+            this.panel1.Location = new System.Drawing.Point(3, 222);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(180, 229);
+            this.panel1.TabIndex = 19;
+            // 
+            // HistoryBox
+            // 
+            this.HistoryBox.FormattingEnabled = true;
+            this.HistoryBox.Location = new System.Drawing.Point(17, 18);
+            this.HistoryBox.Name = "HistoryBox";
+            this.HistoryBox.Size = new System.Drawing.Size(155, 199);
+            this.HistoryBox.TabIndex = 0;
             // 
             // mainForm
             // 
@@ -740,6 +797,10 @@
             this.flowView.ResumeLayout(false);
             this.pnlGlobalView.ResumeLayout(false);
             this.pnlGlobalView.PerformLayout();
+            this.pnlColorPicker.ResumeLayout(false);
+            this.pnlColorPicker.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarColorPicker)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -804,6 +865,11 @@
         private System.Windows.Forms.Button btnPanelGlobalView;
         private System.Windows.Forms.RadioButton rbtnViewOblique;
         private System.Windows.Forms.RadioButton rbtnViewRect;
+        private System.Windows.Forms.Panel pnlColorPicker;
+        private System.Windows.Forms.Button btnPanelColorPicker;
+        private System.Windows.Forms.TrackBar trackBarColorPicker;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ListBox HistoryBox;
     }
 }
 

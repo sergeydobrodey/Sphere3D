@@ -12,14 +12,13 @@ namespace Sphere3d
 
       
         #region global variables
-
-        GraphicModel item;       
+        List<GraphicModel> ModelsTree = new List<GraphicModel>();     
         int size = 0;
         Point3d basepoint;
         float Lod = 0.2F;
         PointF delta = new PointF(0, 0);
         int VIEWPORT = 200;   // size of image
-     
+        Color ModelColor = Color.Red;
         #endregion
             
 
@@ -30,17 +29,31 @@ namespace Sphere3d
         }
 
         #region methods
+
+        private void AddSphere()
+        {
+            ModelsTree.Add(new GraphicModel(basepoint, size, Lod, ModelColor));
+
+            HistoryBox.Items.Add(ModelsTree.Count);
+            if (trackBarColorPicker.Value != trackBarColorPicker.Maximum)
+                trackBarColorPicker.Value += 1;
+            else trackBarColorPicker.Value = trackBarColorPicker.Minimum;
+        }
+
         private void DrawSphere()
         {
             Graphics gF = pbFront.CreateGraphics();
             Graphics gL = pbLeft.CreateGraphics();
             Graphics gT = pbTop.CreateGraphics();
-            Graphics gM = pbMain.CreateGraphics();
-            item.DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked);
+            Graphics gM = pbMain.CreateGraphics();  
+            foreach (GraphicModel temp in ModelsTree)
+            temp.DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked);
             
         }
 
-        private void UpdateSphere()
+       
+
+        private void UpdateSphere(GraphicModel model)
         {
             Initialize();
             double movex = Convert.ToDouble(tbmovex.Text);
@@ -52,9 +65,9 @@ namespace Sphere3d
             double anglex = Convert.ToDouble(tbanglex.Text);
             double angley = Convert.ToDouble(tbangley.Text);
             double anglez = Convert.ToDouble(tbanglez.Text);
-            if (item!=null)
+            if (model!=null)
             {
-                item.UpdateModel(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
+                model.UpdateModel(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
                 DrawSphere();
             }
             tbanglex.Text = "0";
@@ -88,23 +101,26 @@ namespace Sphere3d
             Initialize();            
             size = Convert.ToInt32(tbsize.Text);             
             basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
-            item = new GraphicModel(basepoint, size, Lod);   
+            AddSphere();
             DrawSphere();
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
         {
-            UpdateSphere();           
+            if (ModelsTree.Count!=0)
+            UpdateSphere(ModelsTree[ModelsTree.Count-1]);           
         }
 
         private void btnmove_Click(object sender, EventArgs e)
         {
-            UpdateSphere();     
+            if (ModelsTree.Count != 0)
+            UpdateSphere(ModelsTree[ModelsTree.Count - 1]);     
         }
 
         private void btnscale_Click(object sender, EventArgs e)
         {
-            UpdateSphere();     
+            if (ModelsTree.Count != 0)
+            UpdateSphere(ModelsTree[ModelsTree.Count - 1]);     
         }
 
         private void trackBarLOD_ValueChanged(object sender, EventArgs e)
@@ -115,7 +131,8 @@ namespace Sphere3d
 
         private void rbtnViewOblique_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateSphere();     
+            if (ModelsTree.Count != 0)
+            UpdateSphere(ModelsTree[ModelsTree.Count-1]);     
         }
         #endregion
 
@@ -141,7 +158,7 @@ namespace Sphere3d
                 size = Convert.ToInt32(Math.Sqrt((radpoint.x - basepoint.x) * (radpoint.x - basepoint.x) + (radpoint.y - basepoint.y) * (radpoint.y - basepoint.y)));
                 basepoint.x -= VIEWPORT;
                 basepoint.y -= VIEWPORT;
-                item = new GraphicModel(basepoint, size, Lod);               
+                AddSphere();
                 DrawSphere();
             }
             if (e.Button == MouseButtons.Right)
@@ -150,7 +167,8 @@ namespace Sphere3d
                 float scrollanglex = delta.Y - e.Y;
                 tbanglex.Text = Convert.ToString(scrollanglex);
                 tbangley.Text = Convert.ToString(scrollangley);
-                UpdateSphere();     
+                if (ModelsTree.Count != 0)
+                UpdateSphere(ModelsTree[ModelsTree.Count - 1]);     
             }
             if (e.Button == MouseButtons.Middle)
             {
@@ -160,7 +178,8 @@ namespace Sphere3d
                 tbScaleX.Text = Convert.ToString(scrollzoom);
                 tbScaleY.Text = Convert.ToString(scrollzoom);
                 tbScaleZ.Text = Convert.ToString(scrollzoom);
-                UpdateSphere();   
+                if (ModelsTree.Count != 0)
+                UpdateSphere(ModelsTree[ModelsTree.Count - 1]);   
             }
 
         }
@@ -229,7 +248,7 @@ namespace Sphere3d
 
         private void btnPanelGlobalView_Click(object sender, EventArgs e)
         {
-             if (pnlGlobalView.Height != 30)
+            if (pnlGlobalView.Height != 30)
             {
                 pnlGlobalView.Height = 30;
                 btnPanelGlobalView.Text = "+                  GlobalView";
@@ -242,7 +261,37 @@ namespace Sphere3d
 
 
         }
+       
+
+        private void btnPanelColorPicker_Click(object sender, EventArgs e)
+        {
+            if (pnlColorPicker.Height != 30)
+            {
+                pnlColorPicker.Height = 30;
+                btnPanelColorPicker.Text = "+                     Color";
+            }
+            else
+            {
+                pnlColorPicker.Height = 100;
+                btnPanelColorPicker.Text = "-                     Color";
+            }
+        }
         #endregion
+
+        private void trackBarColorPicker_ValueChanged(object sender, EventArgs e)
+        {
+            switch(trackBarColorPicker.Value)
+            {
+                case 0: ModelColor = Color.Red; break;
+                case 1: ModelColor = Color.Yellow; break;
+                case 2: ModelColor = Color.Green; break;
+                case 3: ModelColor = Color.Blue; break;
+                case 4: ModelColor = Color.White; break;
+                case 5: ModelColor = Color.Indigo; break;
+            }
+        }
+
+       
     }
 }
 

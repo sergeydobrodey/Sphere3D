@@ -12,8 +12,9 @@ namespace Sphere3d
         List<Point3d> model = new List<Point3d>();
         List<double[,]> matrix = new List<double[,]>();
         double W = 1;
+        Color ModelColor;
 
-        public GraphicModel(Point3d basepoint,float R,float LOD) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
+        public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
          {
             model.Clear();
             double x, y, z, fi, psi;
@@ -32,12 +33,13 @@ namespace Sphere3d
                     y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
                     z = basepoint.z + R * Math.Cos(psi);
                     model.Add(new Point3d((float)x, (float)y, (float)z));
-                }            
+                }
+            this.ModelColor = color;
         }
 
         public void DrawModel(Graphics FrontView,Graphics LeftView,Graphics TopView,Graphics MainView,float size,bool MainViewIsometrik) // Draws model
          {         
-            Pen pen = new Pen(Color.Blue, 1);
+            Pen pen = new Pen(ModelColor, 1);
             for (int i = 0; i < model.Count - 1; i++)
             {
                 FrontView.DrawLine(pen, model[i].x + size, model[i].y + size, model[i + 1].x + size, model[i + 1].y + size);
@@ -50,7 +52,7 @@ namespace Sphere3d
         
         private void Draw2D(Graphics g, Point3d pt1, Point3d pt2,float size,bool isometrik)  // Draws on  main view
         {
-            Pen pen = new Pen(Color.Black, 1);
+            Pen pen = new Pen(ModelColor, 1);
             if (isometrik)
                 g.DrawLine(pen, new PointF((float)(pt1.x / Math.Cos(Math.PI / 6) - pt1.z * Math.Cos(Math.PI / 6) + size), (float)(-pt1.y + pt1.z * Math.Sin(Math.PI / 6) + pt1.x * Math.Sin(Math.PI / 6) + size)), new PointF((float)(pt2.x / Math.Cos(Math.PI / 6) - pt2.z * Math.Cos(Math.PI / 6) + size), (float)(-pt2.y + pt2.z * Math.Sin(Math.PI / 6) + pt2.x * Math.Sin(Math.PI / 6) + size)));
             else
