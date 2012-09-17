@@ -9,7 +9,7 @@ namespace Sphere3d
     {
         List<Point3d> model = new List<Point3d>();
         List<double[,]> matrix = new List<double[,]>();
-        double W = 1;
+        const double W = 1;
         Color ModelColor;
 
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
@@ -34,6 +34,8 @@ namespace Sphere3d
                 }
             this.ModelColor = color;
         }
+
+        
 
         public void DrawModel(Graphics FrontView,Graphics LeftView,Graphics TopView,Graphics MainView,float size,bool MainViewIsometrik) // Draws model
          {         
@@ -129,7 +131,7 @@ namespace Sphere3d
         }
 
         #region Matrix
-        public void Rotate(double anglex, double angley, double anglez)
+        private void Rotate(double anglex, double angley, double anglez)
         {
             double Cx = Math.Cos(anglex);
             double Sx = Math.Sin(anglex);
@@ -145,13 +147,13 @@ namespace Sphere3d
             matrix.Add(rotateZ);
         }
 
-        public void Move(double movex, double movey, double movez)
+        private void Move(double movex, double movey, double movez)
         {
             double[,] move = { { 1, 0, 0, movex }, { 0, 1, 0, movey }, { 0, 0, 1, movez }, { 0, 0, 0, 1 } };
             matrix.Add(move);
         }
 
-        public void Scale(double scalex, double scaley, double scalez)
+        private void Scale(double scalex, double scaley, double scalez)
         {
             double[,] scale = { { scalex, 0, 0, 0 }, { 0, scaley, 0, 0 }, { 0, 0, scalez, 0 }, { 0, 0, 0, 1 } };
             matrix.Add(scale);

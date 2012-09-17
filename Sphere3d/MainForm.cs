@@ -18,7 +18,7 @@ namespace Sphere3d
         int VIEWPORT = 200;   // size of image
         Color ModelColor = Color.Red;       
         #endregion
-        private Panel holder = new Panel();         
+       
      
 
         public mainForm()
@@ -29,19 +29,16 @@ namespace Sphere3d
         #region methods
 
         private void AddSphere()
-        {
-            
+        {            
             ModelsTree.Add(new GraphicModel(basepoint, size, Lod, ModelColor));                      
-            HistoryBox.Items.Add(ModelsTree.Count);
+            HistoryBox.Items.Add("Object "+ModelsTree.Count);
             if (trackBarColorPicker.Value != trackBarColorPicker.Maximum)
                 trackBarColorPicker.Value += 1;
             else trackBarColorPicker.Value = trackBarColorPicker.Minimum;
-            
         }
 
         private void DrawSphere(bool update)
-        {
-            
+        {            
             Graphics gF = pbFront.CreateGraphics();
             Graphics gL = pbLeft.CreateGraphics();
             Graphics gT = pbTop.CreateGraphics();
@@ -54,9 +51,7 @@ namespace Sphere3d
             }
             else ModelsTree[ModelsTree.Count - 1].DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked); 
         }
-
        
-
         private void UpdateSphere(GraphicModel model)
         {
             Initialize();
@@ -137,11 +132,24 @@ namespace Sphere3d
             if (ModelsTree.Count != 0)
             UpdateSphere(ModelsTree[ModelsTree.Count - 1]);     
         }
-
+        
         private void trackBarLOD_ValueChanged(object sender, EventArgs e)
         {
             Lod = (float)trackBarLOD.Value / 10;
             tabControlMain.Refresh();
+        } 
+
+        private void trackBarColorPicker_ValueChanged(object sender, EventArgs e)
+        {
+            switch (trackBarColorPicker.Value)
+            {
+                case 0: ModelColor = Color.Red; break;
+                case 1: ModelColor = Color.Yellow; break;
+                case 2: ModelColor = Color.Green; break;
+                case 3: ModelColor = Color.Blue; break;
+                case 4: ModelColor = Color.White; break;
+                case 5: ModelColor = Color.Indigo; break;
+            }
         }
 
         private void rbtnViewOblique_CheckedChanged(object sender, EventArgs e)
@@ -292,18 +300,7 @@ namespace Sphere3d
         }
         #endregion
 
-        private void trackBarColorPicker_ValueChanged(object sender, EventArgs e)
-        {
-            switch(trackBarColorPicker.Value)
-            {
-                case 0: ModelColor = Color.Red; break;
-                case 1: ModelColor = Color.Yellow; break;
-                case 2: ModelColor = Color.Green; break;
-                case 3: ModelColor = Color.Blue; break;
-                case 4: ModelColor = Color.White; break;
-                case 5: ModelColor = Color.Indigo; break;
-            }
-        }
+        
 
         
 
