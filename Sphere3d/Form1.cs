@@ -82,14 +82,11 @@ namespace Sphere3d
             tbScaleX.Text = "1";
             tbScaleY.Text = "1";
             tbScaleZ.Text = "1";
+            
         }
 
         private void Initialize()
-        {
-            //pbFront.Image = Properties.Resources.viewport;
-            //pbLeft.Image = Properties.Resources.viewport;
-            //pbTop.Image = Properties.Resources.viewport;
-            //pbMain.Image = null;
+        {           
             pbFront.Refresh();
             pbLeft.Refresh();
             pbTop.Refresh();
@@ -290,6 +287,19 @@ namespace Sphere3d
                 case 4: ModelColor = Color.White; break;
                 case 5: ModelColor = Color.Indigo; break;
             }
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            if (HistoryBox.SelectedIndex!=-1)
+            {
+                ModelsTree.RemoveAt(HistoryBox.SelectedIndex);
+                HistoryBox.Items.RemoveAt(HistoryBox.SelectedIndex);
+                if (ModelsTree.Count != 0)
+                    UpdateSphere(ModelsTree[ModelsTree.Count - 1]);
+                else Initialize();
+            }
+            
         }
 
        
