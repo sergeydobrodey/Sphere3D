@@ -16,10 +16,10 @@ namespace Sphere3d
         float Lod = 0.2F;
         PointF delta = new PointF(0, 0);
         int VIEWPORT = 200;   // size of image
-        Color ModelColor = Color.Red;
+        Color ModelColor = Color.Red;       
         #endregion
-            
-
+        private Panel holder = new Panel();         
+     
 
         public mainForm()
         {
@@ -30,12 +30,13 @@ namespace Sphere3d
 
         private void AddSphere()
         {
-            ModelsTree.Add(new GraphicModel(basepoint, size, Lod, ModelColor));
-
+            
+            ModelsTree.Add(new GraphicModel(basepoint, size, Lod, ModelColor));                      
             HistoryBox.Items.Add(ModelsTree.Count);
             if (trackBarColorPicker.Value != trackBarColorPicker.Maximum)
                 trackBarColorPicker.Value += 1;
             else trackBarColorPicker.Value = trackBarColorPicker.Minimum;
+            
         }
 
         private void DrawSphere(bool update)
@@ -92,6 +93,8 @@ namespace Sphere3d
             pbTop.Refresh();
             pbMain.Refresh();
         }
+
+
         #endregion
 
         #region buttons handlers
@@ -102,6 +105,19 @@ namespace Sphere3d
             basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
             AddSphere();
             DrawSphere(false);
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            if (HistoryBox.SelectedIndex != -1)
+            {
+                ModelsTree.RemoveAt(HistoryBox.SelectedIndex);
+                HistoryBox.Items.RemoveAt(HistoryBox.SelectedIndex);
+                if (ModelsTree.Count != 0)
+                    UpdateSphere(ModelsTree[ModelsTree.Count - 1]);
+                else Initialize();
+            }
+            
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
@@ -289,18 +305,7 @@ namespace Sphere3d
             }
         }
 
-        private void btnHistory_Click(object sender, EventArgs e)
-        {
-            if (HistoryBox.SelectedIndex!=-1)
-            {
-                ModelsTree.RemoveAt(HistoryBox.SelectedIndex);
-                HistoryBox.Items.RemoveAt(HistoryBox.SelectedIndex);
-                if (ModelsTree.Count != 0)
-                    UpdateSphere(ModelsTree[ModelsTree.Count - 1]);
-                else Initialize();
-            }
-            
-        }
+        
 
        
     }

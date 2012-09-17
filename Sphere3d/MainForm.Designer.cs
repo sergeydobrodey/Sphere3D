@@ -67,6 +67,7 @@
             this.lbLod = new System.Windows.Forms.Label();
             this.trackBarLOD = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnHistory = new System.Windows.Forms.Button();
             this.HistoryBox = new System.Windows.Forms.ListBox();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.flowEdit = new System.Windows.Forms.FlowLayoutPanel();
@@ -93,7 +94,6 @@
             this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
-            this.btnHistory = new System.Windows.Forms.Button();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -471,7 +471,7 @@
             this.trackBarLOD.Location = new System.Drawing.Point(71, 3);
             this.trackBarLOD.Minimum = 1;
             this.trackBarLOD.Name = "trackBarLOD";
-            this.trackBarLOD.Size = new System.Drawing.Size(104, 42);
+            this.trackBarLOD.Size = new System.Drawing.Size(104, 45);
             this.trackBarLOD.TabIndex = 17;
             this.trackBarLOD.Value = 2;
             this.trackBarLOD.ValueChanged += new System.EventHandler(this.trackBarLOD_ValueChanged);
@@ -483,15 +483,26 @@
             this.panel1.Controls.Add(this.HistoryBox);
             this.panel1.Location = new System.Drawing.Point(3, 222);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 229);
+            this.panel1.Size = new System.Drawing.Size(180, 167);
             this.panel1.TabIndex = 19;
+            // 
+            // btnHistory
+            // 
+            this.btnHistory.Location = new System.Drawing.Point(31, 130);
+            this.btnHistory.Name = "btnHistory";
+            this.btnHistory.Size = new System.Drawing.Size(115, 25);
+            this.btnHistory.TabIndex = 1;
+            this.btnHistory.Text = "Remove Selected";
+            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // HistoryBox
             // 
+            this.HistoryBox.BackColor = System.Drawing.SystemColors.Control;
             this.HistoryBox.FormattingEnabled = true;
-            this.HistoryBox.Location = new System.Drawing.Point(17, 18);
+            this.HistoryBox.Location = new System.Drawing.Point(4, 3);
             this.HistoryBox.Name = "HistoryBox";
-            this.HistoryBox.Size = new System.Drawing.Size(155, 108);
+            this.HistoryBox.Size = new System.Drawing.Size(168, 121);
             this.HistoryBox.TabIndex = 0;
             // 
             // tabEdit
@@ -502,7 +513,7 @@
             this.tabEdit.Location = new System.Drawing.Point(4, 20);
             this.tabEdit.Name = "tabEdit";
             this.tabEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEdit.Size = new System.Drawing.Size(192, 546);
+            this.tabEdit.Size = new System.Drawing.Size(192, 476);
             this.tabEdit.TabIndex = 1;
             // 
             // flowEdit
@@ -513,7 +524,7 @@
             this.flowEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowEdit.Location = new System.Drawing.Point(3, 3);
             this.flowEdit.Name = "flowEdit";
-            this.flowEdit.Size = new System.Drawing.Size(186, 540);
+            this.flowEdit.Size = new System.Drawing.Size(186, 470);
             this.flowEdit.TabIndex = 0;
             // 
             // pnlRotate
@@ -740,7 +751,7 @@
             this.trackBarColorPicker.Location = new System.Drawing.Point(31, 41);
             this.trackBarColorPicker.Maximum = 5;
             this.trackBarColorPicker.Name = "trackBarColorPicker";
-            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 42);
+            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 45);
             this.trackBarColorPicker.TabIndex = 2;
             this.trackBarColorPicker.ValueChanged += new System.EventHandler(this.trackBarColorPicker_ValueChanged);
             // 
@@ -763,25 +774,17 @@
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
             // 
-            // btnHistory
-            // 
-            this.btnHistory.Location = new System.Drawing.Point(17, 132);
-            this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(155, 55);
-            this.btnHistory.TabIndex = 1;
-            this.btnHistory.Text = "Remove Selected";
-            this.btnHistory.UseVisualStyleBackColor = true;
-            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1053, 830);
+            this.ClientSize = new System.Drawing.Size(1054, 831);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
+            this.MaximumSize = new System.Drawing.Size(1070, 870);
+            this.MinimumSize = new System.Drawing.Size(1070, 870);
             this.Name = "mainForm";
             this.Text = "3D Editor";
             this.pnViews.ResumeLayout(false);
