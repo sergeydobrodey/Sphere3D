@@ -255,6 +255,7 @@
             // btnmove
             // 
             this.btnmove.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnmove.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnmove.Location = new System.Drawing.Point(33, 110);
             this.btnmove.Name = "btnmove";
             this.btnmove.Size = new System.Drawing.Size(115, 25);
@@ -560,6 +561,7 @@
             // btnscale
             // 
             this.btnscale.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnscale.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.btnscale.Location = new System.Drawing.Point(33, 110);
             this.btnscale.Name = "btnscale";
             this.btnscale.Size = new System.Drawing.Size(115, 25);
