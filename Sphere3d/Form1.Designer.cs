@@ -66,6 +66,8 @@
             this.pnlLOD = new System.Windows.Forms.Panel();
             this.lbLod = new System.Windows.Forms.Label();
             this.trackBarLOD = new System.Windows.Forms.TrackBar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.HistoryBox = new System.Windows.Forms.ListBox();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.flowEdit = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlRotate = new System.Windows.Forms.Panel();
@@ -88,11 +90,9 @@
             this.rbtnViewRect = new System.Windows.Forms.RadioButton();
             this.btnPanelGlobalView = new System.Windows.Forms.Button();
             this.pnlColorPicker = new System.Windows.Forms.Panel();
+            this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
-            this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.HistoryBox = new System.Windows.Forms.ListBox();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -104,6 +104,7 @@
             this.pnlCreate.SuspendLayout();
             this.pnlLOD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLOD)).BeginInit();
+            this.panel1.SuspendLayout();
             this.tabEdit.SuspendLayout();
             this.flowEdit.SuspendLayout();
             this.pnlRotate.SuspendLayout();
@@ -114,7 +115,6 @@
             this.pnlGlobalView.SuspendLayout();
             this.pnlColorPicker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarColorPicker)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnrotate
@@ -475,6 +475,23 @@
             this.trackBarLOD.Value = 2;
             this.trackBarLOD.ValueChanged += new System.EventHandler(this.trackBarLOD_ValueChanged);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.HistoryBox);
+            this.panel1.Location = new System.Drawing.Point(3, 222);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(180, 229);
+            this.panel1.TabIndex = 19;
+            // 
+            // HistoryBox
+            // 
+            this.HistoryBox.FormattingEnabled = true;
+            this.HistoryBox.Location = new System.Drawing.Point(17, 18);
+            this.HistoryBox.Name = "HistoryBox";
+            this.HistoryBox.Size = new System.Drawing.Size(155, 199);
+            this.HistoryBox.TabIndex = 0;
+            // 
             // tabEdit
             // 
             this.tabEdit.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -716,6 +733,15 @@
             this.pnlColorPicker.Size = new System.Drawing.Size(186, 136);
             this.pnlColorPicker.TabIndex = 1;
             // 
+            // trackBarColorPicker
+            // 
+            this.trackBarColorPicker.Location = new System.Drawing.Point(31, 41);
+            this.trackBarColorPicker.Maximum = 5;
+            this.trackBarColorPicker.Name = "trackBarColorPicker";
+            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 42);
+            this.trackBarColorPicker.TabIndex = 2;
+            this.trackBarColorPicker.ValueChanged += new System.EventHandler(this.trackBarColorPicker_ValueChanged);
+            // 
             // btnPanelColorPicker
             // 
             this.btnPanelColorPicker.Location = new System.Drawing.Point(4, 3);
@@ -734,32 +760,6 @@
             this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
-            // 
-            // trackBarColorPicker
-            // 
-            this.trackBarColorPicker.Location = new System.Drawing.Point(31, 41);
-            this.trackBarColorPicker.Maximum = 5;
-            this.trackBarColorPicker.Name = "trackBarColorPicker";
-            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 42);
-            this.trackBarColorPicker.TabIndex = 2;
-            this.trackBarColorPicker.ValueChanged += new System.EventHandler(this.trackBarColorPicker_ValueChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.HistoryBox);
-            this.panel1.Location = new System.Drawing.Point(3, 222);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 229);
-            this.panel1.TabIndex = 19;
-            // 
-            // HistoryBox
-            // 
-            this.HistoryBox.FormattingEnabled = true;
-            this.HistoryBox.Location = new System.Drawing.Point(17, 18);
-            this.HistoryBox.Name = "HistoryBox";
-            this.HistoryBox.Size = new System.Drawing.Size(155, 199);
-            this.HistoryBox.TabIndex = 0;
             // 
             // mainForm
             // 
@@ -785,6 +785,7 @@
             this.pnlLOD.ResumeLayout(false);
             this.pnlLOD.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLOD)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.tabEdit.ResumeLayout(false);
             this.flowEdit.ResumeLayout(false);
             this.pnlRotate.ResumeLayout(false);
@@ -800,7 +801,6 @@
             this.pnlColorPicker.ResumeLayout(false);
             this.pnlColorPicker.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarColorPicker)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

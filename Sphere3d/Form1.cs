@@ -8,8 +8,6 @@ namespace Sphere3d
 {
     public partial class mainForm : Form
     {
-
-
       
         #region global variables
         List<GraphicModel> ModelsTree = new List<GraphicModel>();     
@@ -40,15 +38,20 @@ namespace Sphere3d
             else trackBarColorPicker.Value = trackBarColorPicker.Minimum;
         }
 
-        private void DrawSphere()
+        private void DrawSphere(bool update)
         {
+            
             Graphics gF = pbFront.CreateGraphics();
             Graphics gL = pbLeft.CreateGraphics();
             Graphics gT = pbTop.CreateGraphics();
-            Graphics gM = pbMain.CreateGraphics();  
-            foreach (GraphicModel temp in ModelsTree)
-            temp.DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked);
-            
+            Graphics gM = pbMain.CreateGraphics();
+            if (update)
+            {
+                Initialize();
+                foreach (GraphicModel temp in ModelsTree)
+                    temp.DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked);
+            }
+            else ModelsTree[ModelsTree.Count - 1].DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked); 
         }
 
        
@@ -68,7 +71,7 @@ namespace Sphere3d
             if (model!=null)
             {
                 model.UpdateModel(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
-                DrawSphere();
+                DrawSphere(true);
             }
             tbanglex.Text = "0";
             tbangley.Text = "0";
@@ -83,10 +86,10 @@ namespace Sphere3d
 
         private void Initialize()
         {
-            pbFront.Image = Properties.Resources.viewport;
-            pbLeft.Image = Properties.Resources.viewport;
-            pbTop.Image = Properties.Resources.viewport;
-            pbMain.Image = null;
+            //pbFront.Image = Properties.Resources.viewport;
+            //pbLeft.Image = Properties.Resources.viewport;
+            //pbTop.Image = Properties.Resources.viewport;
+            //pbMain.Image = null;
             pbFront.Refresh();
             pbLeft.Refresh();
             pbTop.Refresh();
@@ -97,12 +100,11 @@ namespace Sphere3d
         #region buttons handlers
 
         private void btnbuild_Click(object sender, EventArgs e)
-        {
-            Initialize();            
+        {                       
             size = Convert.ToInt32(tbsize.Text);             
             basepoint = new Point3d(Convert.ToDouble(tbbasex.Text), Convert.ToDouble(tbbasey.Text), Convert.ToDouble(tbbasez.Text));
             AddSphere();
-            DrawSphere();
+            DrawSphere(false);
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
@@ -152,14 +154,13 @@ namespace Sphere3d
         private void pbFront_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-            {
-                Initialize();
+            {                
                 Point3d radpoint = new Point3d(e.X, e.Y, 0);
                 size = Convert.ToInt32(Math.Sqrt((radpoint.x - basepoint.x) * (radpoint.x - basepoint.x) + (radpoint.y - basepoint.y) * (radpoint.y - basepoint.y)));
                 basepoint.x -= VIEWPORT;
                 basepoint.y -= VIEWPORT;
                 AddSphere();
-                DrawSphere();
+                DrawSphere(false);
             }
             if (e.Button == MouseButtons.Right)
             {
