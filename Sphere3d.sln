@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphere3d", "Sphere3d\Sphere3d.csproj", "{7DE52C69-1024-48C6-8114-FF01338AD213}"
 EndProject
 Global
