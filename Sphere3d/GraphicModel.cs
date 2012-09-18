@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
+ 
 namespace Sphere3d
 {
     class GraphicModel
@@ -46,9 +46,43 @@ namespace Sphere3d
                 LeftView.DrawLine(pen, model[i].x + size, model[i].z + size, model[i + 1].x + size, model[i + 1].z + size);
                 TopView.DrawLine(pen, model[i].y + size, model[i].z + size, model[i + 1].y + size, model[i + 1].z + size);
                 Draw2D(MainView, model[i], model[i + 1],size,MainViewIsometrik);
-            }
+            }         
             
          }
+
+        private void Aksonometrik(float psi,float fi)
+        {
+            double Sp = Math.Sin(psi);
+            double Cp = Math.Cos(psi);
+            double Sf = Math.Sin(fi);
+            double Cf = Math.Cos(fi);
+            double[,] matrix = { { Cp, Sf * Sp, 0, 0 }, { 0, Cf, 0, 0 }, { Sp, -Sf * Cp, 0, 0 }, { 0, 0, 0, 1 } };           
+            for (int i = 0; i < model.Count; i++)
+            {
+                model[i] = MultiplicateF(model[i], matrix);
+            }
+        }
+
+        private void Kosougol(float l, float alpha)
+        {
+            double C = Math.Cos(alpha);
+            double S = Math.Sin(alpha);
+            double[,] matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { l*C, l*S, 0, 0 }, { 0, 0, 0, 1 } };
+            for (int i = 0; i < model.Count; i++)
+            {
+                model[i] = MultiplicateF(model[i], matrix);
+            }
+        }
+
+        private void Perspect(float d)
+        {
+            double[,] matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0,0, 1, 1/d }, { 0, 0, 0, 0 } };
+            for (int i = 0; i < model.Count; i++)
+            {
+                model[i] = MultiplicateF(model[i], matrix);
+            }
+
+        }
         
         private void Draw2D(Graphics g, Point3d pt1, Point3d pt2,float size,bool isometrik)  // Draws on  main view
         {
