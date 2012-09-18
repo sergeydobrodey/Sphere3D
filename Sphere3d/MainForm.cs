@@ -16,7 +16,8 @@ namespace Sphere3d
         float Lod = 0.2F;
         PointF delta = new PointF(0, 0);
         int VIEWPORT = 200;   // size of image
-        Color ModelColor = Color.Red;       
+        Color ModelColor = Color.Red;
+        byte MainViewType = 0;
         #endregion
        
      
@@ -43,13 +44,15 @@ namespace Sphere3d
             Graphics gL = pbLeft.CreateGraphics();
             Graphics gT = pbTop.CreateGraphics();
             Graphics gM = pbMain.CreateGraphics();
+            double viewparam1 = Convert.ToDouble(tbviewparam1.Text);
+            double viewparam2 = Convert.ToDouble(tbviewparam2.Text);
             if (update)
             {
                 Initialize();
                 foreach (GraphicModel temp in ModelsTree)
-                    temp.DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked);
+                    temp.DrawModel(gF, gL, gT, gM, VIEWPORT, MainViewType, viewparam1, viewparam2);
             }
-            else ModelsTree[ModelsTree.Count - 1].DrawModel(gF, gL, gT, gM, VIEWPORT, rbtnViewRect.Checked); 
+            else ModelsTree[ModelsTree.Count - 1].DrawModel(gF, gL, gT, gM, VIEWPORT, MainViewType, viewparam1, viewparam2); 
         }
        
         private void UpdateSphere(GraphicModel model)
@@ -115,6 +118,11 @@ namespace Sphere3d
             
         }
 
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            //ModelsTree[ModelsTree.Count - 1].DrawModel();
+        }
+
         private void btnrotate_Click(object sender, EventArgs e)
         {
             if (ModelsTree.Count!=0)
@@ -160,6 +168,7 @@ namespace Sphere3d
                     tbviewparam2.Visible = true;
                     lbviewparam1.Text = "fi angle:";
                     lbviewparam2.Text = "psi angle:";
+                    byte MainViewType = 0;
                     
                 }
 
@@ -169,6 +178,7 @@ namespace Sphere3d
                     tbviewparam2.Visible = true;
                     lbviewparam1.Text = "L:";
                     lbviewparam2.Text = "alpha angle:";
+                    byte MainViewType = 1;
                    
                 }
 
@@ -177,6 +187,7 @@ namespace Sphere3d
                     lbviewparam1.Text = "Distanse:";
                     lbviewparam2.Visible = false;
                     tbviewparam2.Visible = false;
+                    byte MainViewType = 2;
                 }
 
             
@@ -324,6 +335,8 @@ namespace Sphere3d
             }
         }
         #endregion
+
+        
 
         
 

@@ -724,6 +724,7 @@
             this.btnView.TabIndex = 6;
             this.btnView.Text = "Update View";
             this.btnView.UseVisualStyleBackColor = false;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // tbviewparam2
             // 
@@ -731,6 +732,7 @@
             this.tbviewparam2.Name = "tbviewparam2";
             this.tbviewparam2.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam2.TabIndex = 5;
+            this.tbviewparam2.Text = "45";
             // 
             // tbviewparam1
             // 
@@ -738,6 +740,7 @@
             this.tbviewparam1.Name = "tbviewparam1";
             this.tbviewparam1.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam1.TabIndex = 5;
+            this.tbviewparam1.Text = "45";
             // 
             // lbviewparam2
             // 

@@ -9,7 +9,7 @@ namespace Sphere3d
     {
         List<Point3d> model = new List<Point3d>();
         List<double[,]> matrix = new List<double[,]>();
-        const double W = 1;
+      
         Color ModelColor;
 
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
@@ -35,63 +35,39 @@ namespace Sphere3d
             this.ModelColor = color;
         }
 
-        
 
-        public void DrawModel(Graphics FrontView,Graphics LeftView,Graphics TopView,Graphics MainView,float size,bool MainViewIsometrik) // Draws model
+
+        public void DrawModel(Graphics FrontView, Graphics LeftView, Graphics TopView, Graphics MainView, float size, byte MainViewType, double viewparam1, double viewparam2) // Draws model
          {         
             Pen pen = new Pen(ModelColor, 1);
             for (int i = 0; i < model.Count - 1; i++)
             {
-                FrontView.DrawLine(pen, model[i].x + size, model[i].y + size, model[i + 1].x + size, model[i + 1].y + size);
-                LeftView.DrawLine(pen, model[i].x + size, model[i].z + size, model[i + 1].x + size, model[i + 1].z + size);
-                TopView.DrawLine(pen, model[i].y + size, model[i].z + size, model[i + 1].y + size, model[i + 1].z + size);
-                Draw2D(MainView, model[i], model[i + 1],size,MainViewIsometrik);
+                FrontView.DrawLine(pen, model[i].x + size, -model[i].y + size, model[i + 1].x + size,- model[i + 1].y + size);
+                LeftView.DrawLine(pen, model[i].x + size, -model[i].z + size, model[i + 1].x + size,- model[i + 1].z + size);
+                TopView.DrawLine(pen, model[i].y + size, -model[i].z + size, model[i + 1].y + size, -model[i + 1].z + size);
+               Draw2D(MainView, model[i], model[i + 1],size,MainViewType,viewparam1,viewparam2);
             }         
             
          }
 
-        private void Aksonometrik(float psi,float fi)
-        {
-            double Sp = Math.Sin(psi);
-            double Cp = Math.Cos(psi);
-            double Sf = Math.Sin(fi);
-            double Cf = Math.Cos(fi);
-            double[,] matrix = { { Cp, Sf * Sp, 0, 0 }, { 0, Cf, 0, 0 }, { Sp, -Sf * Cp, 0, 0 }, { 0, 0, 0, 1 } };           
-            for (int i = 0; i < model.Count; i++)
-            {
-                model[i] = MultiplicateF(model[i], matrix);
-            }
-        }
 
-        private void Kosougol(float l, float alpha)
-        {
-            double C = Math.Cos(alpha);
-            double S = Math.Sin(alpha);
-            double[,] matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { l*C, l*S, 0, 0 }, { 0, 0, 0, 1 } };
-            for (int i = 0; i < model.Count; i++)
-            {
-                model[i] = MultiplicateF(model[i], matrix);
-            }
-        }
 
-        private void Perspect(float d)
-        {
-            double[,] matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0,0, 1, 1/d }, { 0, 0, 0, 0 } };
-            for (int i = 0; i < model.Count; i++)
-            {
-                model[i] = MultiplicateF(model[i], matrix);
-            }
-
-        }
-        
-        private void Draw2D(Graphics g, Point3d pt1, Point3d pt2,float size,bool isometrik)  // Draws on  main view
+        private void Draw2D(Graphics g, Point3d pt1, Point3d pt2, float size, byte MainViewType, double viewparam1, double viewparam2)  // Draws on  main view
         {
             Pen pen = new Pen(ModelColor, 1);
-            if (isometrik)
-                g.DrawLine(pen, new PointF((float)(pt1.x / Math.Cos(Math.PI / 6) - pt1.z * Math.Cos(Math.PI / 6) + size), (float)(-pt1.y + pt1.z * Math.Sin(Math.PI / 6) + pt1.x * Math.Sin(Math.PI / 6) + size)), new PointF((float)(pt2.x / Math.Cos(Math.PI / 6) - pt2.z * Math.Cos(Math.PI / 6) + size), (float)(-pt2.y + pt2.z * Math.Sin(Math.PI / 6) + pt2.x * Math.Sin(Math.PI / 6) + size)));
-            else
-                g.DrawLine(pen, new PointF(pt1.x - pt1.z / 2 + size, -pt1.y + pt1.z / 2 + size), new PointF(pt2.x - pt2.z / 2 + size, -pt2.y + pt2.z / 2 + size));
+            Point3d point1=null;
+            Point3d point2=null;
+            switch (MainViewType)
+            {
+                case 0: point1 = pt1.Aksonometrik(viewparam1, viewparam2); point2 = pt2.Aksonometrik(viewparam1, viewparam2); break;
+                case 1: point1 = pt1.Kosougol(viewparam1, viewparam2); point2 = pt2.Kosougol(viewparam1, viewparam2); break;
+                case 2: point1 = pt1.Perspect(viewparam1); point2 = pt2.Perspect(viewparam1); break;
+            }
+            g.DrawLine(pen, new PointF(point1.x + size, -point1.y + size), new PointF(point2.x + size, -point2.y + size));
+          
         }
+
+        
 
         public void UpdateModel(double movex, double movey, double movez, double scalex, double scaley, double scalez, double anglex, double angley, double anglez)
         {
@@ -100,7 +76,7 @@ namespace Sphere3d
             matrix.Clear();
             for (int i = 0; i < model.Count; i++)
             {
-                model[i] = MultiplicateF(model[i], matrixACT);
+                model[i] = model[i].MultiplicateF(model[i], matrixACT);                  
             }
         }  // Update model with new parametrs
 
@@ -138,31 +114,7 @@ namespace Sphere3d
             return result;
         }
 
-        private Point3d MultiplicateF(Point3d vertex, double[,] ar)
-        {
-            double[,] result = new double[4, 1];
-            double[,] a = ar;
-            double[,] b = new double[4, 1];
-            b[0, 0] = vertex.x;
-            b[1, 0] = vertex.y;
-            b[2, 0] = vertex.z;
-            b[3, 0] = W;
-            
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 1; j++)
-                {
-                    result[i, j] = 0;
-                    for (int r = 0; r < 4; r++)
-                        result[i, j] += a[i, r] * b[r, j];
-                }
-
-            vertex.x = (float)(result[0, 0]);
-            vertex.y = (float)(result[1, 0]);
-            vertex.z = (float)(result[2, 0]);
-
-            return vertex;
-
-        }
+      
 
         #region Matrix
         private void Rotate(double anglex, double angley, double anglez)
