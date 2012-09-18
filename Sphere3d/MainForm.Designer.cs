@@ -87,6 +87,12 @@
             this.tabView = new System.Windows.Forms.TabPage();
             this.flowView = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlGlobalView = new System.Windows.Forms.Panel();
+            this.btnView = new System.Windows.Forms.Button();
+            this.tbviewparam2 = new System.Windows.Forms.TextBox();
+            this.tbviewparam1 = new System.Windows.Forms.TextBox();
+            this.lbviewparam2 = new System.Windows.Forms.Label();
+            this.lbviewparam1 = new System.Windows.Forms.Label();
+            this.rbtnGeometricView = new System.Windows.Forms.RadioButton();
             this.rbtnViewOblique = new System.Windows.Forms.RadioButton();
             this.rbtnViewRect = new System.Windows.Forms.RadioButton();
             this.btnPanelGlobalView = new System.Windows.Forms.Button();
@@ -471,7 +477,7 @@
             this.trackBarLOD.Location = new System.Drawing.Point(71, 3);
             this.trackBarLOD.Minimum = 1;
             this.trackBarLOD.Name = "trackBarLOD";
-            this.trackBarLOD.Size = new System.Drawing.Size(104, 45);
+            this.trackBarLOD.Size = new System.Drawing.Size(104, 42);
             this.trackBarLOD.TabIndex = 17;
             this.trackBarLOD.Value = 2;
             this.trackBarLOD.ValueChanged += new System.EventHandler(this.trackBarLOD_ValueChanged);
@@ -694,24 +700,85 @@
             // pnlGlobalView
             // 
             this.pnlGlobalView.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlGlobalView.Controls.Add(this.btnView);
+            this.pnlGlobalView.Controls.Add(this.tbviewparam2);
+            this.pnlGlobalView.Controls.Add(this.tbviewparam1);
+            this.pnlGlobalView.Controls.Add(this.lbviewparam2);
+            this.pnlGlobalView.Controls.Add(this.lbviewparam1);
+            this.pnlGlobalView.Controls.Add(this.rbtnGeometricView);
             this.pnlGlobalView.Controls.Add(this.rbtnViewOblique);
             this.pnlGlobalView.Controls.Add(this.rbtnViewRect);
             this.pnlGlobalView.Controls.Add(this.btnPanelGlobalView);
             this.pnlGlobalView.Location = new System.Drawing.Point(3, 3);
             this.pnlGlobalView.Name = "pnlGlobalView";
-            this.pnlGlobalView.Size = new System.Drawing.Size(186, 140);
+            this.pnlGlobalView.Size = new System.Drawing.Size(186, 220);
             this.pnlGlobalView.TabIndex = 0;
+            // 
+            // btnView
+            // 
+            this.btnView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnView.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnView.Location = new System.Drawing.Point(31, 184);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(115, 25);
+            this.btnView.TabIndex = 6;
+            this.btnView.Text = "Update View";
+            this.btnView.UseVisualStyleBackColor = false;
+            // 
+            // tbviewparam2
+            // 
+            this.tbviewparam2.Location = new System.Drawing.Point(77, 149);
+            this.tbviewparam2.Name = "tbviewparam2";
+            this.tbviewparam2.Size = new System.Drawing.Size(100, 20);
+            this.tbviewparam2.TabIndex = 5;
+            // 
+            // tbviewparam1
+            // 
+            this.tbviewparam1.Location = new System.Drawing.Point(77, 123);
+            this.tbviewparam1.Name = "tbviewparam1";
+            this.tbviewparam1.Size = new System.Drawing.Size(100, 20);
+            this.tbviewparam1.TabIndex = 5;
+            // 
+            // lbviewparam2
+            // 
+            this.lbviewparam2.AutoSize = true;
+            this.lbviewparam2.Location = new System.Drawing.Point(13, 156);
+            this.lbviewparam2.Name = "lbviewparam2";
+            this.lbviewparam2.Size = new System.Drawing.Size(52, 13);
+            this.lbviewparam2.TabIndex = 4;
+            this.lbviewparam2.Text = "psi angle:";
+            // 
+            // lbviewparam1
+            // 
+            this.lbviewparam1.AutoSize = true;
+            this.lbviewparam1.Location = new System.Drawing.Point(13, 130);
+            this.lbviewparam1.Name = "lbviewparam1";
+            this.lbviewparam1.Size = new System.Drawing.Size(44, 13);
+            this.lbviewparam1.TabIndex = 4;
+            this.lbviewparam1.Text = "fi angle:";
+            // 
+            // rbtnGeometricView
+            // 
+            this.rbtnGeometricView.AutoSize = true;
+            this.rbtnGeometricView.Location = new System.Drawing.Point(4, 91);
+            this.rbtnGeometricView.Name = "rbtnGeometricView";
+            this.rbtnGeometricView.Size = new System.Drawing.Size(145, 17);
+            this.rbtnGeometricView.TabIndex = 3;
+            this.rbtnGeometricView.TabStop = true;
+            this.rbtnGeometricView.Text = "geometric projection view";
+            this.rbtnGeometricView.UseVisualStyleBackColor = true;
+            this.rbtnGeometricView.CheckedChanged += new System.EventHandler(this.rbtnView_CheckedChanged);
             // 
             // rbtnViewOblique
             // 
             this.rbtnViewOblique.AutoSize = true;
             this.rbtnViewOblique.Location = new System.Drawing.Point(4, 67);
             this.rbtnViewOblique.Name = "rbtnViewOblique";
-            this.rbtnViewOblique.Size = new System.Drawing.Size(160, 17);
+            this.rbtnViewOblique.Size = new System.Drawing.Size(84, 17);
             this.rbtnViewOblique.TabIndex = 2;
-            this.rbtnViewOblique.Text = "oblique frontal isometric view";
+            this.rbtnViewOblique.Text = "oblique view";
             this.rbtnViewOblique.UseVisualStyleBackColor = true;
-            this.rbtnViewOblique.CheckedChanged += new System.EventHandler(this.rbtnViewOblique_CheckedChanged);
+            this.rbtnViewOblique.CheckedChanged += new System.EventHandler(this.rbtnView_CheckedChanged);
             // 
             // rbtnViewRect
             // 
@@ -719,11 +786,12 @@
             this.rbtnViewRect.Checked = true;
             this.rbtnViewRect.Location = new System.Drawing.Point(4, 43);
             this.rbtnViewRect.Name = "rbtnViewRect";
-            this.rbtnViewRect.Size = new System.Drawing.Size(147, 17);
+            this.rbtnViewRect.Size = new System.Drawing.Size(107, 17);
             this.rbtnViewRect.TabIndex = 1;
             this.rbtnViewRect.TabStop = true;
-            this.rbtnViewRect.Text = "rectangular isometric view";
+            this.rbtnViewRect.Text = "axonometric view";
             this.rbtnViewRect.UseVisualStyleBackColor = true;
+            this.rbtnViewRect.CheckedChanged += new System.EventHandler(this.rbtnView_CheckedChanged);
             // 
             // btnPanelGlobalView
             // 
@@ -741,7 +809,7 @@
             this.pnlColorPicker.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlColorPicker.Controls.Add(this.trackBarColorPicker);
             this.pnlColorPicker.Controls.Add(this.btnPanelColorPicker);
-            this.pnlColorPicker.Location = new System.Drawing.Point(3, 149);
+            this.pnlColorPicker.Location = new System.Drawing.Point(3, 229);
             this.pnlColorPicker.Name = "pnlColorPicker";
             this.pnlColorPicker.Size = new System.Drawing.Size(186, 136);
             this.pnlColorPicker.TabIndex = 1;
@@ -751,7 +819,7 @@
             this.trackBarColorPicker.Location = new System.Drawing.Point(31, 41);
             this.trackBarColorPicker.Maximum = 5;
             this.trackBarColorPicker.Name = "trackBarColorPicker";
-            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 45);
+            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 42);
             this.trackBarColorPicker.TabIndex = 2;
             this.trackBarColorPicker.ValueChanged += new System.EventHandler(this.trackBarColorPicker_ValueChanged);
             // 
@@ -779,7 +847,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1054, 831);
+            this.ClientSize = new System.Drawing.Size(1062, 843);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
@@ -886,6 +954,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox HistoryBox;
         private System.Windows.Forms.Button btnHistory;
+        private System.Windows.Forms.RadioButton rbtnGeometricView;
+        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.TextBox tbviewparam2;
+        private System.Windows.Forms.TextBox tbviewparam1;
+        private System.Windows.Forms.Label lbviewparam2;
+        private System.Windows.Forms.Label lbviewparam1;
     }
 }
 

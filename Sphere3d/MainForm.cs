@@ -152,10 +152,35 @@ namespace Sphere3d
             }
         }
 
-        private void rbtnViewOblique_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ModelsTree.Count != 0)
-            UpdateSphere(ModelsTree[ModelsTree.Count-1]);     
+        private void rbtnView_CheckedChanged(object sender, EventArgs e)
+        {           
+                if (rbtnViewRect.Checked)
+                {
+                    lbviewparam2.Visible = true;
+                    tbviewparam2.Visible = true;
+                    lbviewparam1.Text = "fi angle:";
+                    lbviewparam2.Text = "psi angle:";
+                    
+                }
+
+                if (rbtnViewOblique.Checked)
+                {
+                    lbviewparam2.Visible = true;
+                    tbviewparam2.Visible = true;
+                    lbviewparam1.Text = "L:";
+                    lbviewparam2.Text = "alpha angle:";
+                   
+                }
+
+                if (rbtnGeometricView.Checked)
+                {
+                    lbviewparam1.Text = "Distanse:";
+                    lbviewparam2.Visible = false;
+                    tbviewparam2.Visible = false;
+                }
+
+            
+            //UpdateSphere(ModelsTree[ModelsTree.Count-1]);     
         }
         #endregion
 
@@ -277,7 +302,7 @@ namespace Sphere3d
             }
             else
             {
-                pnlGlobalView.Height = 170;
+                pnlGlobalView.Height = 220;
                 btnPanelGlobalView.Text = "-                  GlobalView";
             }
 
