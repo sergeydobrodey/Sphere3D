@@ -9,21 +9,23 @@ namespace Sphere3d
     {
         List<Point3d> model = new List<Point3d>();
         List<double[,]> matrix = new List<double[,]>();
-      
+        List<PointF> mxy = new List<PointF>();
+        List<PointF> mxz = new List<PointF>();
+        List<PointF> myz = new List<PointF>();
         Color ModelColor;
 
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
          {
             model.Clear();
             double x, y, z, fi, psi;
-            for (fi = 0; fi < Math.PI; fi += LOD)
-                for (psi = 0; psi < 2 * Math.PI; psi += LOD)
-                {
-                    x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
-                    y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
-                    z = basepoint.z + R * Math.Cos(psi);
-                    model.Add(new Point3d((float)x, (float)y, (float)z));
-                }
+            //for (fi = 0; fi < Math.PI; fi += LOD)
+            //    for (psi = 0; psi < 2 * Math.PI; psi += LOD)
+            //    {
+            //        x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
+            //        y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
+            //        z = basepoint.z + R * Math.Cos(psi);
+            //        model.Add(new Point3d((float)x, (float)y, (float)z));
+            //    }
             for (psi = 0; psi < Math.PI; psi += LOD)
                 for (fi = 0; fi < 2 * Math.PI; fi += LOD)
                 {
@@ -40,13 +42,25 @@ namespace Sphere3d
         public void DrawModel(Graphics FrontView, Graphics LeftView, Graphics TopView, Graphics MainView, float size, byte MainViewType, double viewparam1, double viewparam2) // Draws model
          {         
             Pen pen = new Pen(ModelColor, 1);
-            for (int i = 0; i < model.Count - 1; i++)
+            mxy.Clear();
+            mxz.Clear();
+            myz.Clear();
+            foreach (Point3d vertex in model)
             {
-                FrontView.DrawLine(pen, model[i].x + size, -model[i].y + size, model[i + 1].x + size,- model[i + 1].y + size);
-                LeftView.DrawLine(pen, model[i].x + size, -model[i].z + size, model[i + 1].x + size,- model[i + 1].z + size);
-                TopView.DrawLine(pen, model[i].y + size, -model[i].z + size, model[i + 1].y + size, -model[i + 1].z + size);
-               Draw2D(MainView, model[i], model[i + 1],size,MainViewType,viewparam1,viewparam2);
-            }         
+                mxy.Add(new PointF(vertex.x + size, vertex.y + size));
+                mxz.Add(new PointF(vertex.x + size, vertex.z + size));
+                myz.Add(new PointF(vertex.y + size, vertex.z + size));
+            }
+            FrontView.DrawLines(pen, mxy.ToArray());
+            LeftView.DrawLines(pen, mxz.ToArray());
+            TopView.DrawLines(pen, myz.ToArray());
+            //for (int i = 0; i < model.Count-1 ; i++)
+            //{
+            //    FrontView.DrawLine(pen, model[i].x + size, -model[i].y + size, model[i + 1].x + size,- model[i + 1].y + size);
+            //    LeftView.DrawLine(pen, model[i].x + size, -model[i].z + size, model[i + 1].x + size,- model[i + 1].z + size);
+            //    TopView.DrawLine(pen, model[i].y + size, -model[i].z + size, model[i + 1].y + size, -model[i + 1].z + size);
+            //  // Draw2D(MainView, model[i], model[i + 1],size,MainViewType,viewparam1,viewparam2);
+            //}         
             
          }
 

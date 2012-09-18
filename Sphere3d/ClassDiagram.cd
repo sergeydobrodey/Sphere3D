@@ -3,21 +3,21 @@
   <Class Name="Sphere3d.GraphicModel">
     <Position X="0.5" Y="1" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAAQAAIAAAAAAAgIAACAAEAAAAAAACCgBAAAIAAA=</HashCode>
+      <HashCode>AAACAAQAAIAAAAAAAgIAACAAEAAAAAAACCABAAAIAAA=</HashCode>
       <FileName>GraphicModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sphere3d.mainForm" Collapsed="true">
     <Position X="4.75" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CgBISEQQADkB9QEMsPzcKBSaAJxEJWYYgI5gKWEWBAA=</HashCode>
+      <HashCode>CgBISMSQgDkB9QFJsPzcLBSaALxEJWYYgI5gKWEWBAA=</HashCode>
       <FileName>MainForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sphere3d.Point3d">
     <Position X="9.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAIAEAAAhgAQAIAAA=</HashCode>
       <FileName>Point3d.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -38,6 +38,13 @@
     <Position X="8.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sphere3d.Edge">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAADAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Edge.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
