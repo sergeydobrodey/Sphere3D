@@ -7,17 +7,13 @@ namespace Sphere3d
 {
     class GraphicModel
     {
-        List<Point3d> model = new List<Point3d>();
-        List<double[,]> matrix = new List<double[,]>();
-        
+        List<double[,]> matrix = new List<double[,]>();        
         List<Edge> edgelist = new List<Edge>();
         Color ModelColor;
 
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
-         {
-            model.Clear();
+         {          
             double x, y, z, fi, psi;
-
             for (fi = 0; fi < Math.PI; fi += LOD)
             {
                 edgelist.Add(new Edge(edgelist.Count + 1));
@@ -25,8 +21,7 @@ namespace Sphere3d
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
                     y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
-                    z = basepoint.z + R * Math.Cos(psi);
-                    model.Add(new Point3d((float)x, (float)y, (float)z));
+                    z = basepoint.z + R * Math.Cos(psi);                   
                     edgelist[edgelist.Count - 1].vertex.Add(new Point3d((float)x, (float)y, (float)z));
                 }
             }
@@ -37,8 +32,7 @@ namespace Sphere3d
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
                     y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
-                    z = basepoint.z + R * Math.Cos(psi);
-                    model.Add(new Point3d((float)x, (float)y, (float)z));
+                    z = basepoint.z + R * Math.Cos(psi);                   
                     edgelist[edgelist.Count - 1].vertex.Add(new Point3d((float)x, (float)y, (float)z));
                 }
             }
@@ -78,15 +72,8 @@ namespace Sphere3d
                 TopView.DrawLines(pen, myz.ToArray());
             }
             for (int i = 0; i < edgelist.Count; i++)
-                for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)              
-           
-           
-            {
-            //    FrontView.DrawLine(pen, model[i].x + size, -model[i].y + size, model[i + 1].x + size,- model[i + 1].y + size);
-            //    LeftView.DrawLine(pen, model[i].x + size, -model[i].z + size, model[i + 1].x + size,- model[i + 1].z + size);
-            //    TopView.DrawLine(pen, model[i].y + size, -model[i].z + size, model[i + 1].y + size, -model[i + 1].z + size);
-           Draw2D(MainView, edgelist[i].vertex[j], edgelist[i].vertex[j+1],size,MainViewType,viewparam1,viewparam2);
-            }         
+                for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)                         
+                    Draw2D(MainView, edgelist[i].vertex[j], edgelist[i].vertex[j+1],size,MainViewType,viewparam1,viewparam2);          
             
          }
 
@@ -98,7 +85,7 @@ namespace Sphere3d
             float size,
             byte MainViewType,
             double viewparam1,
-            double viewparam2)  // Draws on  main view
+            double viewparam2)  // Draws   main view
         {
             Pen pen = new Pen(ModelColor, 1);
             Point3d point1=null;
@@ -130,12 +117,7 @@ namespace Sphere3d
             matrix.Clear();
             for (int i = 0; i < edgelist.Count; i++)
                 for (int j = 0; j < edgelist[i].vertex.Count; j++)
-                    edgelist[i].vertex[j] = edgelist[i].vertex[j].MultiplicateF(edgelist[i].vertex[j], matrixACT);
-           
-            //for (int i = 0; i < model.Count; i++)
-            //{
-            //    model[i] = model[i].MultiplicateF(model[i], matrixACT);                  
-            //}
+                    edgelist[i].vertex[j] = edgelist[i].vertex[j].MultiplicateF(edgelist[i].vertex[j], matrixACT);            
         }  // Update model with new parametrs
 
         private double[,] MatrixReady(double movex,

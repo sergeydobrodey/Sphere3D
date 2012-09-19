@@ -14,11 +14,5 @@ namespace Sphere3d
         {
             this.id = id;
         }
-        public void  DrawEdge(Graphics g,Color color)
-        {
-            Pen pen = new Pen(color, 1);
-           
-        }
-
     }
 }
