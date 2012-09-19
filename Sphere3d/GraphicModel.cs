@@ -48,10 +48,12 @@ namespace Sphere3d
 
 
         public void DrawModel(Graphics FrontView, 
-            Graphics LeftView, Graphics TopView, 
+            Graphics LeftView,
+            Graphics TopView, 
             Graphics MainView, 
             float size, 
-            byte MainViewType,             
+            byte MainViewType, 
+            double viewparam1,
             double viewparam2) // Draws model
          {         
             Pen pen = new Pen(ModelColor, 1);
