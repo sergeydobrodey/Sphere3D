@@ -47,7 +47,12 @@ namespace Sphere3d
 
 
 
-        public void DrawModel(Graphics FrontView, Graphics LeftView, Graphics TopView, Graphics MainView, float size, byte MainViewType, double viewparam1, double viewparam2) // Draws model
+        public void DrawModel(Graphics FrontView, 
+            Graphics LeftView, Graphics TopView, 
+            Graphics MainView, 
+            float size, 
+            byte MainViewType,             
+            double viewparam2) // Draws model
          {         
             Pen pen = new Pen(ModelColor, 1);
             List<PointF> mxy = new List<PointF>();
@@ -83,7 +88,13 @@ namespace Sphere3d
 
 
 
-        private void Draw2D(Graphics g, Point3d pt1, Point3d pt2, float size, byte MainViewType, double viewparam1, double viewparam2)  // Draws on  main view
+        private void Draw2D(Graphics g,
+            Point3d pt1,
+            Point3d pt2,
+            float size,
+            byte MainViewType,
+            double viewparam1,
+            double viewparam2)  // Draws on  main view
         {
             Pen pen = new Pen(ModelColor, 1);
             Point3d point1=null;
@@ -100,7 +111,15 @@ namespace Sphere3d
 
         
 
-        public void UpdateModel(double movex, double movey, double movez, double scalex, double scaley, double scalez, double anglex, double angley, double anglez)
+        public void UpdateModel(double movex,
+            double movey,
+            double movez,
+            double scalex,
+            double scaley,
+            double scalez,
+            double anglex,
+            double angley,
+            double anglez)
         {
 
             double[,] matrixACT = MatrixReady(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
@@ -111,7 +130,15 @@ namespace Sphere3d
             }
         }  // Update model with new parametrs
 
-        private double[,] MatrixReady(double movex, double movey, double movez, double scalex, double scaley, double scalez, double anglex, double angley, double anglez)
+        private double[,] MatrixReady(double movex,
+            double movey,
+            double movez,
+            double scalex,
+            double scaley,
+            double scalez,
+            double anglex,
+            double angley,
+            double anglez)
         {           
             Move(movex, movey, movez);
             try
