@@ -26,7 +26,10 @@ namespace Sphere3d
             double Cp = Math.Cos(psi);
             double Sf = Math.Sin(fi);
             double Cf = Math.Cos(fi);             
-            double[,] matrix = { { Cp, Sf * Sp, 0, 0 }, { 0, Cf, 0, 0 }, { Sp, -Sf * Cp, 0, 0 }, { 0, 0, 0, 1 } };
+            double[,] matrix = { { Cp, Sf * Sp, 0, 0 },
+                               { 0, Cf, 0, 0 },
+                               { Sp, -Sf * Cp, 0, 0 },
+                               { 0, 0, 0, 1 } };
             return MultiplicateF(this, matrix);
         }
 
@@ -35,13 +38,19 @@ namespace Sphere3d
             alpha = Convert.ToDouble(alpha) * Math.PI / 180; 
             double C = Math.Cos(alpha);
             double S = Math.Sin(alpha);
-            double[,] matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { l * C, l * S, 0, 0 }, { 0, 0, 0, 1 } };
+            double[,] matrix = { { 1, 0, 0, 0 },
+                               { 0, 1, 0, 0 }, 
+                               { l * C, l * S, 0, 0 }, 
+                               { 0, 0, 0, 1 } };
             return MultiplicateF(this, matrix);
         }
 
         public Point3d Perspect(double d)
         {
-            double[,] matrix = { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 1 / d }, { 0, 0, 0, 0 } };
+            double[,] matrix = { { 1, 0, 0, 0 },
+                               { 0, 1, 0, 0 },
+                               { 0, 0, 1, 1 / d },
+                               { 0, 0, 0, 0 } };
             return MultiplicateF(this, matrix);
         }
 
