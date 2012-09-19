@@ -77,13 +77,15 @@ namespace Sphere3d
                 LeftView.DrawLines(pen, mxz.ToArray());
                 TopView.DrawLines(pen, myz.ToArray());
             }
-            
-            for (int i = 0; i < model.Count-1 ; i++)
+            for (int i = 0; i < edgelist.Count; i++)
+                for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)              
+           
+           
             {
             //    FrontView.DrawLine(pen, model[i].x + size, -model[i].y + size, model[i + 1].x + size,- model[i + 1].y + size);
             //    LeftView.DrawLine(pen, model[i].x + size, -model[i].z + size, model[i + 1].x + size,- model[i + 1].z + size);
             //    TopView.DrawLine(pen, model[i].y + size, -model[i].z + size, model[i + 1].y + size, -model[i + 1].z + size);
-           Draw2D(MainView, model[i], model[i + 1],size,MainViewType,viewparam1,viewparam2);
+           Draw2D(MainView, edgelist[i].vertex[j], edgelist[i].vertex[j+1],size,MainViewType,viewparam1,viewparam2);
             }         
             
          }
@@ -126,10 +128,14 @@ namespace Sphere3d
 
             double[,] matrixACT = MatrixReady(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
             matrix.Clear();
-            for (int i = 0; i < model.Count; i++)
-            {
-                model[i] = model[i].MultiplicateF(model[i], matrixACT);                  
-            }
+            for (int i = 0; i < edgelist.Count; i++)
+                for (int j = 0; j < edgelist[i].vertex.Count; j++)
+                    edgelist[i].vertex[j] = edgelist[i].vertex[j].MultiplicateF(edgelist[i].vertex[j], matrixACT);
+           
+            //for (int i = 0; i < model.Count; i++)
+            //{
+            //    model[i] = model[i].MultiplicateF(model[i], matrixACT);                  
+            //}
         }  // Update model with new parametrs
 
         private double[,] MatrixReady(double movex,
