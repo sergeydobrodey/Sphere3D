@@ -45,13 +45,24 @@ namespace Sphere3d
             return MultiplicateF(this, matrix);
         }
 
-        public Point3d Perspect(double d)
+        public Point3d Perspect(double d,double q,double fi,double psi)       
         {
+            fi = Convert.ToDouble(fi) * Math.PI / 180;
+            psi = Convert.ToDouble(psi) * Math.PI / 180;
+            double Sp = Math.Sin(psi);
+            double Cp = Math.Cos(psi);
+            double Sf = Math.Sin(fi);
+            double Cf = Math.Cos(fi);
             double[,] matrix = { { 1, 0, 0, 0 },
                                { 0, 1, 0, 0 },
                                { 0, 0, 1, 1 / d },
                                { 0, 0, 0, 0 } };
-            return MultiplicateF(this, matrix);
+            double[,] matrixView = { { -Sp, -Cf * Cp, -Sf * Cp, 0 },
+                                   { Cp, -Cf * Sp, -Sf * Sp, 0 },
+                                   { 0, Sf, -Cf, 0 },
+                                   { 0, 0, q, 1 } };
+
+            return MultiplicateF(MultiplicateF(this, matrix), matrixView);
         }
 
         public Point3d MultiplicateF(Point3d vertex, double[,] ar)

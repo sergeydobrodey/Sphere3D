@@ -100,6 +100,10 @@
             this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
+            this.lbviewparam3 = new System.Windows.Forms.Label();
+            this.lbviewparam4 = new System.Windows.Forms.Label();
+            this.tbviewparam3 = new System.Windows.Forms.TextBox();
+            this.tbviewparam4 = new System.Windows.Forms.TextBox();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -701,8 +705,12 @@
             // 
             this.pnlGlobalView.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlGlobalView.Controls.Add(this.btnView);
+            this.pnlGlobalView.Controls.Add(this.tbviewparam4);
             this.pnlGlobalView.Controls.Add(this.tbviewparam2);
+            this.pnlGlobalView.Controls.Add(this.tbviewparam3);
+            this.pnlGlobalView.Controls.Add(this.lbviewparam4);
             this.pnlGlobalView.Controls.Add(this.tbviewparam1);
+            this.pnlGlobalView.Controls.Add(this.lbviewparam3);
             this.pnlGlobalView.Controls.Add(this.lbviewparam2);
             this.pnlGlobalView.Controls.Add(this.lbviewparam1);
             this.pnlGlobalView.Controls.Add(this.rbtnGeometricView);
@@ -711,14 +719,14 @@
             this.pnlGlobalView.Controls.Add(this.btnPanelGlobalView);
             this.pnlGlobalView.Location = new System.Drawing.Point(3, 3);
             this.pnlGlobalView.Name = "pnlGlobalView";
-            this.pnlGlobalView.Size = new System.Drawing.Size(186, 220);
+            this.pnlGlobalView.Size = new System.Drawing.Size(186, 260);
             this.pnlGlobalView.TabIndex = 0;
             // 
             // btnView
             // 
             this.btnView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnView.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnView.Location = new System.Drawing.Point(31, 184);
+            this.btnView.Location = new System.Drawing.Point(31, 227);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(115, 25);
             this.btnView.TabIndex = 6;
@@ -747,22 +755,23 @@
             this.lbviewparam2.AutoSize = true;
             this.lbviewparam2.Location = new System.Drawing.Point(13, 156);
             this.lbviewparam2.Name = "lbviewparam2";
-            this.lbviewparam2.Size = new System.Drawing.Size(52, 13);
+            this.lbviewparam2.Size = new System.Drawing.Size(16, 13);
             this.lbviewparam2.TabIndex = 4;
-            this.lbviewparam2.Text = "psi angle:";
+            this.lbviewparam2.Text = "q:";
             // 
             // lbviewparam1
             // 
             this.lbviewparam1.AutoSize = true;
             this.lbviewparam1.Location = new System.Drawing.Point(13, 130);
             this.lbviewparam1.Name = "lbviewparam1";
-            this.lbviewparam1.Size = new System.Drawing.Size(44, 13);
+            this.lbviewparam1.Size = new System.Drawing.Size(50, 13);
             this.lbviewparam1.TabIndex = 4;
-            this.lbviewparam1.Text = "fi angle:";
+            this.lbviewparam1.Text = "distance:";
             // 
             // rbtnGeometricView
             // 
             this.rbtnGeometricView.AutoSize = true;
+            this.rbtnGeometricView.Checked = true;
             this.rbtnGeometricView.Location = new System.Drawing.Point(4, 91);
             this.rbtnGeometricView.Name = "rbtnGeometricView";
             this.rbtnGeometricView.Size = new System.Drawing.Size(145, 17);
@@ -786,12 +795,10 @@
             // rbtnViewRect
             // 
             this.rbtnViewRect.AutoSize = true;
-            this.rbtnViewRect.Checked = true;
             this.rbtnViewRect.Location = new System.Drawing.Point(4, 43);
             this.rbtnViewRect.Name = "rbtnViewRect";
             this.rbtnViewRect.Size = new System.Drawing.Size(107, 17);
             this.rbtnViewRect.TabIndex = 1;
-            this.rbtnViewRect.TabStop = true;
             this.rbtnViewRect.Text = "axonometric view";
             this.rbtnViewRect.UseVisualStyleBackColor = true;
             this.rbtnViewRect.CheckedChanged += new System.EventHandler(this.rbtnView_CheckedChanged);
@@ -812,7 +819,7 @@
             this.pnlColorPicker.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pnlColorPicker.Controls.Add(this.trackBarColorPicker);
             this.pnlColorPicker.Controls.Add(this.btnPanelColorPicker);
-            this.pnlColorPicker.Location = new System.Drawing.Point(3, 229);
+            this.pnlColorPicker.Location = new System.Drawing.Point(3, 269);
             this.pnlColorPicker.Name = "pnlColorPicker";
             this.pnlColorPicker.Size = new System.Drawing.Size(186, 136);
             this.pnlColorPicker.TabIndex = 1;
@@ -844,6 +851,40 @@
             this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
+            // 
+            // lbviewparam3
+            // 
+            this.lbviewparam3.AutoSize = true;
+            this.lbviewparam3.Location = new System.Drawing.Point(13, 182);
+            this.lbviewparam3.Name = "lbviewparam3";
+            this.lbviewparam3.Size = new System.Drawing.Size(44, 13);
+            this.lbviewparam3.TabIndex = 4;
+            this.lbviewparam3.Text = "fi angle:";
+            // 
+            // lbviewparam4
+            // 
+            this.lbviewparam4.AutoSize = true;
+            this.lbviewparam4.Location = new System.Drawing.Point(13, 208);
+            this.lbviewparam4.Name = "lbviewparam4";
+            this.lbviewparam4.Size = new System.Drawing.Size(52, 13);
+            this.lbviewparam4.TabIndex = 4;
+            this.lbviewparam4.Text = "psi angle:";
+            // 
+            // tbviewparam3
+            // 
+            this.tbviewparam3.Location = new System.Drawing.Point(77, 175);
+            this.tbviewparam3.Name = "tbviewparam3";
+            this.tbviewparam3.Size = new System.Drawing.Size(100, 20);
+            this.tbviewparam3.TabIndex = 5;
+            this.tbviewparam3.Text = "45";
+            // 
+            // tbviewparam4
+            // 
+            this.tbviewparam4.Location = new System.Drawing.Point(77, 201);
+            this.tbviewparam4.Name = "tbviewparam4";
+            this.tbviewparam4.Size = new System.Drawing.Size(100, 20);
+            this.tbviewparam4.TabIndex = 5;
+            this.tbviewparam4.Text = "45";
             // 
             // mainForm
             // 
@@ -963,6 +1004,10 @@
         private System.Windows.Forms.TextBox tbviewparam1;
         private System.Windows.Forms.Label lbviewparam2;
         private System.Windows.Forms.Label lbviewparam1;
+        private System.Windows.Forms.TextBox tbviewparam4;
+        private System.Windows.Forms.TextBox tbviewparam3;
+        private System.Windows.Forms.Label lbviewparam4;
+        private System.Windows.Forms.Label lbviewparam3;
     }
 }
 

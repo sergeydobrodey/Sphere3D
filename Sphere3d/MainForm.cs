@@ -17,7 +17,7 @@ namespace Sphere3d
         PointF delta = new PointF(0, 0);
         int VIEWPORT = 200;   // size of image
         Color ModelColor = Color.Red;
-        byte MainViewType = 0;
+        byte MainViewType = 2;
         #endregion
        
      
@@ -46,14 +46,16 @@ namespace Sphere3d
             Graphics gM = pbMain.CreateGraphics();
             double viewparam1 = Convert.ToDouble(tbviewparam1.Text);
             double viewparam2 = Convert.ToDouble(tbviewparam2.Text);
+            double viewparam3 = Convert.ToDouble(tbviewparam3.Text);
+            double viewparam4 = Convert.ToDouble(tbviewparam4.Text);
             if (update)
             {
                 Initialize();
                 foreach (GraphicModel temp in ModelsTree)
-                    temp.DrawModel(gF, gL, gT, gM, VIEWPORT, MainViewType, viewparam1, viewparam2);
+                    temp.DrawModel(gF, gL, gT, gM, VIEWPORT, MainViewType, viewparam1, viewparam2,viewparam3,viewparam4);
              
             }
-            else ModelsTree[ModelsTree.Count - 1].DrawModel(gF, gL, gT, gM, VIEWPORT, MainViewType, viewparam1, viewparam2); 
+            else ModelsTree[ModelsTree.Count - 1].DrawModel(gF, gL, gT, gM, VIEWPORT, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4); 
         }
        
         private void UpdateSphere(GraphicModel model)
@@ -165,8 +167,10 @@ namespace Sphere3d
         {           
                 if (rbtnViewRect.Checked)
                 {
-                    lbviewparam2.Visible = true;
-                    tbviewparam2.Visible = true;
+                    lbviewparam3.Visible = false;
+                    tbviewparam3.Visible = false;
+                    lbviewparam4.Visible = false;
+                    tbviewparam4.Visible = false;
                     lbviewparam1.Text = "fi angle:";
                     lbviewparam2.Text = "psi angle:";
                     MainViewType = 0;
@@ -175,8 +179,10 @@ namespace Sphere3d
 
                 if (rbtnViewOblique.Checked)
                 {
-                    lbviewparam2.Visible = true;
-                    tbviewparam2.Visible = true;
+                    lbviewparam3.Visible = false;
+                    tbviewparam3.Visible = false;
+                    lbviewparam4.Visible = false;
+                    tbviewparam4.Visible = false;
                     lbviewparam1.Text = "L:";
                     lbviewparam2.Text = "alpha angle:";
                     MainViewType = 1;                    
@@ -185,8 +191,13 @@ namespace Sphere3d
                 if (rbtnGeometricView.Checked)
                 {
                     lbviewparam1.Text = "Distanse:";
-                    lbviewparam2.Visible = false;
-                    tbviewparam2.Visible = false;
+                    lbviewparam2.Text = "q:";
+                    lbviewparam3.Text = "fi anlge:";
+                    lbviewparam4.Text = "psi angle:";
+                    lbviewparam3.Visible = true;
+                    tbviewparam3.Visible = true;
+                    lbviewparam4.Visible = true;
+                    tbviewparam4.Visible = true;
                     MainViewType = 2;
                 }
 
@@ -313,7 +324,7 @@ namespace Sphere3d
             }
             else
             {
-                pnlGlobalView.Height = 220;
+                pnlGlobalView.Height = 260;
                 btnPanelGlobalView.Text = "-                  GlobalView";
             }
 

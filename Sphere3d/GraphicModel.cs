@@ -41,23 +41,25 @@ namespace Sphere3d
 
 
 
-        public void DrawModel(Graphics FrontView, 
+        public void DrawModel(Graphics FrontView,
             Graphics LeftView,
-            Graphics TopView, 
-            Graphics MainView, 
-            float size, 
-            byte MainViewType, 
+            Graphics TopView,
+            Graphics MainView,
+            float size,
+            byte MainViewType,
             double viewparam1,
-            double viewparam2) // Draws model
-         {         
+            double viewparam2,
+            double viewparam3,
+            double viewparam4) // Draws model
+        {
             Pen pen = new Pen(ModelColor, 1);
             List<PointF> mxy = new List<PointF>();
             List<PointF> mxz = new List<PointF>();
             List<PointF> myz = new List<PointF>();
-          
+
             foreach (Edge edge in edgelist)
             {
-                
+
                 mxy.Clear();
                 mxz.Clear();
                 myz.Clear();
@@ -72,10 +74,11 @@ namespace Sphere3d
                 TopView.DrawLines(pen, myz.ToArray());
             }
             for (int i = 0; i < edgelist.Count; i++)
-                for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)                         
-                    Draw2D(MainView, edgelist[i].vertex[j], edgelist[i].vertex[j+1],size,MainViewType,viewparam1,viewparam2);          
-            
-         }
+                for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)
+                    Draw2D(MainView, edgelist[i].vertex[j], edgelist[i].vertex[j + 1], size, MainViewType, viewparam1, viewparam2,viewparam3,viewparam4);
+        }
+
+
 
 
 
@@ -85,7 +88,9 @@ namespace Sphere3d
             float size,
             byte MainViewType,
             double viewparam1,
-            double viewparam2)  // Draws   main view
+            double viewparam2,
+            double viewparam3,
+            double viewparam4)  // Draws   main view
         {
             Pen pen = new Pen(ModelColor, 1);
             Point3d point1=null;
@@ -94,7 +99,8 @@ namespace Sphere3d
             {
                 case 0: point1 = pt1.Aksonometrik(viewparam1, viewparam2); point2 = pt2.Aksonometrik(viewparam1, viewparam2); break;
                 case 1: point1 = pt1.Kosougol(viewparam1, viewparam2); point2 = pt2.Kosougol(viewparam1, viewparam2); break;
-                case 2: point1 = pt1.Perspect(viewparam1); point2 = pt2.Perspect(viewparam1); break;
+                case 2: point1 = pt1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4); point2 = pt2.Perspect(viewparam1, viewparam2, viewparam3, viewparam4); break;
+                //case 2: point1 = new Point3d(pt1.x * viewparam1 / pt1.z, pt1.y * viewparam1 / pt1.z, viewparam1); point2 = new Point3d(pt2.x * viewparam1 / pt2.z, pt2.y * viewparam1 / pt2.z, viewparam1); break;
             }
             g.DrawLine(pen, new PointF(point1.x + size, -point1.y + size), new PointF(point2.x + size, -point2.y + size));
           
