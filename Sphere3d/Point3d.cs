@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -61,8 +62,8 @@ namespace Sphere3d
                                    { Cp, -Cf * Sp, -Sf * Sp, 0 },
                                    { 0, Sf, -Cf, 0 },
                                    { 0, 0, q, 1 } };
-
-            return MultiplicateF(MultiplicateF(this, matrix), matrixView);
+            Point3d correctPoint = MultiplicateF(this, matrix);
+            return MultiplicateF(new Point3d(correctPoint.x*d/correctPoint.z,correctPoint.y*d/correctPoint.z,d), matrixView);
         }
 
         public Point3d MultiplicateF(Point3d vertex, double[,] ar)
@@ -85,5 +86,19 @@ namespace Sphere3d
             return (new Point3d((float)(result[0, 0]),(float)(result[1, 0]),(float)(result[2, 0])));
 
         }
+
+        public PointF ToPoitntFxy()
+        {
+            return new PointF(this.x + 200, this.y + 200);
+        }
+        public PointF ToPoitntFxz()
+        {
+            return new PointF(this.x + 200, this.z + 200);
+        }
+        public PointF ToPoitntFyz()
+        {
+            return new PointF(this.y + 200, this.z + 200);
+        }
+
     }
 }

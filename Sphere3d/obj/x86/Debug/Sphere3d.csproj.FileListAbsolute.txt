@@ -1,0 +1,8 @@
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\bin\Debug\Sphere3d.exe
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\bin\Debug\Sphere3d.pdb
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\obj\x86\Debug\Sphere3d.mainForm.resources
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\obj\x86\Debug\Sphere3d.Properties.Resources.resources
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\obj\x86\Debug\Sphere3d.csproj.GenerateResource.Cache
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\obj\x86\Debug\Sphere3d.exe
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\obj\x86\Debug\Sphere3d.pdb
+C:\Users\serge_000\Documents\GitHub\Sphere3D\Sphere3d\obj\x86\Debug\Sphere3d.csprojResolveAssemblyReference.cache

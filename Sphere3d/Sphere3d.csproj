@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Edge.cs" />
+    <Compile Include="Faces.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
  
 namespace Sphere3d
@@ -9,6 +10,7 @@ namespace Sphere3d
     {
         List<double[,]> matrix = new List<double[,]>();        
         List<Edge> edgelist = new List<Edge>();
+        List<Faces> faceslist = new List<Faces>();
         Color ModelColor;
 
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
@@ -25,17 +27,34 @@ namespace Sphere3d
                     edgelist[edgelist.Count - 1].vertex.Add(new Point3d((float)x, (float)y, (float)z));
                 }
             }
+          
             for (psi = 0; psi < Math.PI; psi += LOD)
             {
                 edgelist.Add(new Edge(edgelist.Count+1));
-                for (fi = 0; fi < 2 * Math.PI+LOD; fi += LOD)
+                for (fi = 0; fi <2 * Math.PI+LOD; fi += LOD)
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
                     y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
                     z = basepoint.z + R * Math.Cos(psi);                   
                     edgelist[edgelist.Count - 1].vertex.Add(new Point3d((float)x, (float)y, (float)z));
+                    
                 }
             }
+
+
+            for (int i = 15; i < 32; i++)
+            {
+                for (int j = 0; j < 33; j++)
+                {
+                    int iNext = (i!=31) ?i + 1:i ;
+                    int jNext = (j != 32) ? j + 1 : 0;
+                    faceslist.Add(new Faces(edgelist[i].vertex[j], edgelist[i].vertex[jNext], edgelist[iNext].vertex[jNext], edgelist[iNext].vertex[j]));                   
+                }
+            }
+            //for (int j = 0; j < 32; j++)
+            //{
+            //    faceslist.Add(new Faces(edgelist[15].vertex[j],edgelist[15].vertex[j+1],edgelist[0].vertex[32-j],edgelist[0].vertex[31-j]));
+            //}
             this.ModelColor = color;
         }
 
@@ -69,9 +88,14 @@ namespace Sphere3d
                     mxz.Add(new PointF(vertex.x + size, vertex.z + size));
                     myz.Add(new PointF(vertex.y + size, vertex.z + size));
                 }
-                FrontView.DrawLines(pen, mxy.ToArray());
-                LeftView.DrawLines(pen, mxz.ToArray());
-                TopView.DrawLines(pen, myz.ToArray());
+                foreach (Faces face in faceslist)
+                {
+                    face.DrawIt(FrontView,LeftView,TopView, ModelColor);
+                  //  Thread.Sleep(10);
+                }
+                //FrontView.DrawLines(pen, mxy.ToArray());
+                //LeftView.DrawLines(pen, mxz.ToArray());
+                //TopView.DrawLines(pen, myz.ToArray());
             }
             for (int i = 0; i < edgelist.Count; i++)
                 for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)
