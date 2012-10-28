@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
- 
+
 namespace Sphere3d
 {
     class GraphicModel
     {
+        
         List<double[,]> matrix = new List<double[,]>();        
         List<Edge> edgelist = new List<Edge>();
         List<Faces> faceslist = new List<Faces>();
         Color ModelColor;
-
-        public GraphicModel(Point3d basepoint,float R,float LOD,Color color) /// Input parametrs are basepoint of Sphere, Radius and Level of detalization
-         {          
+       
+        public GraphicModel(Point3d basepoint,float R,float LOD,Color color)
+        {          
             double x, y, z, fi, psi;
             for (fi = 0; fi < Math.PI; fi += LOD)
             {
-                edgelist.Add(new Edge(edgelist.Count + 1));
+                edgelist.Add(new Edge());
                 for (psi = 0; psi < 2 * Math.PI + LOD; psi += LOD)
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
@@ -30,7 +32,7 @@ namespace Sphere3d
           
             for (psi = 0; psi < Math.PI; psi += LOD)
             {
-                edgelist.Add(new Edge(edgelist.Count+1));
+                edgelist.Add(new Edge());
                 for (fi = 0; fi <2 * Math.PI+LOD; fi += LOD)
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
@@ -40,22 +42,9 @@ namespace Sphere3d
                     
                 }
             }
-
-
-            for (int i = 15; i < 32; i++)
-            {
-                for (int j = 0; j < 33; j++)
-                {
-                    int iNext = (i!=31) ?i + 1:i ;
-                    int jNext = (j != 32) ? j + 1 : 0;
-                    faceslist.Add(new Faces(edgelist[i].vertex[j], edgelist[i].vertex[jNext], edgelist[iNext].vertex[jNext], edgelist[iNext].vertex[j]));                   
-                }
-            }
-            //for (int j = 0; j < 32; j++)
-            //{
-            //    faceslist.Add(new Faces(edgelist[15].vertex[j],edgelist[15].vertex[j+1],edgelist[0].vertex[32-j],edgelist[0].vertex[31-j]));
-            //}
-            this.ModelColor = color;
+            
+            
+            ModelColor = color;
         }
 
 
@@ -71,10 +60,10 @@ namespace Sphere3d
             double viewparam3,
             double viewparam4) // Draws model
         {
-            Pen pen = new Pen(ModelColor, 1);
-            List<PointF> mxy = new List<PointF>();
-            List<PointF> mxz = new List<PointF>();
-            List<PointF> myz = new List<PointF>();
+            var pen = new Pen(ModelColor, 1);
+            var mxy = new List<PointF>();
+            var mxz = new List<PointF>();
+            var myz = new List<PointF>();
 
             foreach (Edge edge in edgelist)
             {
@@ -88,18 +77,14 @@ namespace Sphere3d
                     mxz.Add(new PointF(vertex.x + size, vertex.z + size));
                     myz.Add(new PointF(vertex.y + size, vertex.z + size));
                 }
-                foreach (Faces face in faceslist)
-                {
-                    face.DrawIt(FrontView,LeftView,TopView, ModelColor);
-                  //  Thread.Sleep(10);
-                }
-                //FrontView.DrawLines(pen, mxy.ToArray());
-                //LeftView.DrawLines(pen, mxz.ToArray());
-                //TopView.DrawLines(pen, myz.ToArray());
+                
+                FrontView.DrawLines(pen, mxy.ToArray());
+                LeftView.DrawLines(pen, mxz.ToArray());
+                TopView.DrawLines(pen, myz.ToArray());
             }
-            for (int i = 0; i < edgelist.Count; i++)
-                for (int j = 0; j < edgelist[i].vertex.Count - 1; j++)
-                    Draw2D(MainView, edgelist[i].vertex[j], edgelist[i].vertex[j + 1], size, MainViewType, viewparam1, viewparam2,viewparam3,viewparam4);
+            foreach (Edge t in edgelist)
+                for (int j = 0; j < t.vertex.Count - 1; j++)
+                    Draw2D(MainView, t.vertex[j], t.vertex[j + 1], MainViewType, viewparam1, viewparam2, viewparam3, viewparam4);
         }
 
 
@@ -109,14 +94,13 @@ namespace Sphere3d
         private void Draw2D(Graphics g,
             Point3d pt1,
             Point3d pt2,
-            float size,
             byte MainViewType,
             double viewparam1,
             double viewparam2,
             double viewparam3,
             double viewparam4)  // Draws   main view
         {
-            Pen pen = new Pen(ModelColor, 1);
+            var pen = new Pen(ModelColor, 1);
             Point3d point1=null;
             Point3d point2=null;
             switch (MainViewType)
@@ -124,13 +108,64 @@ namespace Sphere3d
                 case 0: point1 = pt1.Aksonometrik(viewparam1, viewparam2); point2 = pt2.Aksonometrik(viewparam1, viewparam2); break;
                 case 1: point1 = pt1.Kosougol(viewparam1, viewparam2); point2 = pt2.Kosougol(viewparam1, viewparam2); break;
                 case 2: point1 = pt1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4); point2 = pt2.Perspect(viewparam1, viewparam2, viewparam3, viewparam4); break;
-                //case 2: point1 = new Point3d(pt1.x * viewparam1 / pt1.z, pt1.y * viewparam1 / pt1.z, viewparam1); point2 = new Point3d(pt2.x * viewparam1 / pt2.z, pt2.y * viewparam1 / pt2.z, viewparam1); break;
             }
-            g.DrawLine(pen, new PointF(point1.x + size, -point1.y + size), new PointF(point2.x + size, -point2.y + size));
+            g.DrawLine(pen, point1.ToPoitntFxy(), point2.ToPoitntFxy());
           
         }
 
-        
+        public void Fill(Graphics eGraphics,
+            byte MainViewType,
+            double viewparam1,
+            double viewparam2,
+            double viewparam3,
+            double viewparam4,
+            bool light)
+        {
+            
+            faceslist.Clear();
+            for (var i = edgelist.Count/2; i < edgelist.Count; i++)
+            {
+                for (var j = 0; j < edgelist[0].vertex.Count; j++)
+                {
+                    var iNext = (i != edgelist.Count-1) ? i + 1 : i;
+                    var jNext = (j != edgelist[0].vertex.Count-1) ? j + 1 : 0;
+                    Point3d point1 = edgelist[i].vertex[j];
+                    Point3d point2 = edgelist[i].vertex[jNext];
+                    Point3d point3 = edgelist[iNext].vertex[jNext];
+                    Point3d point4 = edgelist[iNext].vertex[j];
+                    faceslist.Add(new Faces(point1,point2,point3, point4,ModelColor));
+                }
+            }
+            var depth = (faceslist.Select(f => f.GetDepth()).ToList().Max() +
+                       faceslist.Select(f => f.GetDepth()).ToList().Min())/2;
+
+            foreach (var f in faceslist.Where(f => f.GetDepth() >= depth))
+            {
+                if (light) f.LightDiffuse();
+                switch (MainViewType)
+                {
+                    case 0:
+                        f.pt1 = f.pt1.Aksonometrik(viewparam1, viewparam2);
+                        f.pt2 = f.pt2.Aksonometrik(viewparam1, viewparam2);
+                        f.pt3 = f.pt3.Aksonometrik(viewparam1, viewparam2);
+                        f.pt4 = f.pt4.Aksonometrik(viewparam1, viewparam2);
+                        break;
+                    case 1:
+                        f.pt1 = f.pt1.Kosougol(viewparam1, viewparam2);
+                        f.pt2 = f.pt2.Kosougol(viewparam1, viewparam2);
+                        f.pt3 = f.pt3.Kosougol(viewparam1, viewparam2);
+                        f.pt4 = f.pt4.Kosougol(viewparam1, viewparam2);
+                        break;
+                    case 2:
+                        f.pt1 = f.pt1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                        f.pt2 = f.pt2.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                        f.pt3 = f.pt3.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                        f.pt4 = f.pt4.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                        break;
+                }
+                f.DrawIt(eGraphics,light);
+            }
+        }
 
         public void UpdateModel(double movex,
             double movey,
@@ -145,9 +180,9 @@ namespace Sphere3d
 
             double[,] matrixACT = MatrixReady(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
             matrix.Clear();
-            for (int i = 0; i < edgelist.Count; i++)
-                for (int j = 0; j < edgelist[i].vertex.Count; j++)
-                    edgelist[i].vertex[j] = edgelist[i].vertex[j].MultiplicateF(edgelist[i].vertex[j], matrixACT);            
+            foreach (Edge t in edgelist)
+                for (int j = 0; j < t.vertex.Count; j++)
+                    t.vertex[j] = t.vertex[j].MultiplicateF(t.vertex[j], matrixACT);
         }  // Update model with new parametrs
 
         private double[,] MatrixReady(double movex,
@@ -173,15 +208,13 @@ namespace Sphere3d
             angley = Convert.ToDouble(angley) * Math.PI / 180; 
             anglez = Convert.ToDouble(anglez) * Math.PI / 180; 
             Rotate(anglex, angley, anglez);
-            double[,] result = new double[4, 4] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
-            for (int i = 0; i < matrix.Count; i++)
-                result = MultiplicateM(result, matrix[i]);
-            return result;
+            var result = new double[4, 4] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+            return matrix.Aggregate(result, MultiplicateM);
         }   
          
         private double[,] MultiplicateM(double[,] a, double[,] b)
         {
-            double[,] result = new double[4, 4];
+            var result = new double[4, 4];
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                 {
@@ -191,8 +224,7 @@ namespace Sphere3d
                 }
             return result;
         }
-
-      
+        
 
         #region Matrix
         private void Rotate(double anglex, double angley, double anglez)

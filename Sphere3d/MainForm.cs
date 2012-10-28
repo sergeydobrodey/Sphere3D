@@ -126,6 +126,17 @@ namespace Sphere3d
             DrawSphere(true);
         }
 
+        private void btnFill_Click(object sender, EventArgs e)
+        {
+            pbMain.Refresh();
+            var gM = pbMain.CreateGraphics();
+            double viewparam1 = Convert.ToDouble(tbviewparam1.Text);
+            double viewparam2 = Convert.ToDouble(tbviewparam2.Text);
+            double viewparam3 = Convert.ToDouble(tbviewparam3.Text);
+            double viewparam4 = Convert.ToDouble(tbviewparam4.Text);
+            ModelsTree[ModelsTree.Count - 1].Fill(gM, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4,chkLight.Checked);
+        }
+
         private void btnrotate_Click(object sender, EventArgs e)
         {
             if (ModelsTree.Count!=0)
@@ -346,6 +357,12 @@ namespace Sphere3d
             }
         }
         #endregion
+
+        
+
+        
+
+       
        
     }
 }

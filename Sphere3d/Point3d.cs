@@ -41,7 +41,7 @@ namespace Sphere3d
             double S = Math.Sin(alpha);
             double[,] matrix = { { 1, 0, 0, 0 },
                                { 0, 1, 0, 0 }, 
-                               { l * C, l * S, 0, 0 }, 
+                               { -l * C, -l * S, 0, 0 }, 
                                { 0, 0, 0, 1 } };
             return MultiplicateF(this, matrix);
         }

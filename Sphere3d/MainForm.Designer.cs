@@ -66,9 +66,11 @@
             this.pnlLOD = new System.Windows.Forms.Panel();
             this.lbLod = new System.Windows.Forms.Label();
             this.trackBarLOD = new System.Windows.Forms.TrackBar();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlHistory = new System.Windows.Forms.Panel();
             this.btnHistory = new System.Windows.Forms.Button();
             this.HistoryBox = new System.Windows.Forms.ListBox();
+            this.pnlFill = new System.Windows.Forms.Panel();
+            this.btnFill = new System.Windows.Forms.Button();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.flowEdit = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlRotate = new System.Windows.Forms.Panel();
@@ -88,8 +90,12 @@
             this.flowView = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlGlobalView = new System.Windows.Forms.Panel();
             this.btnView = new System.Windows.Forms.Button();
+            this.tbviewparam4 = new System.Windows.Forms.TextBox();
             this.tbviewparam2 = new System.Windows.Forms.TextBox();
+            this.tbviewparam3 = new System.Windows.Forms.TextBox();
+            this.lbviewparam4 = new System.Windows.Forms.Label();
             this.tbviewparam1 = new System.Windows.Forms.TextBox();
+            this.lbviewparam3 = new System.Windows.Forms.Label();
             this.lbviewparam2 = new System.Windows.Forms.Label();
             this.lbviewparam1 = new System.Windows.Forms.Label();
             this.rbtnGeometricView = new System.Windows.Forms.RadioButton();
@@ -100,10 +106,7 @@
             this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
-            this.lbviewparam3 = new System.Windows.Forms.Label();
-            this.lbviewparam4 = new System.Windows.Forms.Label();
-            this.tbviewparam3 = new System.Windows.Forms.TextBox();
-            this.tbviewparam4 = new System.Windows.Forms.TextBox();
+            this.chkLight = new System.Windows.Forms.CheckBox();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -115,7 +118,8 @@
             this.pnlCreate.SuspendLayout();
             this.pnlLOD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLOD)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnlHistory.SuspendLayout();
+            this.pnlFill.SuspendLayout();
             this.tabEdit.SuspendLayout();
             this.flowEdit.SuspendLayout();
             this.pnlRotate.SuspendLayout();
@@ -401,7 +405,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(841, 13);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(200, 500);
+            this.tabControlMain.Size = new System.Drawing.Size(200, 512);
             this.tabControlMain.TabIndex = 16;
             // 
             // tabPrimitives
@@ -412,18 +416,19 @@
             this.tabPrimitives.Location = new System.Drawing.Point(4, 20);
             this.tabPrimitives.Name = "tabPrimitives";
             this.tabPrimitives.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPrimitives.Size = new System.Drawing.Size(192, 476);
+            this.tabPrimitives.Size = new System.Drawing.Size(192, 488);
             this.tabPrimitives.TabIndex = 0;
             // 
             // flowPrimitiv
             // 
             this.flowPrimitiv.Controls.Add(this.pnlCreate);
             this.flowPrimitiv.Controls.Add(this.pnlLOD);
-            this.flowPrimitiv.Controls.Add(this.panel1);
+            this.flowPrimitiv.Controls.Add(this.pnlHistory);
+            this.flowPrimitiv.Controls.Add(this.pnlFill);
             this.flowPrimitiv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowPrimitiv.Location = new System.Drawing.Point(3, 3);
             this.flowPrimitiv.Name = "flowPrimitiv";
-            this.flowPrimitiv.Size = new System.Drawing.Size(186, 470);
+            this.flowPrimitiv.Size = new System.Drawing.Size(186, 482);
             this.flowPrimitiv.TabIndex = 0;
             // 
             // pnlCreate
@@ -481,29 +486,31 @@
             this.trackBarLOD.Location = new System.Drawing.Point(71, 3);
             this.trackBarLOD.Minimum = 1;
             this.trackBarLOD.Name = "trackBarLOD";
-            this.trackBarLOD.Size = new System.Drawing.Size(104, 42);
+            this.trackBarLOD.Size = new System.Drawing.Size(104, 45);
             this.trackBarLOD.TabIndex = 17;
             this.trackBarLOD.Value = 2;
             this.trackBarLOD.ValueChanged += new System.EventHandler(this.trackBarLOD_ValueChanged);
             // 
-            // panel1
+            // pnlHistory
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.btnHistory);
-            this.panel1.Controls.Add(this.HistoryBox);
-            this.panel1.Location = new System.Drawing.Point(3, 222);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 167);
-            this.panel1.TabIndex = 19;
+            this.pnlHistory.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlHistory.Controls.Add(this.btnHistory);
+            this.pnlHistory.Controls.Add(this.HistoryBox);
+            this.pnlHistory.Location = new System.Drawing.Point(3, 222);
+            this.pnlHistory.Name = "pnlHistory";
+            this.pnlHistory.Size = new System.Drawing.Size(180, 133);
+            this.pnlHistory.TabIndex = 19;
             // 
             // btnHistory
             // 
-            this.btnHistory.Location = new System.Drawing.Point(31, 130);
+            this.btnHistory.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnHistory.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnHistory.Location = new System.Drawing.Point(26, 104);
             this.btnHistory.Name = "btnHistory";
             this.btnHistory.Size = new System.Drawing.Size(115, 25);
             this.btnHistory.TabIndex = 1;
             this.btnHistory.Text = "Remove Selected";
-            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.UseVisualStyleBackColor = false;
             this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // HistoryBox
@@ -512,8 +519,30 @@
             this.HistoryBox.FormattingEnabled = true;
             this.HistoryBox.Location = new System.Drawing.Point(4, 3);
             this.HistoryBox.Name = "HistoryBox";
-            this.HistoryBox.Size = new System.Drawing.Size(168, 121);
+            this.HistoryBox.Size = new System.Drawing.Size(168, 95);
             this.HistoryBox.TabIndex = 0;
+            // 
+            // pnlFill
+            // 
+            this.pnlFill.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFill.Controls.Add(this.chkLight);
+            this.pnlFill.Controls.Add(this.btnFill);
+            this.pnlFill.Location = new System.Drawing.Point(3, 361);
+            this.pnlFill.Name = "pnlFill";
+            this.pnlFill.Size = new System.Drawing.Size(180, 87);
+            this.pnlFill.TabIndex = 20;
+            // 
+            // btnFill
+            // 
+            this.btnFill.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnFill.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnFill.Location = new System.Drawing.Point(26, 3);
+            this.btnFill.Name = "btnFill";
+            this.btnFill.Size = new System.Drawing.Size(115, 25);
+            this.btnFill.TabIndex = 0;
+            this.btnFill.Text = "Fill";
+            this.btnFill.UseVisualStyleBackColor = false;
+            this.btnFill.Click += new System.EventHandler(this.btnFill_Click);
             // 
             // tabEdit
             // 
@@ -523,7 +552,7 @@
             this.tabEdit.Location = new System.Drawing.Point(4, 20);
             this.tabEdit.Name = "tabEdit";
             this.tabEdit.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEdit.Size = new System.Drawing.Size(192, 476);
+            this.tabEdit.Size = new System.Drawing.Size(192, 488);
             this.tabEdit.TabIndex = 1;
             // 
             // flowEdit
@@ -534,7 +563,7 @@
             this.flowEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowEdit.Location = new System.Drawing.Point(3, 3);
             this.flowEdit.Name = "flowEdit";
-            this.flowEdit.Size = new System.Drawing.Size(186, 470);
+            this.flowEdit.Size = new System.Drawing.Size(186, 482);
             this.flowEdit.TabIndex = 0;
             // 
             // pnlRotate
@@ -688,7 +717,7 @@
             this.tabView.ImageIndex = 2;
             this.tabView.Location = new System.Drawing.Point(4, 20);
             this.tabView.Name = "tabView";
-            this.tabView.Size = new System.Drawing.Size(192, 476);
+            this.tabView.Size = new System.Drawing.Size(192, 488);
             this.tabView.TabIndex = 2;
             // 
             // flowView
@@ -698,7 +727,7 @@
             this.flowView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowView.Location = new System.Drawing.Point(0, 0);
             this.flowView.Name = "flowView";
-            this.flowView.Size = new System.Drawing.Size(192, 476);
+            this.flowView.Size = new System.Drawing.Size(192, 488);
             this.flowView.TabIndex = 0;
             // 
             // pnlGlobalView
@@ -734,6 +763,14 @@
             this.btnView.UseVisualStyleBackColor = false;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
+            // tbviewparam4
+            // 
+            this.tbviewparam4.Location = new System.Drawing.Point(77, 201);
+            this.tbviewparam4.Name = "tbviewparam4";
+            this.tbviewparam4.Size = new System.Drawing.Size(100, 20);
+            this.tbviewparam4.TabIndex = 5;
+            this.tbviewparam4.Text = "45";
+            // 
             // tbviewparam2
             // 
             this.tbviewparam2.Location = new System.Drawing.Point(77, 149);
@@ -742,6 +779,23 @@
             this.tbviewparam2.TabIndex = 5;
             this.tbviewparam2.Text = "45";
             // 
+            // tbviewparam3
+            // 
+            this.tbviewparam3.Location = new System.Drawing.Point(77, 175);
+            this.tbviewparam3.Name = "tbviewparam3";
+            this.tbviewparam3.Size = new System.Drawing.Size(100, 20);
+            this.tbviewparam3.TabIndex = 5;
+            this.tbviewparam3.Text = "45";
+            // 
+            // lbviewparam4
+            // 
+            this.lbviewparam4.AutoSize = true;
+            this.lbviewparam4.Location = new System.Drawing.Point(13, 208);
+            this.lbviewparam4.Name = "lbviewparam4";
+            this.lbviewparam4.Size = new System.Drawing.Size(52, 13);
+            this.lbviewparam4.TabIndex = 4;
+            this.lbviewparam4.Text = "psi angle:";
+            // 
             // tbviewparam1
             // 
             this.tbviewparam1.Location = new System.Drawing.Point(77, 123);
@@ -749,6 +803,15 @@
             this.tbviewparam1.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam1.TabIndex = 5;
             this.tbviewparam1.Text = "45";
+            // 
+            // lbviewparam3
+            // 
+            this.lbviewparam3.AutoSize = true;
+            this.lbviewparam3.Location = new System.Drawing.Point(13, 182);
+            this.lbviewparam3.Name = "lbviewparam3";
+            this.lbviewparam3.Size = new System.Drawing.Size(44, 13);
+            this.lbviewparam3.TabIndex = 4;
+            this.lbviewparam3.Text = "fi angle:";
             // 
             // lbviewparam2
             // 
@@ -829,7 +892,7 @@
             this.trackBarColorPicker.Location = new System.Drawing.Point(31, 41);
             this.trackBarColorPicker.Maximum = 5;
             this.trackBarColorPicker.Name = "trackBarColorPicker";
-            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 42);
+            this.trackBarColorPicker.Size = new System.Drawing.Size(104, 45);
             this.trackBarColorPicker.TabIndex = 2;
             this.trackBarColorPicker.ValueChanged += new System.EventHandler(this.trackBarColorPicker_ValueChanged);
             // 
@@ -852,46 +915,22 @@
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
             // 
-            // lbviewparam3
+            // chkLight
             // 
-            this.lbviewparam3.AutoSize = true;
-            this.lbviewparam3.Location = new System.Drawing.Point(13, 182);
-            this.lbviewparam3.Name = "lbviewparam3";
-            this.lbviewparam3.Size = new System.Drawing.Size(44, 13);
-            this.lbviewparam3.TabIndex = 4;
-            this.lbviewparam3.Text = "fi angle:";
-            // 
-            // lbviewparam4
-            // 
-            this.lbviewparam4.AutoSize = true;
-            this.lbviewparam4.Location = new System.Drawing.Point(13, 208);
-            this.lbviewparam4.Name = "lbviewparam4";
-            this.lbviewparam4.Size = new System.Drawing.Size(52, 13);
-            this.lbviewparam4.TabIndex = 4;
-            this.lbviewparam4.Text = "psi angle:";
-            // 
-            // tbviewparam3
-            // 
-            this.tbviewparam3.Location = new System.Drawing.Point(77, 175);
-            this.tbviewparam3.Name = "tbviewparam3";
-            this.tbviewparam3.Size = new System.Drawing.Size(100, 20);
-            this.tbviewparam3.TabIndex = 5;
-            this.tbviewparam3.Text = "45";
-            // 
-            // tbviewparam4
-            // 
-            this.tbviewparam4.Location = new System.Drawing.Point(77, 201);
-            this.tbviewparam4.Name = "tbviewparam4";
-            this.tbviewparam4.Size = new System.Drawing.Size(100, 20);
-            this.tbviewparam4.TabIndex = 5;
-            this.tbviewparam4.Text = "45";
+            this.chkLight.AutoSize = true;
+            this.chkLight.Location = new System.Drawing.Point(26, 35);
+            this.chkLight.Name = "chkLight";
+            this.chkLight.Size = new System.Drawing.Size(49, 17);
+            this.chkLight.TabIndex = 1;
+            this.chkLight.Text = "Light";
+            this.chkLight.UseVisualStyleBackColor = true;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1062, 843);
+            this.ClientSize = new System.Drawing.Size(1054, 831);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
@@ -912,7 +951,9 @@
             this.pnlLOD.ResumeLayout(false);
             this.pnlLOD.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLOD)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.pnlHistory.ResumeLayout(false);
+            this.pnlFill.ResumeLayout(false);
+            this.pnlFill.PerformLayout();
             this.tabEdit.ResumeLayout(false);
             this.flowEdit.ResumeLayout(false);
             this.pnlRotate.ResumeLayout(false);
@@ -995,7 +1036,7 @@
         private System.Windows.Forms.Panel pnlColorPicker;
         private System.Windows.Forms.Button btnPanelColorPicker;
         private System.Windows.Forms.TrackBar trackBarColorPicker;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlHistory;
         private System.Windows.Forms.ListBox HistoryBox;
         private System.Windows.Forms.Button btnHistory;
         private System.Windows.Forms.RadioButton rbtnGeometricView;
@@ -1008,6 +1049,9 @@
         private System.Windows.Forms.TextBox tbviewparam3;
         private System.Windows.Forms.Label lbviewparam4;
         private System.Windows.Forms.Label lbviewparam3;
+        private System.Windows.Forms.Panel pnlFill;
+        private System.Windows.Forms.Button btnFill;
+        private System.Windows.Forms.CheckBox chkLight;
     }
 }
 
