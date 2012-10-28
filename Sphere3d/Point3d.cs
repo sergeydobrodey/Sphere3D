@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Sphere3d
 {
@@ -33,15 +29,18 @@ namespace Sphere3d
                                { 0, 0, 0, 1 } };
             return MultiplicateF(this, matrix);
         }
-
+       
+        /// TODO: 
+        
+       
         public Point3d Kosougol(double l, double alpha)
         {
             alpha = Convert.ToDouble(alpha) * Math.PI / 180; 
             double C = Math.Cos(alpha);
             double S = Math.Sin(alpha);
             double[,] matrix = { { 1, 0, 0, 0 },
-                               { 0, 1, 0, 0 }, 
-                               { -l * C, -l * S, 0, 0 }, 
+                               { l * C, l * S, 0, 0 }, 
+                               { 0, 0, 1, 0 }, 
                                { 0, 0, 0, 1 } };
             return MultiplicateF(this, matrix);
         }
