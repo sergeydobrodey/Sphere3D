@@ -121,7 +121,6 @@ namespace Sphere3d
             double viewparam4,
             bool light)
         {
-            
             faceslist.Clear();
             for (var i = edgelist.Count/2; i < edgelist.Count; i++)
             {
@@ -136,9 +135,10 @@ namespace Sphere3d
                     faceslist.Add(new Faces(point1,point2,point3, point4,ModelColor));
                 }
             }
-            var depth = (faceslist.Select(f => f.GetDepth()).ToList().Max() +
+            /// TODO:
+            var depth = light?-100000:(faceslist.Select(f => f.GetDepth()).ToList().Max() +
                        faceslist.Select(f => f.GetDepth()).ToList().Min())/2;
-
+            faceslist.Sort((a, b) => a.GetDepth().CompareTo(b.GetDepth()));
             foreach (var f in faceslist.Where(f => f.GetDepth() >= depth))
             {
                 if (light) f.LightDiffuse();

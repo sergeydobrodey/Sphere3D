@@ -54,7 +54,7 @@ namespace Sphere3d
 
         public void DrawIt(Graphics e, bool light)
         {   
-           if (light) e.FillClosedCurve(new SolidBrush(FaceColor), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy(),pt1.ToPoitntFxy()}, FillMode.Winding);
+           if (light) e.FillClosedCurve(new SolidBrush(FaceColor), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy(),pt1.ToPoitntFxy()}, FillMode.Alternate);
            else e.DrawLines(new Pen(FaceColor,1), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy(), pt1.ToPoitntFxy() });
            //e.DrawClosedCurve(new Pen(FaceColor, 1), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy() });
         }
