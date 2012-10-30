@@ -70,6 +70,7 @@
             this.btnHistory = new System.Windows.Forms.Button();
             this.HistoryBox = new System.Windows.Forms.ListBox();
             this.pnlFill = new System.Windows.Forms.Panel();
+            this.chkLight = new System.Windows.Forms.CheckBox();
             this.btnFill = new System.Windows.Forms.Button();
             this.tabEdit = new System.Windows.Forms.TabPage();
             this.flowEdit = new System.Windows.Forms.FlowLayoutPanel();
@@ -106,7 +107,6 @@
             this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
-            this.chkLight = new System.Windows.Forms.CheckBox();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -532,6 +532,16 @@
             this.pnlFill.Size = new System.Drawing.Size(180, 87);
             this.pnlFill.TabIndex = 20;
             // 
+            // chkLight
+            // 
+            this.chkLight.AutoSize = true;
+            this.chkLight.Location = new System.Drawing.Point(26, 35);
+            this.chkLight.Name = "chkLight";
+            this.chkLight.Size = new System.Drawing.Size(49, 17);
+            this.chkLight.TabIndex = 1;
+            this.chkLight.Text = "Light";
+            this.chkLight.UseVisualStyleBackColor = true;
+            // 
             // btnFill
             // 
             this.btnFill.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -769,7 +779,7 @@
             this.tbviewparam4.Name = "tbviewparam4";
             this.tbviewparam4.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam4.TabIndex = 5;
-            this.tbviewparam4.Text = "45";
+            this.tbviewparam4.Text = "0";
             // 
             // tbviewparam2
             // 
@@ -777,7 +787,7 @@
             this.tbviewparam2.Name = "tbviewparam2";
             this.tbviewparam2.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam2.TabIndex = 5;
-            this.tbviewparam2.Text = "45";
+            this.tbviewparam2.Text = "0";
             // 
             // tbviewparam3
             // 
@@ -785,7 +795,7 @@
             this.tbviewparam3.Name = "tbviewparam3";
             this.tbviewparam3.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam3.TabIndex = 5;
-            this.tbviewparam3.Text = "45";
+            this.tbviewparam3.Text = "0";
             // 
             // lbviewparam4
             // 
@@ -802,7 +812,7 @@
             this.tbviewparam1.Name = "tbviewparam1";
             this.tbviewparam1.Size = new System.Drawing.Size(100, 20);
             this.tbviewparam1.TabIndex = 5;
-            this.tbviewparam1.Text = "45";
+            this.tbviewparam1.Text = "1";
             // 
             // lbviewparam3
             // 
@@ -914,16 +924,6 @@
             this.imgListTabMain.Images.SetKeyName(0, "tabprimitives.png");
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
-            // 
-            // chkLight
-            // 
-            this.chkLight.AutoSize = true;
-            this.chkLight.Location = new System.Drawing.Point(26, 35);
-            this.chkLight.Name = "chkLight";
-            this.chkLight.Size = new System.Drawing.Size(49, 17);
-            this.chkLight.TabIndex = 1;
-            this.chkLight.Text = "Light";
-            this.chkLight.UseVisualStyleBackColor = true;
             // 
             // mainForm
             // 
