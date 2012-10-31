@@ -39,8 +39,8 @@ namespace Sphere3d
             double C = Math.Cos(alpha);
             double S = Math.Sin(alpha);
             double[,] matrix = { { 1, 0, 0, 0 },
-                               { l * C, l * S, 0, 0 }, 
-                               { 0, 0, 1, 0 }, 
+                               {0,1, 0, 0 }, 
+                               {  l * C, l * S,0, 0 }, 
                                { 0, 0, 0, 1 } };
             return MultiplicateF(this, matrix);
         }
@@ -68,22 +68,33 @@ namespace Sphere3d
 
         public Point3d MultiplicateF(Point3d vertex, double[,] ar)
         {
-            double[,] result = new double[4, 1];
-            double[,] a = ar;
-            double[,] b = new double[4, 1];
-            b[0, 0] = vertex.x;
-            b[1, 0] = vertex.y;
-            b[2, 0] = vertex.z;
-            b[3, 0] = W;
+            double[,] result = new double[1, 4];
+            double[,] a = new double[1, 4];
+            double[,] b = ar;
+            a[0, 0] = vertex.x;
+            a[0, 1] = vertex.y;
+            a[0, 2] = vertex.z;
+            a[0, 3] = W;
 
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 1; j++)
+
+            for (int i = 0; i < 1; i++)
+            {
+                for (int j = 0; j < 4; j++)
                 {
                     result[i, j] = 0;
-                    for (int r = 0; r < 4; r++)
-                        result[i, j] += a[i, r] * b[r, j];
-                }         
-            return (new Point3d((float)(result[0, 0]),(float)(result[1, 0]),(float)(result[2, 0])));
+                    for (int q = 0; q < 4; q++)
+                        result[i, j] += a[i, q] * b[q, j];
+                }
+            }
+
+            //for (int i = 0; i < 4; i++)
+            //    for (int j = 0; j < 1; j++)
+            //    {
+            //        result[i, j] = 0;
+            //        for (int r = 0; r < 4; r++)
+            //            result[i, j] += a[i, r] * b[r, j];
+            //    }         
+            return (new Point3d((float)(result[0, 0]),(float)(result[0, 1]),(float)(result[0, 2])));
 
         }
 

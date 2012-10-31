@@ -235,9 +235,9 @@ namespace Sphere3d
             double Sy = Math.Sin(angley);
             double Cz = Math.Cos(anglez);
             double Sz = Math.Sin(anglez);
-            double[,] rotateX = { { 1, 0, 0, 0 }, { 0, Cx, Sx, 0 }, { 0, -Sx, Cx, 0 }, { 0, 0, 0, 1 } };
+            double[,] rotateX = { { 1, 0, 0, 0 }, { 0, Cx, -Sx, 0 }, { 0, Sx, Cx, 0 }, { 0, 0, 0, 1 } };
             double[,] rotateY = { { Cy, 0, Sy, 0 }, { 0, 1, 0, 0 }, { -Sy, 0, Cy, 0 }, { 0, 0, 0, 1 } };
-            double[,] rotateZ = { { Cz, Sz, 0, 0 }, { -Sz, Cz, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+            double[,] rotateZ = { { Cz, -Sz, 0, 0 }, { Sz, Cz, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
             matrix.Add(rotateX);
             matrix.Add(rotateY);
             matrix.Add(rotateZ);
@@ -245,7 +245,10 @@ namespace Sphere3d
 
         private void Move(double movex, double movey, double movez)
         {
-            double[,] move = { { 1, 0, 0, movex }, { 0, 1, 0, movey }, { 0, 0, 1, movez }, { 0, 0, 0, 1 } };
+            double[,] move = { { 1, 0, 0, 0},
+                               { 0, 1, 0, 0 },
+                               { 0, 0, 1, 0 },
+                               { movex, movey, movez, 1 } };
             matrix.Add(move);
         }
 
