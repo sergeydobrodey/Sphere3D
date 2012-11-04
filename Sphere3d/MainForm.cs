@@ -18,6 +18,7 @@ namespace Sphere3d
         int VIEWPORT = 200;   // size of image
         Color ModelColor = Color.Red;
         byte MainViewType = 2;
+        PointF rotdelta = new PointF(0, 0);
         #endregion
        
      
@@ -357,6 +358,28 @@ namespace Sphere3d
             }
         }
         #endregion
+
+       
+
+        private void pbMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                pbMain.Refresh();
+                var gM = pbMain.CreateGraphics();
+
+                double viewparam1 = Convert.ToDouble(tbviewparam1.Text);
+                double viewparam2 = Convert.ToDouble(tbviewparam2.Text);
+                double viewparam3 = Convert.ToDouble(tbviewparam3.Text)+e.Y-rotdelta.Y;
+                double viewparam4 = Convert.ToDouble(tbviewparam4.Text)+e.X-rotdelta.X;
+                rotdelta.X = e.X;
+                rotdelta.Y = e.Y;
+                tbviewparam3.Text = Convert.ToString(viewparam3);
+                tbviewparam4.Text = Convert.ToString(viewparam4);
+                ModelsTree[ModelsTree.Count - 1].DrawModel( gM, VIEWPORT, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4);
+                
+            }
+        }
 
         
 

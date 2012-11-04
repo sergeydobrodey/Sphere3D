@@ -36,7 +36,7 @@ namespace Sphere3d
 
         public void LightDiffuse()
         {
-            var vectorLight = new Point3d(1000 - pt1.x, 1000 - pt1.y, 1000 - pt1.z);
+            var vectorLight = new Point3d(200- pt1.x,200 - pt1.y,200 - pt1.z);
             var vectorPoint = new Point3d(pt1.x, pt1.y, pt1.z);
             double cosTetta = (vectorLight.x * vectorPoint.x + vectorLight.y * vectorLight.y +
                               vectorLight.z * vectorPoint.z) / (
@@ -46,7 +46,7 @@ namespace Sphere3d
                                                                Math.Sqrt(Math.Pow(vectorPoint.x, 2) +
                                                                          Math.Pow(vectorPoint.y, 2) +
                                                                          Math.Pow(vectorPoint.z, 2)));
-            double lighting = 0 + 70 * 0.6 * cosTetta;
+            double lighting = 0 + 100 * 0.6 * cosTetta;
             lighting = lighting > 255 ? 255 : lighting;
             lighting = lighting < 0 ? 0 : lighting;
             FaceColor = Color.FromArgb(Convert.ToInt32(lighting), Convert.ToInt32(lighting), Convert.ToInt32(lighting));

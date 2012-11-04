@@ -107,6 +107,7 @@
             this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -383,6 +384,7 @@
             this.pbMain.Size = new System.Drawing.Size(400, 400);
             this.pbMain.TabIndex = 2;
             this.pbMain.TabStop = false;
+            this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseMove);
             // 
             // pbLeft
             // 
@@ -525,6 +527,7 @@
             // pnlFill
             // 
             this.pnlFill.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFill.Controls.Add(this.checkBox1);
             this.pnlFill.Controls.Add(this.chkLight);
             this.pnlFill.Controls.Add(this.btnFill);
             this.pnlFill.Location = new System.Drawing.Point(3, 361);
@@ -925,6 +928,16 @@
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(31, 59);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1052,6 +1065,7 @@
         private System.Windows.Forms.Panel pnlFill;
         private System.Windows.Forms.Button btnFill;
         private System.Windows.Forms.CheckBox chkLight;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
