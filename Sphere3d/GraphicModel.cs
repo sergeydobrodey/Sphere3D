@@ -88,7 +88,7 @@ namespace Sphere3d
         }
 
 
-        public void DrawModel(
+        public void DrawModelFast(
             Graphics MainView,
             float size,
             byte MainViewType,
@@ -100,10 +100,10 @@ namespace Sphere3d
             var mainviewlist = new List<PointF>();
             foreach (Edge t in edgelist)
                 mainviewlist.AddRange(t.vertex.Select(t1 => t1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4).ToPoitntFxy()));
-            MainView.DrawLines(new Pen(ModelColor, 1),mainviewlist.ToArray());
-            // Draw2D(MainView, t.vertex[j], t.vertex[j + 1], MainViewType, viewparam1, viewparam2, viewparam3, viewparam4);
+            MainView.DrawLines(new Pen(ModelColor, 1), mainviewlist.ToArray());
+            
         }
-
+     
 
 
         private void Draw2D(Graphics g,

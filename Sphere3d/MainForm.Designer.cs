@@ -527,7 +527,6 @@
             // pnlFill
             // 
             this.pnlFill.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.pnlFill.Controls.Add(this.checkBox1);
             this.pnlFill.Controls.Add(this.chkLight);
             this.pnlFill.Controls.Add(this.btnFill);
             this.pnlFill.Location = new System.Drawing.Point(3, 361);
@@ -746,6 +745,7 @@
             // pnlGlobalView
             // 
             this.pnlGlobalView.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlGlobalView.Controls.Add(this.checkBox1);
             this.pnlGlobalView.Controls.Add(this.btnView);
             this.pnlGlobalView.Controls.Add(this.tbviewparam4);
             this.pnlGlobalView.Controls.Add(this.tbviewparam2);
@@ -931,10 +931,10 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(31, 59);
+            this.checkBox1.Location = new System.Drawing.Point(3, 110);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 2;
+            this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -943,7 +943,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1054, 831);
+            this.ClientSize = new System.Drawing.Size(1054, 832);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
@@ -951,6 +951,7 @@
             this.MinimumSize = new System.Drawing.Size(1070, 870);
             this.Name = "mainForm";
             this.Text = "3D Editor";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);
             this.pnViews.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).EndInit();

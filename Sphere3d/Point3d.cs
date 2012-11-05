@@ -45,7 +45,7 @@ namespace Sphere3d
             return MultiplicateF(this, matrix);
         }
 
-        public Point3d Perspect(double d,double q,double fi,double psi)       
+        public Point3d Perspect(double d, double q, double fi, double psi)
         {
             fi = Convert.ToDouble(fi) * Math.PI / 180;
             psi = Convert.ToDouble(psi) * Math.PI / 180;
@@ -63,8 +63,9 @@ namespace Sphere3d
                                    { 0, 0, q, 1 } };
             Point3d correctPoint = MultiplicateF(this, matrixView);
 
-            return new Point3d(correctPoint.x/(correctPoint.z/d+1),correctPoint.y/(correctPoint.z/d+1),0);
+            return new Point3d(correctPoint.x / (correctPoint.z / d + 1), correctPoint.y / (correctPoint.z / d + 1), 0);
         }
+        
 
         public Point3d MultiplicateF(Point3d vertex, double[,] ar)
         {
