@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -23,20 +21,11 @@ namespace Sphere3d
             this.FaceColor = color;
         }
 
-        public double GetDepth()
-        {
-            double minZ = pt1.z;
-            var itemsList = new List<Point3d> {pt1, pt2, pt3, pt4};
-            foreach (var point3D in itemsList)
-            {
-                if (point3D.z < minZ) minZ = point3D.z;
-            }
-            return minZ;
-        }
+     
 
         public void LightDiffuse()
         {
-            var vectorLight = new Point3d(200,200,0);
+            var vectorLight = new Point3d(0,200,200);
             var vectorPoint = new Point3d(pt1.x, pt1.y, pt1.z);
             double cosTetta = (vectorLight.x * vectorPoint.x + vectorLight.y * vectorPoint.y +
                               vectorLight.z * vectorPoint.z) / (
@@ -56,7 +45,7 @@ namespace Sphere3d
         {   
            if (light) e.FillClosedCurve(new SolidBrush(FaceColor), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy(),pt1.ToPoitntFxy()}, FillMode.Alternate);
            else e.DrawLines(new Pen(FaceColor,1), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy(), pt1.ToPoitntFxy() });
-           //e.DrawClosedCurve(new Pen(FaceColor, 1), new[] { pt1.ToPoitntFxy(), pt2.ToPoitntFxy(), pt3.ToPoitntFxy(), pt4.ToPoitntFxy() });
+          
         }
     }
 }

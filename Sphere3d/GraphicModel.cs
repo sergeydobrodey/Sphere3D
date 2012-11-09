@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Sphere3d
 {
     class GraphicModel
     {
-        
-        List<double[,]> matrix = new List<double[,]>();        
-        List<Edge> edgelist = new List<Edge>();
-        List<Faces> faceslist = new List<Faces>();
-        Color ModelColor;
+
+        readonly List<double[,]> matrix = new List<double[,]>();
+        readonly List<Edge> edgelist = new List<Edge>();
+        readonly List<Faces> faceslist = new List<Faces>();
+        readonly Color ModelColor;
        
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color)
         {          
@@ -42,8 +41,7 @@ namespace Sphere3d
                     
                 }
             }
-            
-            
+
             ModelColor = color;
         }
 
@@ -82,6 +80,7 @@ namespace Sphere3d
                 LeftView.DrawLines(pen, mxz.ToArray());
                 TopView.DrawLines(pen, myz.ToArray());
             }
+
             foreach (Edge t in edgelist)
                 for (int j = 0; j < t.vertex.Count - 1; j++)
                     Draw2D(MainView, t.vertex[j], t.vertex[j + 1], MainViewType, viewparam1, viewparam2, viewparam3, viewparam4);
@@ -97,10 +96,12 @@ namespace Sphere3d
             double viewparam3,
             double viewparam4) // Draws model
         {
-            var mainviewlist = new List<PointF>();
-            foreach (Edge t in edgelist)
-                mainviewlist.AddRange(t.vertex.Select(t1 => t1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4).ToPoitntFxy()));
-            MainView.DrawLines(new Pen(ModelColor, 1), mainviewlist.ToArray());
+         
+            this.Fill(MainView,MainViewType,viewparam1,viewparam2,viewparam3,viewparam4,false);
+            //var mainviewlist = new List<PointF>();
+            //foreach (Edge t in edgelist)
+            //    mainviewlist.AddRange(t.vertex.Select(t1 => t1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4).ToPoitntFxy()));
+            //MainView.DrawLines(new Pen(ModelColor, 1), mainviewlist.ToArray());
             
         }
      
@@ -113,7 +114,7 @@ namespace Sphere3d
             double viewparam1,
             double viewparam2,
             double viewparam3,
-            double viewparam4)  // Draws   main view
+            double viewparam4)  // Draws main view
         {
             var pen = new Pen(ModelColor, 1);
             Point3d point1=null;
@@ -129,7 +130,7 @@ namespace Sphere3d
         }
 
         public void Fill(Graphics eGraphics,
-            byte MainViewType,
+            byte mainViewType,
             double viewparam1,
             double viewparam2,
             double viewparam3,
@@ -150,16 +151,12 @@ namespace Sphere3d
                     faceslist.Add(new Faces(point1,point2,point3, point4,ModelColor));
                 }
             }
-            /// TODO:
-            var faceArray = new double[4,faceslist.Count];
-            int count = 0;
-            //var depth = light?-100000:(faceslist.Select(f => f.GetDepth()).ToList().Max() +
-            //           faceslist.Select(f => f.GetDepth()).ToList().Min())/2;
-            //faceslist.Sort((a, b) => a.GetDepth().CompareTo(b.GetDepth()));
-            foreach (var f in faceslist)//.Where(f => f.GetDepth() >= depth))
+          
+           
+            foreach (var f in faceslist)
             {
                 if (light) f.LightDiffuse();
-                switch (MainViewType)
+                switch (mainViewType)
                 {
                     case 0:
                         f.pt1 = f.pt1.Aksonometrik(viewparam1, viewparam2);
@@ -181,17 +178,11 @@ namespace Sphere3d
                         break;
                 }
 
-                float A = f.pt1.y*(f.pt2.z - f.pt3.z) + f.pt2.y*(f.pt3.z - f.pt1.z) + f.pt3.y*(f.pt1.z - f.pt2.z);
-                float B = f.pt1.z*(f.pt2.x - f.pt3.x) + f.pt2.z*(f.pt3.x - f.pt1.x) + f.pt3.z*(f.pt1.x - f.pt2.x);
-                float C = f.pt1.x*(f.pt2.y - f.pt3.y) + f.pt2.x*(f.pt3.y - f.pt1.y) + f.pt3.x*(f.pt1.y - f.pt2.y);
-                float D =
-                    -(f.pt1.x*(f.pt2.y*f.pt3.z - f.pt3.y*f.pt2.z) + f.pt2.x*(f.pt3.y*f.pt1.z - f.pt1.y*f.pt3.z) +
-                      f.pt3.x*(f.pt1.y*f.pt2.z - f.pt2.y*f.pt1.z));
-                //faceArray[0, count] = A;
-                //faceArray[1, count] = B;
-                //faceArray[2, count] = C;
-                //faceArray[3, count] = D;
-                //count++;
+                var A = f.pt1.y*(f.pt2.z - f.pt3.z) + f.pt2.y*(f.pt3.z - f.pt1.z) + f.pt3.y*(f.pt1.z - f.pt2.z);
+                var B = f.pt1.z*(f.pt2.x - f.pt3.x) + f.pt2.z*(f.pt3.x - f.pt1.x) + f.pt3.z*(f.pt1.x - f.pt2.x);
+                var C = f.pt1.x*(f.pt2.y - f.pt3.y) + f.pt2.x*(f.pt3.y - f.pt1.y) + f.pt3.x*(f.pt1.y - f.pt2.y);
+                var D = -(A*f.pt1.x + B*f.pt1.y + C*f.pt1.z);
+             
                 if (D < 0)
                 {
                     A = -A;
@@ -199,30 +190,16 @@ namespace Sphere3d
                     C = -C;
                     D = -D;
                 }
-                if (1000*A+1000*B+0*C+1*D>0)
-               // var faceMid = new Point3d((f.pt1.x+ f.pt3.x) / 2, (f.pt1.y + f.pt3.y) / 2, (f.pt1.z+ f.pt3.z) / 2);
-              
-               //// eGraphics.DrawLine(new Pen(Color.Red),faceMid.ToPoitntFxy(),new PointF(1,1));
-               // var vectorLight = new Point3d(1000, 1000, 0);
+                if (0 * A + 0 * B + 10000 * C + 1 * D > 0)
+                {
+                    f.DrawIt(eGraphics, light);
+                }
 
-               // double cosTetta = (vectorLight.x * faceMid.x + vectorLight.y * faceMid.y +
-               //              vectorLight.z * faceMid.z) / (
-               //                                               Math.Sqrt(Math.Pow(vectorLight.x, 2) +
-               //                                                         Math.Pow(vectorLight.y, 2) +
-               //                                                         Math.Pow(vectorLight.z, 2)) *
-               //                                               Math.Sqrt(Math.Pow(faceMid.x, 2) +
-               //                                                         Math.Pow(faceMid.y, 2) +
-               //                                                         Math.Pow(faceMid.z, 2)));
-               // if (cosTetta >= 0)
-               // {
-                   f.DrawIt(eGraphics, light);
-               // }
             }
            
         }
 
 
-        
 
 
         public void UpdateModel(double movex,
@@ -235,8 +212,7 @@ namespace Sphere3d
             double angley,
             double anglez)
         {
-
-            double[,] matrixACT = MatrixReady(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
+            var matrixACT = MatrixReady(movex, movey, movez, scalex, scaley, scalez, anglex, angley, anglez);
             matrix.Clear();
             foreach (Edge t in edgelist)
                 for (int j = 0; j < t.vertex.Count; j++)
@@ -266,10 +242,12 @@ namespace Sphere3d
             angley = Convert.ToDouble(angley) * Math.PI / 180; 
             anglez = Convert.ToDouble(anglez) * Math.PI / 180; 
             Rotate(anglex, angley, anglez);
-            var result = new double[4, 4] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
+            var result = new double[,] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };
             return matrix.Aggregate(result, MultiplicateM);
         }   
          
+
+
         private double[,] MultiplicateM(double[,] a, double[,] b)
         {
             var result = new double[4, 4];
