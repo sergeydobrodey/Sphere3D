@@ -11,7 +11,7 @@ namespace Sphere3d
 
         readonly List<double[,]> matrix = new List<double[,]>();
         readonly List<Edge> edgelist = new List<Edge>();
-        readonly List<Faces> faceslist = new List<Faces>();
+        //readonly List<Faces> faceslist = new List<Faces>();
         readonly Color ModelColor;
        
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color)
@@ -137,7 +137,7 @@ namespace Sphere3d
             double viewparam4,
             bool light)
         {
-            faceslist.Clear();
+            //faceslist.Clear();
             for (var i = edgelist.Count/2; i < edgelist.Count; i++)
             {
                 for (var j = 0; j < edgelist[0].vertex.Count; j++)
@@ -148,54 +148,94 @@ namespace Sphere3d
                     Point3d point2 = edgelist[i].vertex[jNext];
                     Point3d point3 = edgelist[iNext].vertex[jNext];
                     Point3d point4 = edgelist[iNext].vertex[j];
-                    faceslist.Add(new Faces(point1,point2,point3, point4,ModelColor));
+                    //faceslist.Add(new Faces(point1,point2,point3, point4,ModelColor));
+                    var f = new Faces(point1, point2, point3, point4, ModelColor);
+                    if (light) f.LightDiffuse();
+                    switch (mainViewType)
+                    {
+                        case 0:
+                            f.pt1 = f.pt1.Aksonometrik(viewparam1, viewparam2);
+                            f.pt2 = f.pt2.Aksonometrik(viewparam1, viewparam2);
+                            f.pt3 = f.pt3.Aksonometrik(viewparam1, viewparam2);
+                            f.pt4 = f.pt4.Aksonometrik(viewparam1, viewparam2);
+                            break;
+                        case 1:
+                            f.pt1 = f.pt1.Kosougol(viewparam1, viewparam2);
+                            f.pt2 = f.pt2.Kosougol(viewparam1, viewparam2);
+                            f.pt3 = f.pt3.Kosougol(viewparam1, viewparam2);
+                            f.pt4 = f.pt4.Kosougol(viewparam1, viewparam2);
+                            break;
+                        case 2:
+                            f.pt1 = f.pt1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                            f.pt2 = f.pt2.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                            f.pt3 = f.pt3.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                            f.pt4 = f.pt4.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+                            break;
+                    }
+
+                    var A = f.pt1.y * (f.pt2.z - f.pt3.z) + f.pt2.y * (f.pt3.z - f.pt1.z) + f.pt3.y * (f.pt1.z - f.pt2.z);
+                    var B = f.pt1.z * (f.pt2.x - f.pt3.x) + f.pt2.z * (f.pt3.x - f.pt1.x) + f.pt3.z * (f.pt1.x - f.pt2.x);
+                    var C = f.pt1.x * (f.pt2.y - f.pt3.y) + f.pt2.x * (f.pt3.y - f.pt1.y) + f.pt3.x * (f.pt1.y - f.pt2.y);
+                    var D = -(A * f.pt1.x + B * f.pt1.y + C * f.pt1.z);
+
+                    if (D < 0)
+                    {
+                        A = -A;
+                        B = -B;
+                        C = -C;
+                        D = -D;
+                    }
+                    if (0 * A + 0 * B + 10000 * C + 1 * D > 0)
+                    {
+                        f.DrawIt(eGraphics, light);
+                    }
                 }
             }
           
            
-            foreach (var f in faceslist)
-            {
-                if (light) f.LightDiffuse();
-                switch (mainViewType)
-                {
-                    case 0:
-                        f.pt1 = f.pt1.Aksonometrik(viewparam1, viewparam2);
-                        f.pt2 = f.pt2.Aksonometrik(viewparam1, viewparam2);
-                        f.pt3 = f.pt3.Aksonometrik(viewparam1, viewparam2);
-                        f.pt4 = f.pt4.Aksonometrik(viewparam1, viewparam2);
-                        break;
-                    case 1:
-                        f.pt1 = f.pt1.Kosougol(viewparam1, viewparam2);
-                        f.pt2 = f.pt2.Kosougol(viewparam1, viewparam2);
-                        f.pt3 = f.pt3.Kosougol(viewparam1, viewparam2);
-                        f.pt4 = f.pt4.Kosougol(viewparam1, viewparam2);
-                        break;
-                    case 2:
-                        f.pt1 = f.pt1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
-                        f.pt2 = f.pt2.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
-                        f.pt3 = f.pt3.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
-                        f.pt4 = f.pt4.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
-                        break;
-                }
+            //foreach (var f in faceslist)
+            //{
+            //    if (light) f.LightDiffuse();
+            //    switch (mainViewType)
+            //    {
+            //        case 0:
+            //            f.pt1 = f.pt1.Aksonometrik(viewparam1, viewparam2);
+            //            f.pt2 = f.pt2.Aksonometrik(viewparam1, viewparam2);
+            //            f.pt3 = f.pt3.Aksonometrik(viewparam1, viewparam2);
+            //            f.pt4 = f.pt4.Aksonometrik(viewparam1, viewparam2);
+            //            break;
+            //        case 1:
+            //            f.pt1 = f.pt1.Kosougol(viewparam1, viewparam2);
+            //            f.pt2 = f.pt2.Kosougol(viewparam1, viewparam2);
+            //            f.pt3 = f.pt3.Kosougol(viewparam1, viewparam2);
+            //            f.pt4 = f.pt4.Kosougol(viewparam1, viewparam2);
+            //            break;
+            //        case 2:
+            //            f.pt1 = f.pt1.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+            //            f.pt2 = f.pt2.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+            //            f.pt3 = f.pt3.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+            //            f.pt4 = f.pt4.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
+            //            break;
+            //    }
 
-                var A = f.pt1.y*(f.pt2.z - f.pt3.z) + f.pt2.y*(f.pt3.z - f.pt1.z) + f.pt3.y*(f.pt1.z - f.pt2.z);
-                var B = f.pt1.z*(f.pt2.x - f.pt3.x) + f.pt2.z*(f.pt3.x - f.pt1.x) + f.pt3.z*(f.pt1.x - f.pt2.x);
-                var C = f.pt1.x*(f.pt2.y - f.pt3.y) + f.pt2.x*(f.pt3.y - f.pt1.y) + f.pt3.x*(f.pt1.y - f.pt2.y);
-                var D = -(A*f.pt1.x + B*f.pt1.y + C*f.pt1.z);
+            //    var A = f.pt1.y*(f.pt2.z - f.pt3.z) + f.pt2.y*(f.pt3.z - f.pt1.z) + f.pt3.y*(f.pt1.z - f.pt2.z);
+            //    var B = f.pt1.z*(f.pt2.x - f.pt3.x) + f.pt2.z*(f.pt3.x - f.pt1.x) + f.pt3.z*(f.pt1.x - f.pt2.x);
+            //    var C = f.pt1.x*(f.pt2.y - f.pt3.y) + f.pt2.x*(f.pt3.y - f.pt1.y) + f.pt3.x*(f.pt1.y - f.pt2.y);
+            //    var D = -(A*f.pt1.x + B*f.pt1.y + C*f.pt1.z);
              
-                if (D < 0)
-                {
-                    A = -A;
-                    B = -B;
-                    C = -C;
-                    D = -D;
-                }
-                if (0 * A + 0 * B + 10000 * C + 1 * D > 0)
-                {
-                    f.DrawIt(eGraphics, light);
-                }
+            //    if (D < 0)
+            //    {
+            //        A = -A;
+            //        B = -B;
+            //        C = -C;
+            //        D = -D;
+            //    }
+            //    if (0 * A + 0 * B + 10000 * C + 1 * D > 0)
+            //    {
+            //        f.DrawIt(eGraphics, light);
+            //    }
 
-            }
+            //}
            
         }
 
