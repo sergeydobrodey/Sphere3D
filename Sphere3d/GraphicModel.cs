@@ -151,10 +151,12 @@ namespace Sphere3d
                 }
             }
             /// TODO:
-            var depth = light?-100000:(faceslist.Select(f => f.GetDepth()).ToList().Max() +
-                       faceslist.Select(f => f.GetDepth()).ToList().Min())/2;
-            faceslist.Sort((a, b) => a.GetDepth().CompareTo(b.GetDepth()));
-            foreach (var f in faceslist.Where(f => f.GetDepth() >= depth))
+            var faceArray = new double[4,faceslist.Count];
+            int count = 0;
+            //var depth = light?-100000:(faceslist.Select(f => f.GetDepth()).ToList().Max() +
+            //           faceslist.Select(f => f.GetDepth()).ToList().Min())/2;
+            //faceslist.Sort((a, b) => a.GetDepth().CompareTo(b.GetDepth()));
+            foreach (var f in faceslist)//.Where(f => f.GetDepth() >= depth))
             {
                 if (light) f.LightDiffuse();
                 switch (MainViewType)
@@ -178,8 +180,28 @@ namespace Sphere3d
                         f.pt4 = f.pt4.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
                         break;
                 }
+
+                float A = f.pt1.y*(f.pt2.z - f.pt3.z) + f.pt2.y*(f.pt3.z - f.pt1.z) + f.pt3.y*(f.pt1.z - f.pt2.z);
+                float B = f.pt1.z*(f.pt2.x - f.pt3.x) + f.pt2.z*(f.pt3.x - f.pt1.x) + f.pt3.z*(f.pt1.x - f.pt2.x);
+                float C = f.pt1.x*(f.pt2.y - f.pt3.y) + f.pt2.x*(f.pt3.y - f.pt1.y) + f.pt3.x*(f.pt1.y - f.pt2.y);
+                float D =
+                    -(f.pt1.x*(f.pt2.y*f.pt3.z - f.pt3.y*f.pt2.z) + f.pt2.x*(f.pt3.y*f.pt1.z - f.pt1.y*f.pt3.z) +
+                      f.pt3.x*(f.pt1.y*f.pt2.z - f.pt2.y*f.pt1.z));
+                //faceArray[0, count] = A;
+                //faceArray[1, count] = B;
+                //faceArray[2, count] = C;
+                //faceArray[3, count] = D;
+                //count++;
+                if (D < 0)
+                {
+                    A = -A;
+                    B = -B;
+                    C = -C;
+                    D = -D;
+                }
+                if (1000*A+1000*B+0*C+1*D>0)
                // var faceMid = new Point3d((f.pt1.x+ f.pt3.x) / 2, (f.pt1.y + f.pt3.y) / 2, (f.pt1.z+ f.pt3.z) / 2);
-               // //var faceMid = new Point3d(f.pt1.x, f.pt1.y, f.pt1.z);
+              
                //// eGraphics.DrawLine(new Pen(Color.Red),faceMid.ToPoitntFxy(),new PointF(1,1));
                // var vectorLight = new Point3d(1000, 1000, 0);
 
@@ -196,6 +218,7 @@ namespace Sphere3d
                    f.DrawIt(eGraphics, light);
                // }
             }
+           
         }
 
 
