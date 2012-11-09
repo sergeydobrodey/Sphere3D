@@ -53,17 +53,17 @@ namespace Sphere3d
             double Cp = Math.Cos(psi);
             double Sf = Math.Sin(fi);
             double Cf = Math.Cos(fi);
-            double[,] matrix = { { 1, 0, 0, 0 },
-                               { 0, 1, 0, 0 },
-                               { 0, 0, 0,  1/d },
-                               { 0, 0, 0, 1 } };
+            //double[,] matrix = { { 1, 0, 0, 0 },
+            //                   { 0, 1, 0, 0 },
+            //                   { 0, 0, 0,  1/d },
+            //                   { 0, 0, 0, 1 } };
             double[,] matrixView = { { -Sp, -Cf * Cp, -Sf * Cp, 0 },
                                    { Cp, -Cf * Sp, -Sf * Sp, 0 },
                                    { 0, Sf, -Cf, 0 },
                                    { 0, 0, q, 1 } };
             Point3d correctPoint = MultiplicateF(this, matrixView);
 
-            return new Point3d(correctPoint.x / (correctPoint.z / d + 1), correctPoint.y / (correctPoint.z / d + 1), 0);
+            return new Point3d(correctPoint.x / (correctPoint.z / d + 1), correctPoint.y / (correctPoint.z / d + 1),correctPoint.z/(correctPoint.z / d + 1));
         }
         
 

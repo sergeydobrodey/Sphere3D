@@ -36,9 +36,9 @@ namespace Sphere3d
 
         public void LightDiffuse()
         {
-            var vectorLight = new Point3d(200- pt1.x,200 - pt1.y,200 - pt1.z);
+            var vectorLight = new Point3d(200,200,0);
             var vectorPoint = new Point3d(pt1.x, pt1.y, pt1.z);
-            double cosTetta = (vectorLight.x * vectorPoint.x + vectorLight.y * vectorLight.y +
+            double cosTetta = (vectorLight.x * vectorPoint.x + vectorLight.y * vectorPoint.y +
                               vectorLight.z * vectorPoint.z) / (
                                                                Math.Sqrt(Math.Pow(vectorLight.x, 2) +
                                                                          Math.Pow(vectorLight.y, 2) +

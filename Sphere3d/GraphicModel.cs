@@ -178,7 +178,23 @@ namespace Sphere3d
                         f.pt4 = f.pt4.Perspect(viewparam1, viewparam2, viewparam3, viewparam4);
                         break;
                 }
-                f.DrawIt(eGraphics,light);
+               // var faceMid = new Point3d((f.pt1.x+ f.pt3.x) / 2, (f.pt1.y + f.pt3.y) / 2, (f.pt1.z+ f.pt3.z) / 2);
+               // //var faceMid = new Point3d(f.pt1.x, f.pt1.y, f.pt1.z);
+               //// eGraphics.DrawLine(new Pen(Color.Red),faceMid.ToPoitntFxy(),new PointF(1,1));
+               // var vectorLight = new Point3d(1000, 1000, 0);
+
+               // double cosTetta = (vectorLight.x * faceMid.x + vectorLight.y * faceMid.y +
+               //              vectorLight.z * faceMid.z) / (
+               //                                               Math.Sqrt(Math.Pow(vectorLight.x, 2) +
+               //                                                         Math.Pow(vectorLight.y, 2) +
+               //                                                         Math.Pow(vectorLight.z, 2)) *
+               //                                               Math.Sqrt(Math.Pow(faceMid.x, 2) +
+               //                                                         Math.Pow(faceMid.y, 2) +
+               //                                                         Math.Pow(faceMid.z, 2)));
+               // if (cosTetta >= 0)
+               // {
+                   f.DrawIt(eGraphics, light);
+               // }
             }
         }
 
