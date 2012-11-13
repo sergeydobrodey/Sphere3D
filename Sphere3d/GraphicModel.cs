@@ -13,10 +13,12 @@ namespace Sphere3d
         readonly List<Edge> edgelist = new List<Edge>();
         readonly List<Faces> faceslist = new List<Faces>();
         readonly Color ModelColor;
+        private float Radius=0;
        
         public GraphicModel(Point3d basepoint,float R,float LOD,Color color)
         {          
             double x, y, z, fi, psi;
+            Radius = R;
             for (fi = 0; fi < Math.PI; fi += LOD)
             {
                 edgelist.Add(new Edge());
@@ -24,21 +26,21 @@ namespace Sphere3d
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
                     y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
-                    z = basepoint.z + R * Math.Cos(psi);                   
+                    z = basepoint.z + R * Math.Cos(psi);
                     edgelist[edgelist.Count - 1].vertex.Add(new Point3d((float)x, (float)y, (float)z));
                 }
             }
-          
+
             for (psi = 0; psi < Math.PI; psi += LOD)
             {
                 edgelist.Add(new Edge());
-                for (fi = 0; fi <2 * Math.PI+LOD; fi += LOD)
+                for (fi = 0; fi < 2 * Math.PI + LOD; fi += LOD)
                 {
                     x = basepoint.x + R * Math.Sin(psi) * Math.Cos(fi);
                     y = basepoint.y + R * Math.Sin(psi) * Math.Sin(fi);
-                    z = basepoint.z + R * Math.Cos(psi);                   
+                    z = basepoint.z + R * Math.Cos(psi);
                     edgelist[edgelist.Count - 1].vertex.Add(new Point3d((float)x, (float)y, (float)z));
-                    
+
                 }
             }
 
@@ -132,18 +134,46 @@ namespace Sphere3d
             bool light)
         {
             faceslist.Clear();
-           // for (var i = 0; i < edgelist.Count/2; i++)
+          
             for (var i = edgelist.Count/2; i < edgelist.Count; i++)
             {
                 for (var j = 0; j < edgelist[0].vertex.Count; j++)
                 {
-                   // var iNext = (i != edgelist.Count/2 - 1) ? i + 1 : i;
-                   var iNext = (i != edgelist.Count - 1) ? i + 1 : i;
+                    Point3d point1=null;
+                    Point3d point2=null;
+                    Point3d point3=null;
+                    Point3d point4=null;
                     var jNext = (j != edgelist[0].vertex.Count-1) ? j + 1 : 0;
-                    Point3d point1 = edgelist[i].vertex[j];
-                    Point3d point2 = edgelist[i].vertex[jNext];
-                    Point3d point3 = edgelist[iNext].vertex[jNext];
-                    Point3d point4 = edgelist[iNext].vertex[j];
+                    var iNext = i + 1;
+                    if (i == edgelist.Count / 2)
+                    {
+                        point1 = edgelist[0].vertex[0];
+                        point2 = point1;
+                        point3 = edgelist[iNext].vertex[j];
+                        point4 = edgelist[iNext].vertex[jNext];
+                    }
+                    else
+                    if (i != edgelist.Count - 1)
+                    {
+                        
+                        point1 = edgelist[i].vertex[j];
+                        point2 = edgelist[i].vertex[jNext];
+                        point3 = edgelist[iNext].vertex[jNext];
+                        point4 = edgelist[iNext].vertex[j];
+                    }
+                    else
+                    {
+                        point1 = edgelist[i].vertex[j];
+                        point2 = edgelist[i].vertex[jNext];
+                        point3 = new Point3d(edgelist[0].vertex[0].x, edgelist[0].vertex[0].y, edgelist[0].vertex[0].z-2*Radius);
+                        point4 = point3;
+                    }
+                    //var iNext = (i != edgelist.Count - 1) ? i + 1 : i ;
+                   
+                    //Point3d point1 = edgelist[i].vertex[j];
+                    //Point3d point2 = edgelist[i].vertex[jNext];
+                    //Point3d point3 = edgelist[iNext].vertex[jNext];
+                    //Point3d point4 = edgelist[iNext].vertex[j];
                     var f = new Faces(point1, point2, point3, point4, ModelColor);
                     if (light) f.LightDiffuse();
                     switch (mainViewType)

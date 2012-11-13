@@ -53,10 +53,13 @@ namespace Sphere3d
 
         public void RobertsSet(Point3d innerPoint)
         {
-            _A = pt1.y * (pt2.z - pt4.z) + pt2.y * (pt4.z - pt1.z) + pt4.y * (pt1.z - pt2.z);
-            _B = pt1.z * (pt2.x - pt4.x) + pt2.z * (pt4.x - pt1.x) + pt4.z * (pt1.x - pt2.x);
-            _C = pt1.x * (pt2.y - pt4.y) + pt2.x * (pt4.y - pt1.y) + pt4.x * (pt1.y - pt2.y);
-            _D = -(_A * pt1.x + _B * pt1.y + _C * pt1.z);
+            //_A = pt1.y * (pt2.z - pt4.z) + pt2.y * (pt4.z - pt1.z) + pt4.y * (pt1.z - pt2.z);
+            //_B = pt1.z * (pt2.x - pt4.x) + pt2.z * (pt4.x - pt1.x) + pt4.z * (pt1.x - pt2.x);
+            //_C = pt1.x * (pt2.y - pt4.y) + pt2.x * (pt4.y - pt1.y) + pt4.x * (pt1.y - pt2.y);
+            _A = pt1.y * (pt3.z - pt4.z) + pt3.y * (pt4.z - pt1.z) + pt4.y * (pt1.z - pt3.z);
+            _B = pt1.z * (pt3.x - pt4.x) + pt3.z * (pt4.x - pt1.x) + pt4.z * (pt1.x - pt3.x);
+            _C = pt1.x * (pt3.y - pt4.y) + pt3.x * (pt4.y - pt1.y) + pt4.x * (pt1.y - pt3.y);
+            _D = -(_A * pt4.x + _B * pt4.y + _C * pt4.z);
             if (innerPoint.x*_A + innerPoint.y*_B + innerPoint.z*_C + _D > 0) return;
             _A = -_A;
             _B = -_B;
@@ -66,7 +69,7 @@ namespace Sphere3d
 
         public bool RobertsCheck()
         {
-            return 0 * _A + 0 * _B + 10000 * _C + 1 * _D > 0;
+            return  0 * _A + 0 * _B + 10000 * _C + 1 * _D > 0;
         }
     }
 }
