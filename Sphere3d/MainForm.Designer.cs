@@ -90,6 +90,7 @@
             this.tabView = new System.Windows.Forms.TabPage();
             this.flowView = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlGlobalView = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnView = new System.Windows.Forms.Button();
             this.tbviewparam4 = new System.Windows.Forms.TextBox();
             this.tbviewparam2 = new System.Windows.Forms.TextBox();
@@ -107,7 +108,12 @@
             this.trackBarColorPicker = new System.Windows.Forms.TrackBar();
             this.btnPanelColorPicker = new System.Windows.Forms.Button();
             this.imgListTabMain = new System.Windows.Forms.ImageList(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tbLightY = new System.Windows.Forms.TextBox();
+            this.tbLightZ = new System.Windows.Forms.TextBox();
+            this.tbLightX = new System.Windows.Forms.TextBox();
+            this.lblighty = new System.Windows.Forms.Label();
+            this.lblightx = new System.Windows.Forms.Label();
+            this.lblightz = new System.Windows.Forms.Label();
             this.pnViews.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFront)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTop)).BeginInit();
@@ -527,17 +533,23 @@
             // pnlFill
             // 
             this.pnlFill.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlFill.Controls.Add(this.lblighty);
+            this.pnlFill.Controls.Add(this.lblightx);
+            this.pnlFill.Controls.Add(this.lblightz);
+            this.pnlFill.Controls.Add(this.tbLightZ);
+            this.pnlFill.Controls.Add(this.tbLightX);
+            this.pnlFill.Controls.Add(this.tbLightY);
             this.pnlFill.Controls.Add(this.chkLight);
             this.pnlFill.Controls.Add(this.btnFill);
             this.pnlFill.Location = new System.Drawing.Point(3, 361);
             this.pnlFill.Name = "pnlFill";
-            this.pnlFill.Size = new System.Drawing.Size(180, 87);
+            this.pnlFill.Size = new System.Drawing.Size(180, 118);
             this.pnlFill.TabIndex = 20;
             // 
             // chkLight
             // 
             this.chkLight.AutoSize = true;
-            this.chkLight.Location = new System.Drawing.Point(26, 35);
+            this.chkLight.Location = new System.Drawing.Point(128, 37);
             this.chkLight.Name = "chkLight";
             this.chkLight.Size = new System.Drawing.Size(49, 17);
             this.chkLight.TabIndex = 1;
@@ -764,6 +776,16 @@
             this.pnlGlobalView.Size = new System.Drawing.Size(186, 260);
             this.pnlGlobalView.TabIndex = 0;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(3, 110);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // btnView
             // 
             this.btnView.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -928,22 +950,63 @@
             this.imgListTabMain.Images.SetKeyName(1, "tabedit.png");
             this.imgListTabMain.Images.SetKeyName(2, "tabview.png");
             // 
-            // checkBox1
+            // tbLightY
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(3, 110);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.tbLightY.Location = new System.Drawing.Point(72, 60);
+            this.tbLightY.Name = "tbLightY";
+            this.tbLightY.Size = new System.Drawing.Size(54, 20);
+            this.tbLightY.TabIndex = 2;
+            this.tbLightY.Text = "200";
+            // 
+            // tbLightZ
+            // 
+            this.tbLightZ.Location = new System.Drawing.Point(72, 86);
+            this.tbLightZ.Name = "tbLightZ";
+            this.tbLightZ.Size = new System.Drawing.Size(54, 20);
+            this.tbLightZ.TabIndex = 2;
+            this.tbLightZ.Text = "200";
+            // 
+            // tbLightX
+            // 
+            this.tbLightX.Location = new System.Drawing.Point(72, 34);
+            this.tbLightX.Name = "tbLightX";
+            this.tbLightX.Size = new System.Drawing.Size(54, 20);
+            this.tbLightX.TabIndex = 2;
+            this.tbLightX.Text = "0";
+            // 
+            // lblighty
+            // 
+            this.lblighty.AutoSize = true;
+            this.lblighty.Location = new System.Drawing.Point(51, 64);
+            this.lblighty.Name = "lblighty";
+            this.lblighty.Size = new System.Drawing.Size(15, 13);
+            this.lblighty.TabIndex = 14;
+            this.lblighty.Text = "y:";
+            // 
+            // lblightx
+            // 
+            this.lblightx.AutoSize = true;
+            this.lblightx.Location = new System.Drawing.Point(51, 38);
+            this.lblightx.Name = "lblightx";
+            this.lblightx.Size = new System.Drawing.Size(15, 13);
+            this.lblightx.TabIndex = 13;
+            this.lblightx.Text = "x:";
+            // 
+            // lblightz
+            // 
+            this.lblightz.AutoSize = true;
+            this.lblightz.Location = new System.Drawing.Point(51, 90);
+            this.lblightz.Name = "lblightz";
+            this.lblightz.Size = new System.Drawing.Size(15, 13);
+            this.lblightz.TabIndex = 15;
+            this.lblightz.Text = "z:";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1054, 832);
+            this.ClientSize = new System.Drawing.Size(1054, 831);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.pnViews);
             this.Location = new System.Drawing.Point(20, 20);
@@ -1067,6 +1130,12 @@
         private System.Windows.Forms.Button btnFill;
         private System.Windows.Forms.CheckBox chkLight;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox tbLightZ;
+        private System.Windows.Forms.TextBox tbLightX;
+        private System.Windows.Forms.TextBox tbLightY;
+        private System.Windows.Forms.Label lblighty;
+        private System.Windows.Forms.Label lblightx;
+        private System.Windows.Forms.Label lblightz;
     }
 }
 

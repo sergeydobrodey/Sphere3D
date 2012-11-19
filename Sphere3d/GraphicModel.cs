@@ -96,9 +96,11 @@ namespace Sphere3d
             double viewparam1,
             double viewparam2,
             double viewparam3,
-            double viewparam4) // Draws model
+            double viewparam4,
+            bool light,
+            Point3d lightPoint) // Draws model
         {
-            this.Fill(MainView,MainViewType,viewparam1,viewparam2,viewparam3,viewparam4,false);
+            this.Fill(MainView,MainViewType,viewparam1,viewparam2,viewparam3,viewparam4,light,lightPoint);
         }
      
 
@@ -131,7 +133,8 @@ namespace Sphere3d
             double viewparam2,
             double viewparam3,
             double viewparam4,
-            bool light)
+            bool light,
+            Point3d lightPoint)
         {
             faceslist.Clear();
           
@@ -147,7 +150,7 @@ namespace Sphere3d
                     var iNext = i + 1;
                     if (i == edgelist.Count / 2)
                     {
-                        point1 = edgelist[0].vertex[0];
+                        point1 = edgelist[edgelist.Count / 2].vertex[0];
                         point2 = point1;
                         point3 = edgelist[iNext].vertex[j];
                         point4 = edgelist[iNext].vertex[jNext];
@@ -175,7 +178,7 @@ namespace Sphere3d
                     //Point3d point3 = edgelist[iNext].vertex[jNext];
                     //Point3d point4 = edgelist[iNext].vertex[j];
                     var f = new Faces(point1, point2, point3, point4, ModelColor);
-                    if (light) f.LightDiffuse();
+                    if (light) f.LightDiffuse(lightPoint);
                     switch (mainViewType)
                     {
                         case 0:
@@ -199,14 +202,16 @@ namespace Sphere3d
                     }
 
                     f.RobertsSet(new Point3d(0,0,0));
-                    faceslist.Add(f);
+                    if (f.RobertsCheck())
+                        f.DrawIt(eGraphics, light);
+                    //faceslist.Add(f);
                 }
             }
-            foreach (var f in faceslist.Where(f => f.RobertsCheck()))
-            {
+            //foreach (var f in faceslist)
+            //{
                 
-                f.DrawIt(eGraphics, light);
-            }
+            //    f.DrawIt(eGraphics, light);
+            //}
            
            
            

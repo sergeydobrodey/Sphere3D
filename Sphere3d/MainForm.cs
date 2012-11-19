@@ -139,7 +139,11 @@ namespace Sphere3d
             double viewparam2 = Convert.ToDouble(tbviewparam2.Text);
             double viewparam3 = Convert.ToDouble(tbviewparam3.Text);
             double viewparam4 = Convert.ToDouble(tbviewparam4.Text);
-            ModelsTree[ModelsTree.Count - 1].Fill(gM, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4,chkLight.Checked);
+            double lightx = Convert.ToDouble(tbLightX.Text);
+            double lighty = Convert.ToDouble(tbLightY.Text);
+            double lightz = Convert.ToDouble(tbLightZ.Text);
+            var lightPoint = new Point3d(lightx, lighty, lightz);
+            ModelsTree[ModelsTree.Count - 1].Fill(gM, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4,chkLight.Checked,lightPoint);
         }
 
         private void btnrotate_Click(object sender, EventArgs e)
@@ -379,7 +383,11 @@ namespace Sphere3d
                 rotdelta.Y = e.Y;
                 tbviewparam3.Text = Convert.ToString(viewparam3);
                 tbviewparam4.Text = Convert.ToString(viewparam4);
-                ModelsTree[ModelsTree.Count - 1].DrawModelFast(gM, VIEWPORT, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4);
+                double lightx = Convert.ToDouble(tbLightX.Text);
+                double lighty = Convert.ToDouble(tbLightY.Text);
+                double lightz = Convert.ToDouble(tbLightZ.Text);
+                var lightPoint = new Point3d(lightx, lighty, lightz);
+                ModelsTree[ModelsTree.Count - 1].DrawModelFast(gM, VIEWPORT, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4, chkLight.Checked,lightPoint);
 
             }
         }
@@ -395,7 +403,10 @@ namespace Sphere3d
                 double viewparam2 = Convert.ToDouble(tbviewparam2.Text);
                 double viewparam3 = Convert.ToDouble(tbviewparam3.Text);
                 double viewparam4 = Convert.ToDouble(tbviewparam4.Text);
-                
+                double lightx = Convert.ToDouble(tbLightX.Text);
+                double lighty = Convert.ToDouble(tbLightY.Text);
+                double lightz = Convert.ToDouble(tbLightZ.Text);
+                var lightPoint = new Point3d(lightx, lighty, lightz);
                 switch ( e.KeyData)
                 {
                     case Keys.W:
@@ -407,7 +418,7 @@ namespace Sphere3d
                 }
                 tbviewparam1.Text = Convert.ToString(viewparam1);
               
-                ModelsTree[ModelsTree.Count - 1].DrawModelFast(gM, VIEWPORT, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4);
+                ModelsTree[ModelsTree.Count - 1].DrawModelFast(gM, VIEWPORT, MainViewType, viewparam1, viewparam2, viewparam3, viewparam4,chkLight.Checked,lightPoint);
 
             }
         }

@@ -26,9 +26,9 @@ namespace Sphere3d
 
      
 
-        public void LightDiffuse()
+        public void LightDiffuse(Point3d vectorLight)
         {
-            var vectorLight = new Point3d(0,200,200);
+            //var vectorLight = new Point3d(0,200,200);
             var vectorPoint = new Point3d((pt1.x + pt3.x) / 2, (pt1.y + pt3.y) / 2, (pt1.z+pt3.z)/2);
             double cosTetta = (vectorLight.x * vectorPoint.x + vectorLight.y * vectorPoint.y +
                               vectorLight.z * vectorPoint.z) / (
@@ -38,7 +38,7 @@ namespace Sphere3d
                                                                Math.Sqrt(Math.Pow(vectorPoint.x, 2) +
                                                                          Math.Pow(vectorPoint.y, 2) +
                                                                          Math.Pow(vectorPoint.z, 2)));
-            double lighting = 0 + 100 * 0.6 * cosTetta;
+            double lighting = 100 + 100 * 0.6 * cosTetta;
             lighting = lighting > 255 ? 255 : lighting;
             lighting = lighting < 0 ? 0 : lighting;
             FaceColor = Color.FromArgb(Convert.ToInt32(lighting), Convert.ToInt32(lighting), Convert.ToInt32(lighting));
@@ -53,9 +53,7 @@ namespace Sphere3d
 
         public void RobertsSet(Point3d innerPoint)
         {
-            //_A = pt1.y * (pt2.z - pt4.z) + pt2.y * (pt4.z - pt1.z) + pt4.y * (pt1.z - pt2.z);
-            //_B = pt1.z * (pt2.x - pt4.x) + pt2.z * (pt4.x - pt1.x) + pt4.z * (pt1.x - pt2.x);
-            //_C = pt1.x * (pt2.y - pt4.y) + pt2.x * (pt4.y - pt1.y) + pt4.x * (pt1.y - pt2.y);
+          
             _A = pt1.y * (pt3.z - pt4.z) + pt3.y * (pt4.z - pt1.z) + pt4.y * (pt1.z - pt3.z);
             _B = pt1.z * (pt3.x - pt4.x) + pt3.z * (pt4.x - pt1.x) + pt4.z * (pt1.x - pt3.x);
             _C = pt1.x * (pt3.y - pt4.y) + pt3.x * (pt4.y - pt1.y) + pt4.x * (pt1.y - pt3.y);
@@ -69,7 +67,7 @@ namespace Sphere3d
 
         public bool RobertsCheck()
         {
-            return  0 * _A + 0 * _B + 10000 * _C + 1 * _D > 0;
+            return  0 * _A + 0 * _B + 1 * _C + 0 * _D > 0;
         }
     }
 }
