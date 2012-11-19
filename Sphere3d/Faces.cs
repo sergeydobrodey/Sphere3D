@@ -24,7 +24,8 @@ namespace Sphere3d
             FaceColor = color;
         }
 
-     
+
+    
 
         public void LightDiffuse(Point3d vectorLight)
         {
@@ -58,7 +59,7 @@ namespace Sphere3d
             _B = pt1.z * (pt3.x - pt4.x) + pt3.z * (pt4.x - pt1.x) + pt4.z * (pt1.x - pt3.x);
             _C = pt1.x * (pt3.y - pt4.y) + pt3.x * (pt4.y - pt1.y) + pt4.x * (pt1.y - pt3.y);
             _D = -(_A * pt4.x + _B * pt4.y + _C * pt4.z);
-            if (innerPoint.x*_A + innerPoint.y*_B + innerPoint.z*_C + _D > 0) return;
+            if (innerPoint.x * _A + innerPoint.y * _B + innerPoint.z * _C + _D > 0) return;
             _A = -_A;
             _B = -_B;
             _C = -_C;
@@ -67,7 +68,8 @@ namespace Sphere3d
 
         public bool RobertsCheck()
         {
-            return  0 * _A + 0 * _B + 1 * _C + 0 * _D > 0;
+            //return  0 * _A + 0 * _B+1 * _C + 0 * _D > 0;
+            return _C > 0;
         }
     }
 }
